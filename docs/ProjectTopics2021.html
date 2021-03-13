@@ -1,0 +1,564 @@
+<html>
+<head>
+<title>CPE111 2021 Suggested Projects</title>
+</head>
+<body>
+<h3 align="center">CPE 111 2021 - Programming with Data Structures<br>
+Suggested Project Topics</h3>
+<h4 align="center">Last updated: 21 January 2021
+</h4>
+<h3>Introduction</h3>
+<p>The term project for CPE 111 is intended to give students practice in
+  applying the data structures and algorithms introduced in class in a 
+fairly large software system. 
+Students will work in groups three or four students to produce
+  a program that is correct, well-structured, well-documented, and easy to
+  read and understand. Each term project must use at least two categories of 
+data structures we study during the term.</p>
+<p>There will be three main deliverables for the project:
+<ol>
+<li><i>Project design document</i>: This document will show and explain the main data
+  structures in the application. It will also discuss the planned breakdown of
+functions into different modules, and present flowcharts or pseudocode that
+  illustrate the top-level logic of the program as well as the most critical
+  algorithms. The project design document will be due in the middle of the
+  term.</li>
+<p></p>
+<li><i>Draft code</i>: This will be due about one month before the end of
+  the term. At this point, I expect you will have written much of the code,
+  but maybe not all of it. Maybe your program will not work completely
+  correctly (but it should compile). The purpose of submitting the draft code
+  to show me that you have been working on the
+  project, and to give me a chance to provide you with feedback and
+  suggestions.</li>
+<p></p>
+<li><i>Final project report and code</i>: This deliverable will include not only the
+  design information (updated if this information has changed since the middle
+  of the term) but also all code. Submission will be digital. 
+</li>
+<p></p>
+</ol>
+</p> 
+<p>Below is a list of suggested topics, with some description of functionality
+each one should provide. You can choose one of these topics if you want. (Each group must do a different topic.) You can also use these as a guide but suggest 
+changes to my proposed functionality.  As an alternative, you 
+and your teammates can create your own topic, but I will need
+to approve it. Your original topics should have roughly the same scope and
+level of complexity as the suggestions below.</p>
+
+<p>Some of the descriptions below are very general. We can talk about the details
+of your programs after you have selected your topics.</p>
+
+<h3>Suggested Topics</h3>
+<ol>
+<p></p>
+<li><p><b>Food Delivery Application</b>: This program will store information 
+about:
+<ul>
+<li>Geographic information about Bangkok: major intersections, streets
+connecting them, time to travel each street between intersections.</li>
+<li>Restaurants: category, food items available, price per item, location</li>
+<li>Delivery people: ID, name and current location (which will change
+while the program is running)</li>
+</ul> 
+</li>
+<p>A user can make an order by searching restaurants and choosing one, then choosing food items. The user must also input her location (closest intersection
+stored in the system).</p>
+<p>The system will find the closest available delivery person to the restaurant
+and assign the order to that person. The system must calculate and 
+display the expected amount of time it will take for the food to be 
+delivered based on the location of the delivery person, the restaurant and
+the customer. This time will include: a) time for the delivery person
+to travel to the restaurant; b) time for the delivery person to travel
+from the restaurant to the customer. You can ignore food preparation time.</p>
+<p>Once a delivery person has been assigned to an order, that person
+cannot be assigned to a different order until the first order has
+been delivered. You should simulate the passage of time in your program. For
+instance 1 minute of program time could be treated as 10 minutes of travel
+time. So if a delivery person needed 10 minutes to get to the restaurant (based on the geographic information) and 20 minutes to get to the customer,
+that delivery person could not be assigned to a new order until 3 minutes had
+passed inside the program.</p>
+<p>The program should include two options, one to 
+show available delivery people 
+and their locations, and one to show currently busy delivery people
+and when they will be free, so you can check its functionality.
+</p>
+</li>
+<li><p><b>Taxi Dispatching</b>: Your program will store information about the
+  street network of a city, plus the time (in minutes) it takes to traverse each
+  street segment (between intersections). 
+  You will also have some number of taxis (this could be a varying
+  input to the program), which 
+  should start out at random locations. The user can request a taxi, telling
+  the program where she is and where she wants to go. Your program should find
+  the free taxi that is closest to the user's location and assign that taxi
+  to the user. The program should also figure out the route and how long
+  the trip will take, and print that information. 
+  <p></p>
+   Your program must simulate the passing of time. In each minute
+  (or five minute period, if you would rather have a larger time step), you
+  might have another user asking for a taxi. Only taxis that are free
+  can be assigned. When the time for one taxi's trip has passed, that
+  taxi will then become free. The destination
+  of its last passenger will become its new location.
+</li> 
+<p></p>
+<p></p>
+<li><p><b>Agricultural Expert System</b>: An expert system is a program that uses
+  knowledge to help people make decisions. This project will build an expert
+  system that will help a farmer decide what crops to grow on his land. The
+  program will ask for information such as the size of the land plot, the soil
+  type of the land (sand, loam, clay), the average rainfall, the maximum and
+  minimum temperature, the slope, whether irrigation is available, etc. (You
+  may have to do some research to find out what factors affect crop
+  suitability.) Your program should also have information about crop market
+  prices which it should use in its decision. Based on all information
+  available, your program will recommend the crop(s) the farmer should
+  grow. The program should also be able to "explain" why this is a good crop
+  (what factors influenced the decision).</p>
+
+<p>Your system must represent the knowledge and decision rules in its data structures, so that it would be possible to add new knowledge and rules. You should not simply hard-code all the rules using "if...else if..." structures.</p>
+<p>If you are not interested in agriculture, you could implement a decision support system for some other topic, such as medical diagnosis, stock purchase,
+etc.</p>
+</li>
+
+<p></p>
+<li><p><b>Air Traffic Control System Simulation</b>: Your program will simulate 
+the system used by an air traffic control official at an airport, to guide incoming and outgoing planes and keep them safe from collisions. This program will need to simulate the passage of time. It will need several components:</p>
+<ul>
+<li><p>Information on available runways and their status (empty or in use).</p></li>
+<li><p>Plane generator - randomly create information for planes that are coming into the airport or that want to take off. The information should include location, direction, speed and altitude, for incoming planes, and location and take-off direction for outgoing planes.</p></li>
+<li><p>Plane movement simulator - with each time period, update the position and altitude of incoming planes. (You can assume a constant speed.)</p></li>
+<li><p>Display information about currently active planes.</p></li>
+<li><p>Send commands to specific planes. For incoming planes, this can be to land on a specific runway, or to circle and wait. For planes wanting to take off, this can be to take-off from a particular runway or wait. These commands may change the behavior of the currently existing planes.</p></li>
+<li><p>Detect potential future collisions between planes, based on current direction,
+altitude and speed. </p></li>
+</ul>
+
+<p>The goal of the air traffic controller should be to maximize the number of planes serviced, while preventing collisions.</p>
+<p></p>
+
+<li><p><b>Project Scheduling System</b>: Your program will allow the user to
+enter a set of tasks, each of which will have an estimated duration, plus
+dependencies between tasks (for example, you cannot start Task 2 until Task 1
+is complete). The project task information should be read from and written to
+a file, so that it will be persistent between runs of the program. The program
+should also store information about the calendar (number of days per month,
+week days versus weekends). The user can then specify a start date for the
+project, and the program will calculate the project end date (the date all the
+tasks in the project will be completed). If you want to make your program more
+interesting, you can assign tasks to different people, so that some of the
+tasks could be worked on in parallel.
+</li>
+<p></p>
+
+<li><p><b>Simple English to Thai translation system</b>: This program will ask the user for a sentence in English and
+will display a translation in Thai. Of course a full translation 
+system is a very difficult problem, so this program will have a 
+restricted scope. It should be able to translate sentences with
+the following simple structures:
+<ul>
+<li><p>Subject + action verb (e.g. "Dogs bark")</li>
+<li><p>Subject + action verb + object (e.g. "Mother makes pies", "Teenagers eat
+  snacks")</li>
+<li><p>Subject + action verb + direct-object + object (e.g. "Teachers give students
+  homework")</li>
+<li><p>Yes/no question with any of the three structures above (e.g.
+"Do dogs bark?", "Do teenagers eat snacks?")
+</li>
+<li><p>Subject + verb to be form + adjective (e.g. "Somtam is delicious")</p></li>
+</ul>
+</p>
+<p>You can add additional structures if you want. It would be great
+to allow the use of articles ("a" and "the") (e.g. "The students sing songs") and adjectives associated with nouns (e.g. "Teenagers eat delicious snacks")</p>
+</p>
+<p>The program will have a very restricted vocabulary. That is, it will only
+  know a certain set of English nouns, verbs and
+  adjectives - at least twenty of each category. If the user types in
+a sentence that contains an unknown word, or that has a structure not
+included in the types it can handle, the program should display a message
+saying that it cannot understand.</p>
+<p>The program should loop, asking for sentences to translate,
+until the user says he or she is finished.</p>
+<p>It would be very good if the system included a way to add new
+vocabulary words.</p> 
+
+<p>If you prefer, you could create a Thai-to-English translation system
+  instead -- or English-to-French or French-to-English -- or Thai to French!</p>
+
+</li>
+<p></p>
+<li><p><b>C-Doc Utility</b>: The Java programming language has a tool called
+"Javadoc" that
+can create program documentation from comments in Java source code.
+The documentation is created as a set of hyperlinked HTML files.
+For this project you will create a similar system for C. You will need
+to define special keywords to be used inside comments to help 
+you recognize different kinds of information. (You can use the same
+ones that Javadoc uses, if you want.) Your program will read a set of C source files
+for a program and extract the information from the comments, then write file(s)
+that document what C modules are in the program, what functions
+are in each module, and what the input and output arguments
+of the functions are. (The programmer has to put all this
+information into his header comments.)
+</p></li>
+<p></p>
+<li><p><b>Navigation System</b>: This system will act like a GPS navigation system. Your program should have
+data structures representing the street network in some area of Bangkok (or
+some other city). That is, it should have knowledge about what streets
+intersect with what other streets, and in what directions. It should also know
+about the locations of some landmarks (e.g. Siam Square, Victory Monument,
+Democracy Monument, Chatuchak Market, The Mall Bangna, Emporium, etc.).</p>
+<p>Once you have loaded this information into the data structures for the
+  program (probably by reading from a file), the program should enter a loop,
+  asking the user 1) where are you now? and 2) where do you want to go? The
+  answers to these questions should be either landmarks or street
+  intersections (e.g. "Intersection Ratchada Sukhumvit"). Your program must
+  use the stored data to generate a correct sequence of directions, from the
+  start location to the end location. For instance if the user says she is
+  at Victory Monument and wants to go to Emporium, your program might reply:
+  "Victory Monument. Phaya Thai Road to Rama I Road. Turn right. Rama I Road
+  to Sukhumvit Road. Sukhumvit Road to Sukhumvit Soi 22. Emporium."</p>
+</li>
+<p></p>
+<li><p><b>Movie Review Social Network</b>: Create a simple social network
+for people who like to watch movies. This application should have the
+following capabilities.</p>
+<ul>
+<li><p>Create a new profile. The profile information should
+include user name, email, password, favorite types of movies.</p></li>
+<li><p>Log in</p></li>
+<li><p>Write a movie review including a rating.</p></li>
+<li><p>Edit or delete a review.</p></li>
+<li><p>Find reviews of movies by movie name, movie type, review date or user 
+who wrote the review.</p></li>
+<li><p>Follow another user. This means when you log in, you will see 
+a list of that user's new reviews since the last login.</p></li>
+<li><p>"Like" a review</p></li>
+<li><p>Ask for suggestions of who to follow. The system should list 
+(1) other users
+who have written reviews of movies similar to (by category) the ones
+you have liked or (2) users who are followed by users you are following</p></li>
+</ul>
+</p>
+<p>The program should keep its information in memory while it is running, but write all reviews, likes and profile information to files so that 
+the information will be persistent from one run of the program to the next.</p>
+</li> 
+<p></p>
+<li><p><b>Restaurant Review Social Network</b>: This project will be similar to the Movie Review Social Network. However, it should also include the ability to locate restaurants that are within a certain radius of a specified location. For instance, I might ask the system to give me a list of pizza restaurants that are within 1 kilometer from KMUTT. </p>
+<p></p>
+<li><p><b>Airline Reservation System</b>: Your program will need to have data structures about airline flights, with
+  information such as flight number, 
+  airline (e.g. Thai, Air Asia, Japan Air Lines, etc.), 
+  origin location, destination location, takeoff time, landing time, 
+  number of seats available for each date (you should handle at least one
+  month), and price. You should have information about 
+  at least forty flights.</p>
+<p>The user should be able to do the following:</p>
+<ul>
+<li><p>Request an itinerary: the user specifies a starting location and an ending
+  location. Your program must find and print a series of flights that the user 
+  could book to complete this travel. Thus your program must match the
+  destination of one flight to the origin of another, and also consider
+  time. For example, consider flight A from Bangkok to Tokyo and flight B
+  from Tokyo to San Francisco. A user wanting to go from Bangkok to San
+  Francisco can book the itinerary "flightA-flightB" if and only if flight A 
+  arrives before flight B leaves. The ability to find multi-flight itineraries
+is one of the most critical parts of this program.</p></li>
+<li><p>Book an itinerary: after you have shown the user all possible itineraries
+  for his desired origin and destination, the user should be able to pick one
+  and reserve those flights for a specified date and number of passengers. 
+  Your program should 1) check to make sure that the number of required seats
+  is available on all the flights in the itinerary for the specified date; 2) if the check is
+  successful, reduce the number of available seats on each flight, based
+  on the number of people traveling; 3) print an itinerary table showing
+  the dates, flight numbers, take off time, and arrival time for each flight;
+  4) calculate and print the total price for all passengers and flights.</p></li>
+</ul>
+</p>
+</li>
+<p></p>
+<li><p><b>Bus Route Planning</b>: Your program will have information about a set
+  of bus lines: where each one begins (location), where it ends, and where it stops
+  along the way. You must also include information about the schedule of 
+each bus line: how often the bus leaves each starting point and 
+how long it takes to get from each stop to the next stop.</p>
+<p>The user will enter a current location, a desired
+  destination location, and the desired <i>time of arrival</i>. 
+Your program must calculate which bus lines(s) the
+  user should take and print out an itinerary (which route, where she should
+  get on, where she should get off, possibly for multiple bus lines). The plan should also consider time constraints based on the bus schedule. That is, you
+ must tell the user <i>when</i> as well as <i>where</i> 
+she should catch each bus in order to arrive at her destination on time. </p>
+<p>It may be possible to get real bus schedule information from the BMA.</p>
+</li>
+
+<li><p><b>Book recommendation engine</b>: Many ecommerce websites include
+"recommendation engines". A recommendation engine is a program that
+makes suggestions for new items a customer might want to buy based on
+what she has bought previously. This application will store
+information about a large number of books. The information should
+include at least: 1) title; 2) author; 3) category (often called "genre") e.g. adventure, romance, history, biography, comics, mystery, etc. 4) length in pages; 5) keywords (terms that might be used to search).</p>
+<p>The program should have the following functions:
+<ul>
+<li>Create a profile (user name, password)</li>
+<li>Log in</li>
+<li>Select a book to buy.</li>
+<li>Receive recommendations for other books to buy - these can then
+be selected for purchase.</li>
+</ul>
+</p>
+<p>The program must store every user's buying history with the profile information (and write this to a file so that it can be saved from one run of the program to the next). Recommendations should be based on two kinds of information:
+<ul>
+<li>Content-based: Recommend books that are similar to other books this user has bought. Similarity should consider ALL book attributes.</li>
+<li>Community-based: Find other users who have bought the 
+same books as the current user.
+Then recommend other books that have been bought by those other users.</li>
+</ul>
+</p> 
+<p><i>Very important!</i> Your program must be able to find "similar" books without having to search through every book you have stored. That is, you need to
+design data structures that group or connect similar books together.</p>
+</li>
+<p></p>
+<li><b>Online Auction System</b>: This system will be similar to eBay. There are two user roles: sellers and buyers. Both types of user must have profiles and login credentials. (One user can be both a buyer and a seller.) </p>
+<p>Sellers can list items for auction, including their item type and description, and specify a minimum bid and a time period for the auction. Buyers (bidders) can view items that are available for auction and make bids. The system must simulate the passage of time, so that when the time for a particular auction has expired, the item for sale can be offered to the winning bidder and the auction will be closed.</p>
+<p>In addition to registered buyers and sellers, ANY user should be able to view both ongoing and closed auctions, even without logging in. It must be possible to select auctions by item category, date opened, date closed, minimum price and/or final price (for closed auctions only).</p>
+<p>To make this more interesting, you could require buyers to deposit a certain amount of money. When they win an auction, you deduct the winning bid amount from their deposit. If they do not have enough you can black list them, and give the item to the next highest bidder.</p>
+</li>
+<p></p>
+<!--
+<li><p><b>Family relationships reasoning system</b>: This system will build up a "family tree" for a family from statements
+about relationships between pairs of people. Then it will try to answer
+questions about the relationships between other pairs. For example,
+I might give the system the following input:
+<ul>
+<li>George father Sally</li>
+<li>Sally sister Rick</li>
+<li>Rick son Lorraine</li>
+</ul>
+</p>
+<p>Then I might ask the system what is the relationship between Sally and
+  Lorraine, and the system might answer "Sally is the daughter of Lorraine" or 
+"Lorraine is the mother of Sally". 
+You should define the set of relationships
+the system will handle, which should include at least: 
+father, mother, son, daughter, brother, sister, wife, husband, aunt, uncle, grandmother, grandfather.</p>
+<p>Your program must be able to <b>save</b> the current set of relationships
+in a file and <b>reload</b> those relationships the next time the program runs.</p>
+<p>Your program must prevent impossible or illegal relationships. For instance,
+if I say "Rick son Lorraine" but then "Lorraine daughter Rick", the system
+should reject the second statement as illegal.</p>
+<p>Your program must draw conclusions about the gender of people from their relationships, if possible. Once you have assigned a gender to an individual, you should display an error message if the user enters a relationship that violates that gender. For instance, if I say "Rick son Lorraine", I can conclude that Rick is male. If the user then types "Rick sister Jan", this should be rejected as an error.</p></li>
+<p></p>
+-->
+<li><p><b>Computer Dating Application</b>: 
+In this project, you will create an application that
+will match people based on the similarity of their profiles. Your program
+should maintain a database of members, which will include information 
+about their appearance, likes, dislikes, interests, etc. (It is up to
+you to decide exactly what information to ask for and store.) Then 
+a member can ask to be matched with another member based on 
+"compatibility". To do the matching, you should implement data structures
+that represent similarity between different members. 
+You must not exhaustively search through
+all the members.</p> 
+<p>A particular member asking for a match should be able to specify the
+priority of different categories of information. For instance,
+one person might think that education and age are the most important
+criteria, while another might think that hobbies and liking animals
+are most critical. Your program must adjust
+the similarity calculations and final results based on these priorities.</p>
+<p>In addition to printing the name of the most similar/compatible member, your program must be able to "explain" why that particular member was the 
+most compatible. That is, it should display the matching properties that 
+caused the partner to be chosen.</p>
+</li>
+<li><b>Photo Search Engine</b>: In this project you will store at least 100 photos in JPG format. 
+Each photo will have a title and at least four tags 
+(descriptive words or phrases) associated with it. The information about the photos should be 
+saved in a file so that it does not go away when the program exits. The user
+can do the following:
+<p></p>
+<ul>
+<li>Add a new photo with new tags;</li>
+<li>Search for photo(s) with tags that match the ones she enters;</li>
+<li>Search for photo(s) with tags that match the ones she enters, and which do <b>not</b> have
+any tags from a second set.</li>
+<li>Choose a photo. Then display a list of the three most similar photos. Similarity is defined in terms of number of shared tags.</li>
+</ul>
+<p></p>
+When the user asks for a search the program should list the titles of the photos it finds which
+satisfy the user's search criteria. The user can select one of these titles. Then the program should
+show the photograph using the web browser on the system.      
+</li>
+
+
+<p></p>
+<li><p><b>Code Plagiarism Detector</b>: This program will take as input 
+a set of C program source files (at least 20 files per set). It will compare every file with every other file, then calculate and print the probability that the two C source file were copied from one another. This "probability" will actually be a similarity measure that your program will calculate.</p>
+<p>Your program should ignore differences in the use of "white space" (tabs, spaces, blank lines, etc.) It should also have an optional capability to ignore differences in variable names for the same variables. To implement this 
+ability, it will be necessary to find the variable declarations in the source code and replace them with general names (such as "intvar1", "intvar2") before doing the comparison.</p>
+</li>
+<li><p><b>Command-line Based Graphical Editor</b>: This project will allow a
+user to create a picture by describing it in a command language. For instance, the user might enter the following commands (in bold - non-bold text is printed by the program):
+<pre>
+<b>NEWDRAWING 2000 2000</b>
+<b>RECTANGLE 10 30 100 200 RED</b>
+-- R1
+<b>CIRCLE 100 300 27 BLUE</b>
+-- C1
+<b>LINE 10 20 23 40 8 28 GREEN</b>
+-- L1
+<b>LINE 100 120 200 180 RED</b>
+-- L2
+<b>MOVE C1 150 300</b>
+<b>DELETE L1</b>
+<b>DISPLAY</b>
+<b>LIST</b>
+-- Rectangle R1 10 30 100 200 Red
+-- Circle C1 150 300 27 Blue
+-- Line L2 100 120 200 180 Red 
+</pre>
+The user can create various graphical objects (the categories and commands are up to you). The program will keep the information in memory. Whenever the user creates a new object,the program will provide an identifier (e.g. "R1","C1") so that user can change the properties of that object later.</p>
+<p>Your program will use the GD library (<a href="https://en.wikipedia.org/wiki/GD_Graphics_Library">https://en.wikipedia.org/wiki/GD_Graphics_Library</a>) to actually create the image the user describes.</p>
+</li>
+<li><p><b>Medical Dispatch System</b>: Your program will store information about the
+  street network of a city, plus the time (in minutes) it takes to traverse each
+  street segment (between intersections). The program must also store the
+location of multiple hospitals in this network.</p>  
+  You will also have some (small) number of ambulances, which 
+  should start out at random locations.The user can request an ambulance, telling the program where she is in the city and the seriousness of her problem. The program must determine 
+the closest hospital (based on travel time from the caller's location) and
+the closest free ambulance. Assign the ambulance to the caller. Figure out the
+route to pick up the patient, then to drive to the hospital.
+</p>
+<p>Your program must simulate the passage of time. After each five minute period,you should print the current location and status of all ambulances. </p>
+<p>If a call comes in for an ambulance, but no ambulance is available, consider
+the seriousness value. A call with a problem less serious than
+the patient in the closest ambulance must wait in a queue until an amulance is free. However, if the
+new call has a higher seriousness value than that associated with the patient in the closest ambulance, that ambulance should be diverted to pick up the new patient. It should then drop both patients at the closest hospital.</p>
+<p> When the time for one ambulance trip has passed, that
+ambulance will then become free. Its new location will be the hospital where it dropped the last caller.</p>
+</li> 
+<li><p><b>Spell Checking with Metaphone</b>: 
+Spell checking is the process of verifying that a particular word is
+spelled properly according to some dictionary. Spell checkers are used
+in many applications, including word processors (such as Microsoft
+Word), electronic dictionaries, and optical character recognition
+(OCR) systems that need to turn images of printed text (or even
+handwriting) into coherent text.  Spell checking itself is trivial,
+requiring only a simple lookup in a dictionary. However, most
+applications of spell checking also require that the spell checker
+provide a list of potentially correct spellings ("near matches") when
+the word was spelled improperly. For instance, if I type "speling"
+into an online dictionary, it will provide suggestions of similar
+words that I may have meant to type, including "spelling", "spoiling",
+"sapling", and "splendid". </p>
+<p> Your task is to implement a spell checker
+that determines if a given word is spelled correctly based on a
+dictionary lookup. When the word is not spelled correctly, it will
+provide a list of similar-sounding words based on your implementation
+of the Metaphone algorithm, and ordered based on their edit distance
+from the string that the user typed.</p>
+<p>The edit distance algorithm, which will be used to rank the results
+(notice that "spelling" comes before "spoiling") is based on how many letter changes would be needed to change one word into another. </p>
+
+<p>The Metaphone algorithm finds words that "sound like" other words. You can find out more about the Metaphone algorithm at Wikipedia: <a href="https://en.wikipedia.org/wiki/Metaphone">https://en.wikipedia.org/wiki/Metaphone</a>.</p> 
+</li>
+<!--
+<li><p><b>Scrabble Game</b>: Implement a version of the popular word game Scrabble. Your program will need to do the following:
+<ul>
+<li>Maintain complete information about the current state of the board and be able to print it on the screen on command.</li>
+<li>Maintain a list of what letters each player currently has available.</li>
+<li>Provide a way for a player to make a move (define a new word)</li>
+<li>Provide a way for a player to randomly draw new letters, and keep track of what letters still exist in the unused pool.</li>
+<li>Calculate score for each play and totals for each player.</li>
+<li>Save a game in progress and resume later.</li>
+<li>Use an internal dictionary to check whether words played are legal.</li>
+</ul> 
+</p>
+-->
+<p></p>
+<li><p><b>Pseudocode to Flowchart Tool</b>: This program will allow a user to create and display a flowchart by entering pseudocode interactively (or perhaps by reading pseudocode from a text file). You will need to define a minimal set of keywords to be used in the pseudocode. For example, the keywords are
+in ALL CAPS below:
+<pre><b>
+START
+SET i = 0
+ask user for max value
+IF  max <= 0
+    print "Max must be positive"
+    exit
+ELSEIF max > 1000
+    print "Max is too big"
+ENDIF
+WHILE i < max
+    print i,i*i
+    SET i = i+1
+ENDWHILE
+END
+</b></pre>
+The keywords signal the need for special symbols (like diamonds for tests).
+Any line that is not part of a keyword construction would be a simple statement. The flowchart would just create a box, with the text of the
+line inside the box.</p>
+<p>Your program will use the GD library (<a href="https://en.wikipedia.org/wiki/GD_Graphics_Library">https://en.wikipedia.org/wiki/GD_Graphics_Library</a>) to actually create the drawing described by
+the pseudocode. GD lets you create an empty "image" then draw into it. Finally you can save the image as JPG or PNG for display.</p>
+
+</li>
+
+<li><p><b>C Program Function Cross-Reference</b>: This program will provide tools to help a programmer understand the structure of a multi-module C software system. Input to the program will be a set of .h and .c files that are intended to create one or more executables. Your program will read these files and create an in-memory index of all functions that records:
+<ul>
+<li>Where each function is defined (where the code is) - module name and line numbers</li>
+<li>Where each function is called - module and line number.</li>
+</ul>
+</p>
+<p>After the program has built the index, the programmer can do the following:
+<ul>
+<li>Ask for a list of all function names</li>
+<li>Ask for a list of all function names defined in a particular module</li>
+<li>Ask for a list of all function names called in a particular module</li>
+<li>Select or type a function name and see where it is defined, and a list of all places it is called.</li>
+<li>Select a function name and see the code that defines that function (displayed on the screen).</li>
+<li>Select a function name and a module/line number where it is called, and see the code for that function call (displayed on the screen).</li>
+</ul>
+</p>
+<p>This project must be able to deal with large numbers of .c and .h files (e.g. dozens). I will give you some samples to use for testing.</p>
+</li>
+<!--
+<li><p><b>Emotion-based Song Recommender</b>: This program will take as input a set of text files that hold the (English) lyrics of songs. The program will analyze each song to determine the general emotional tone of the song, based on the words used in the song lyrics. You will need to define a set of emotion categories ahead of time, and for each mood, a list of words that are evidence for that emotion. For example:
+<ul>
+<li>Mood "Happy" - happy, smile, laugh, celebrate, joy, fun</li>
+<li>Mood "Angry" - angry, fight, yell, mad, insult</li>
+<li>Mood "Relaxed" - easy, slow, happy, quiet, vacation</li>
+<li>Mood "Sad"  - sorry, sad, cry, tears, depressed, suicide</li>
+</ul>
+</p>
+<p>
+I believe that I can provide you with some sample categories and words to start with, based on a senior project last year.</p>
+<p>Note that one song might have multiple emotions associated with it. Also note that you can measure the strength of a particular emotion based on how many of the keywords you find in the lyrics.</p>
+<p>Once you have built your data structures, the user can do the following:
+<ul type="a">
+<li>Ask for a list of all emotion categories</li>
+<li>Ask for a list of all song titles</li>
+<li>Ask for a list of songs that match a particular emotion.</li>
+<li>Choose a song from the list displayed in (b) or (c) and see the lyrics</li>
+<li>Manually modify the emotion category of a song, either removing the song from a category or adding a new emotion category.</li>
+</ul> </p>
+</li>
+-->
+<li><p><b>File System Cleanup Tools</b>: This program will search all the files on a system hard disk, starting at a root directory specified by the user, and build an internal data structure to help the user find duplicates and multiple versions of files. The internal data structure will be based on a hash table, that is, a sort of dictionary that allows looking things up by their names. Once the system has built the data structure, the user 
+can ask it to perform the following tasks:
+<ul>
+<li>Find possible duplicate files: files in different locations on the disk that have the same name, the same size and the same last modification date and time.</li>
+<li>Find multiple versions of the same file: files that have the same name but different sizes and/or last modification dates/times.</li>  
+<li>Find old files: find and list files that have not been accessed since a user specified date and time. The user might want to delete these files.</li>
+<li>Find recent files: find and list files that have changed since a user specified date and time. The user might want to be sure that these files have been backed up.</li>
+<li>For any of the four categories of files above, create a temporary directory with copies so that it is easier for the user to examine them.</li>
+</ul></p>
+<p>All of the tasks above can be limited to look only in some subdirectories.</p>
+</li>
+</ol>
+<p></p>
+
+
+
+</body>
+</html>

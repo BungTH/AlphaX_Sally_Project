@@ -1,0 +1,49 @@
+----------------------------------------------------------------------------------s
+Team name : AlphaX
+----------------------------------------------------------------------------------
+Topic : photo search engine
+----------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------
+Use case name : find the similar
+-----------------------------------------------------------------------------------
+Actor : Any system user 
+------------------------------------------------------------------------------------
+Goal : Find  photo that have the most 
+       similar to the photo that user given
+------------------------------------------------------------------------------------
+Main sucess narrative:
+
+	1.System asks the user to enter the photo
+	2.Users enter the photo
+	3.System calculate the similar all each photo
+	4.System list three most similar to the photo that user given
+	5.System displays information the most top three similar photo
+	6.User selects one of the photo to displays
+	7.System displays the page in the default web browers
+------------------------------------------------------------------------------------
+Alternative narrative 1:
+	3.System not founded the photo in the database
+	4.System display error no photo founded and ask for a new photo
+------------------------------------------------------------------------------------
+Alternative narrative 2:
+	6. User don't want to see photo in web browers
+	7. System go to main menu
+-------------------------------------------------------------------------------------
+Alternative narrative 3: 
+	2. User don't want to enter the photo (select wrong options: fault from user)
+	3. System go back to main menu
+-------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+	
+	
+	
