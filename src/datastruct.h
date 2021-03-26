@@ -33,3 +33,9 @@ typedef struct _photo
 	struct _photo *nextResult;/*use for search return as a list*/
 	struct _photo *next;/*next photo (use in masterlist)*/
 	}PHOTO_T;
+	
+typedef struct _hashitem
+	{
+	PHOTO_T* photo;
+	struct _hashitem *next;
+	}HASHITEM_T;
