@@ -24,6 +24,7 @@
  *				HASHITEM_T* hashphoto[] (hash table of photo)
  *
  *	return	  : PHOTO_T* (information about the photo)
+ 				NULL for not found
  ************************************************************/
 PHOTO_T* findPhoto(char* namephoto,HASHITEM_T* hashphoto[]);  
 
@@ -51,6 +52,17 @@ int checktag(PHOTO_T* photo,char* tag[]);
  ************************************************************/
 PHOTO_T* searchByTag(char* tag[],HASHITEM_T* hashtag[]); 
 
+/************************************************************
+ *This function delete the photo from the linklist that  
+ *have tag in except[] !!!!! this function look forward check
+ *photo->nextResult and delete the next item not the photo
+ *
+ *	Arguement : PHOTO_T* photo (linklist of result)
+ *			    char* except[]	   (except tag)
+ *
+ *  return	  : NO
+ ************************************************************/
+void checkexcept(PHOTO_T* photo,char* except[]);
 /************************************************************
  *This function find the photo with the 
  *given tag[] that user given and return 
@@ -86,7 +98,7 @@ PHOTO_T* findSimilar(char* namephoto,HASHITEM_T* hashtag[]);
  *				
  *	return    : NO
  ************************************************************/
-void addTag(char* namephoto,char* tag[]);
+void addTag(char* namephoto,HASHITEM_T* hashphoto[],HASHITEM_T* hashtag[],char* tag[]);
 /************************************************************
  *This function delete the tag to the photo
  *
@@ -95,4 +107,4 @@ void addTag(char* namephoto,char* tag[]);
  *				
  *	return    : NO
  ************************************************************/
-void deleteTag(char* namephoto,char* tag[]);
+void deleteTag(char* namephoto,HASHITEM_T* hashphoto[],HASHITEM_T* hashtag[],char* tag[]);
