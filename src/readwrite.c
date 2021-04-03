@@ -77,8 +77,8 @@ void readData(PHOTO_T * pHead, HASHITEM_T * hashphoto[], HASHTAG_T * hashtag[])
 
     PHOTO_T * inputData;
 
-    LIST_TAG_T * pListHead = NULL;
-    LIST_TAG_T * pListTemp = NULL;
+    LIST_TAG_T * pHeadTag = NULL;
+    LIST_TAG_T * pCurrentTag = NULL;
 
     char pic_name[PHOTOSIZE];
     int pic_tagNum;
@@ -109,31 +109,35 @@ void readData(PHOTO_T * pHead, HASHITEM_T * hashphoto[], HASHTAG_T * hashtag[])
                 sscanf(inputline,"%[^;];%d;%s",pic_name,&pic_tagNum,pic_path);
                 fgets(inputline,sizeof(inputline),pIn);
                 sscanf(inputline,"%s",pic_tagAll);
-                //printf("%s - %d - %s - %s",pic_name,pic_tagNum,pic_path,pic_tagAll);
                 strcpy(inputData->namephoto,pic_name);
                 inputData->numtag = pic_tagNum;
                 strcpy(inputData->path,pic_path);
+                //printing first line of info
+                printf("-Printing Picture name, Number of Tag and Path\n");
+                printf("\tName : %s\n\tTag Number : %d\n\tPath : %s\n",pic_name,pic_tagNum,pic_path);
                 //1st strtok
-                pListHead = calloc(1,sizeof(LIST_TAG_T));
-                pListTemp = calloc(1,sizeof(LIST_TAG_T));
+                pHeadTag = (LIST_TAG_T *)calloc(1,sizeof(LIST_TAG_T));
+                pCurrentTag = pHeadTag;
                 ptr = strtok(pic_tagAll,delim);
                 //other strtok 
                 while(ptr != NULL)
                 {
-                    printf("ptr = %s\n",ptr);
-                    /*strcpy(pListTemp->nametag,ptr); //core dump
-                    if(pListHead == NULL)
-                    {
-                        pListHead = pListTemp;
-                    }
-                    else
-                    {
-                        pListTemp->next = pListHead;
-                        pListHead = pListTemp;
-                    }*/
+                    strcpy(pCurrentTag->nametag,ptr);
                     ptr = strtok(NULL,delim);
+                    if(ptr != NULL)
+                    {
+                        pCurrentTag->next = (LIST_TAG_T *)calloc(1,sizeof(LIST_TAG_T));
+                        pCurrentTag = pCurrentTag->next;
+                    }
                 }
-                //strtok then assign tag
+                //printing list
+                printf("-Printing linkedlist data : seperated tags\n");
+                pCurrentTag = pHeadTag;
+                while(pCurrentTag != NULL)
+                {
+                    printf("\ttag = %s\n",pCurrentTag->nametag);
+                    pCurrentTag = pCurrentTag->next;
+                }
                 /*add_photo_2_hashphoto(inputData, hashphoto);
                 add_photo_2_hashtag(inputData, hashtag);
                 add_photo_2_masterlist(inputData, pHead);*/

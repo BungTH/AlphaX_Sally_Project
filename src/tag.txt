@@ -1,2 +1,6 @@
 cat.jpg;3;home/cat.jpg
 Brown;White;Cat
+dog.png;5;home/desktop/dog.png
+Brown;Big;Dog;Smile;Cute
+ice_cream.jpeg;2;home/bin/ice_cream.jpeg
+White;Cool

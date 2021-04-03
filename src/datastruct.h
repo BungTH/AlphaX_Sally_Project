@@ -14,11 +14,12 @@
 #define BUCKET_COUNT 997
 #define PHOTOSIZE 256
 #define PATHSIZE 512
+#define TAGBUFFER 32
 
 typedef struct _listtag
 	{
 	/*linklist of tags*/
-	char* nametag; /*name of the tag*/
+	char nametag[TAGBUFFER]; /*name of the tag*/
 	struct _listtag *next;
 	}LIST_TAG_T;
 
