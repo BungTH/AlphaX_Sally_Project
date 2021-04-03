@@ -8,8 +8,12 @@
  *	Created By Fang
  *		Mar 26 2021
  *
+ *  Modified by Bung (to prevent HASHTAG error)
+ * 		April 3 2021
  **************************************/
 #define BUCKET_COUNT 997
+#define PHOTOSIZE 256
+#define PATHSIZE 512
 
 typedef struct _listtag
 	{
@@ -20,8 +24,8 @@ typedef struct _listtag
 
 typedef struct _photo
 	{
-	char namephoto[256];/*name of the photo*/
-	char path[512];/*path of photo*/
+	char namephoto[PHOTOSIZE];/*name of the photo*/
+	char path[PATHSIZE];/*path of photo*/
 	int numtag; /*number of the tag*/
 	int count; /*use for calculate the similar*/
 	int state; /*use as a flag of calculation
@@ -39,3 +43,9 @@ typedef struct _hashitem
 	PHOTO_T* photo;
 	struct _hashitem *next;
 	}HASHITEM_T;
+
+typedef struct _hashtag
+	{
+	PHOTO_T* photo;
+	struct _hashtag *next;
+	}HASHTAG_T;
