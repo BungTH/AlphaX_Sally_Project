@@ -1,2 +1,2 @@
-cat.jpg:3:home/cat.jpg
-Brown:White:Cat
+cat.jpg;3;home/cat.jpg
+Brown;White;Cat
