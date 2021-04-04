@@ -13,11 +13,15 @@
  *   Modified By Bung
  *       April 4 2021 - Added comment for each function
  *                    - Added code to freeAll, writeData function
- *                    - Bug : segmentation fault when try to access
- *                            data from masterlist in main
- *                      see add_photo_2_masterlist
+ *                    - Bug [SOLVED] :  segmentation fault when try to access
+ *                                      data from masterlist in main
+ *                                      see add_photo_2_masterlist
+ *                    - Added comment for each function
+ *                    - Module finished
  * 
  ******************************************************************/
+
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,12 +31,25 @@
 #include "readwrite.h"
 #include "dtype.h"
 
-#define ALLTAG 512
-#define BUFFER 512
+
+
+/*---------------------------------------PRIVATE FUNCTION---------------------------------------*/
 
 
 
-//use dtype.c
+/******************************************************************
+ * 
+ *  This function will add the information of data structure 
+ *  for each photo into the hash table
+ *
+ *	Arugement : PHOTO_T * photo (data structure of photo)
+ *				HASHITEM_T * hashphoto[] (hash table of photo)
+ *
+ *	return	  : BOOL result (result of insertion)
+ *              - TRUE for succeeded insertion
+ *              - FALSE for failed insertion
+ * 
+ ******************************************************************/
 STATUS add_photo_2_hashphoto(PHOTO_T * photo, HASHITEM_T * hashphoto[])
 {
 	BOOL result = FALSE;                    //variable to hold result of insertitem function
@@ -47,7 +64,19 @@ STATUS add_photo_2_hashphoto(PHOTO_T * photo, HASHITEM_T * hashphoto[])
 
 
 
-//use dtype.c
+/******************************************************************
+ * 
+ *  This function will add the information of linked list
+ *  for tag(s) in photo into the hash table
+ *
+ *	Arugement : PHOTO_T * photo (data structure of photo)
+ *				HASHITEM_T * hashtag[] (hash table of tag)
+ *
+ *	return	  : BOOL result (result of insertion)
+ *              - TRUE for succeeded insertion
+ *              - FALSE for failed insertion
+ *
+ ******************************************************************/
 STATUS add_photo_2_hashtag(PHOTO_T * photo, HASHITEM_T * hashtag[])
 {
 	LIST_TAG_T * pHeadAlltag = NULL;        //variable to hold pointer to head of linkedlist
@@ -72,7 +101,18 @@ STATUS add_photo_2_hashtag(PHOTO_T * photo, HASHITEM_T * hashtag[])
 
 
 
-//use "next" and hand build link list
+/******************************************************************
+ * 
+ *  This function will copy the information from one data
+ *  structure to the master list which will be used to compare
+ *  and search in other function
+ *
+ *	Arugement : PHOTO_T * photo (data structure of photo)
+ *				PHOTO_T ** pHead (data structure of master list)
+ *
+ *	return	  : None
+ *
+ ******************************************************************/
 void add_photo_2_masterlist(PHOTO_T * photo, PHOTO_T ** pHead)
 {
 	if(*pHead == NULL)
@@ -88,70 +128,51 @@ void add_photo_2_masterlist(PHOTO_T * photo, PHOTO_T ** pHead)
 
 
 
-//set data to NULL
-void freeAll(PHOTO_T * pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[])
+/******************************************************************
+ * 
+ *  This function will create the data base file if the program
+ *  failed to open the file or the file doesn't existed
+ *
+ *	Arugement : None
+ *
+ *	return	  : None
+ *
+ ******************************************************************/
+void createFile()
 {
-    LIST_TAG_T * pTmp = NULL;               //variable to hold pointer to temporary linkedlist
+    FILE * pTmp = NULL;                     //variable to hold position of temporary file
 
-    while(pHead != NULL)
+    pTmp = fopen("tag.txt","w");
+    if(pTmp == NULL)
     {
-        pTmp = pHead->alltag;
-        pHead = pHead->next;
-        free(pTmp);
-    }
-    /*freeHash(hashphoto);
-    freeHash(hashtag);*/
-}
-
-
-
-//write data to
-void writeData(PHOTO_T * pHead)
-{
-    FILE * pOut = NULL;                     //variable to hold position of output file
-
-    PHOTO_T * pTmp = NULL;
-
-    LIST_TAG_T * pTmpTag = NULL;
-
-    pOut = fopen("tag_copy.txt","w");
-    if(pOut == NULL)
-    {
-        printf("\tERROR - Failed to open output file\n");
+        printf("\tERROR - Failed to create database file\n");
     }
     else
     {
-        pTmp = pHead;
-        while(pTmp != NULL)
-        {
-            pTmpTag = pHead->alltag;
-            fprintf(pOut,"%s;%d;%s\n",pTmp->namephoto,pTmp->numtag,pTmp->path);
-            while(pTmpTag != NULL)
-            {
-                fprintf(pOut,"%s",pTmpTag->nametag);
-                //check if there is next element or not
-                if(pTmpTag->next != NULL)
-                {
-                    fprintf(pOut,";");
-                }
-                pTmpTag = pTmpTag->next;
-            }
-            fprintf(pOut,"\n");
-            pTmp = pTmp->next;
-        }
-        fclose(pOut);
+        printf("\tNotice - File had been created\n");
+        fclose(pTmp);
     }
 }
 
 
 
-void createFile()
-{
-
-}
+/*---------------------------------------PUBLIC FUNCTION---------------------------------------*/
 
 
 
+/******************************************************************
+ * 
+ *  This function will read the data from the data base file
+ *  then initialized the data structure required in the program
+ *  and other necessary elements
+ *
+ *	Arugement : PHOTO_T ** pHead (data structure of master list)
+ *              HASHITEM_T * hashphoto[] (hash table of photo)
+ *              HASHITEM_T * hashtag[] (hash table of tag)
+ *
+ *	return	  : None
+ *
+ ******************************************************************/
 void readData(PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[])
 {
     FILE * pIn = NULL;                      //variable to hold position of input file
@@ -178,6 +199,7 @@ void readData(PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[]
     if(pIn == NULL)
     {
         printf("\tERROR - Failed to open input file\n");
+        createFile();
     }
     else
     {
@@ -214,17 +236,6 @@ void readData(PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[]
                 inputData->alltag = pHeadTag;
                 inputData->count = 0;
                 inputData->state = 0;
-                /*
-                *   test printing tag from linkedlist
-                *   printf("-Printing linkedlist data : seperated tags\n");
-                *   pCurrentTag = pHeadTag;
-                *   while(pCurrentTag != NULL)
-                *   {
-                *       printf("\ttag = %s\n",pCurrentTag->nametag);
-                *       pCurrentTag = pCurrentTag->next;
-                *   }
-                * 
-                */
                 result_name = add_photo_2_hashphoto(inputData, hashphoto);
                 result_tag = add_photo_2_hashtag(inputData, hashtag);
                 add_photo_2_masterlist(inputData,pHead);
@@ -236,6 +247,87 @@ void readData(PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[]
 
 
 
+/******************************************************************
+ * 
+ *  This function will write the data into the output file
+ *  that will be used in the other module or function in
+ *  the program
+ *
+ *	Arugement : PHOTO_T * pHead (data structure of master list)
+ *
+ *	return	  : None
+ *
+ ******************************************************************/
+void writeData(PHOTO_T * pHead)
+{
+    FILE * pOut = NULL;                     //variable to hold position of output file
+
+    PHOTO_T * pTmp = NULL;                  //variable to hold position of temporary data structure
+
+    LIST_TAG_T * pTmpTag = NULL;            //variable to hold position of temporary linkedlist
+
+    pOut = fopen("tag_copy.txt","w");
+    if(pOut == NULL)
+    {
+        printf("\tERROR - Failed to open output file\n");
+    }
+    else
+    {
+        pTmp = pHead;
+        while(pTmp != NULL)
+        {
+            pTmpTag = pTmp->alltag;
+            fprintf(pOut,"%s;%d;%s\n",pTmp->namephoto,pTmp->numtag,pTmp->path);
+            while(pTmpTag != NULL)
+            {
+                fprintf(pOut,"%s",pTmpTag->nametag);
+                //check if there is next element or not
+                if(pTmpTag->next != NULL)
+                {
+                    fprintf(pOut,";");
+                }
+                pTmpTag = pTmpTag->next;
+            }
+            fprintf(pOut,"\n");
+            pTmp = pTmp->next;
+        }
+        fclose(pOut);
+    }
+}
+
+
+
+/******************************************************************
+ * 
+ *  This function will free all the used memory allocated to
+ *  the data structure and linked list
+ *
+ *	Arugement : PHOTO_T * pHead (data structure of master list)
+ *				HASHITEM_T * hashphoto[] (hash table of photo)
+ *              HASHITEM_T * hashtag[] (hash table of tag)
+ *
+ *	return	  : None
+ *
+ ******************************************************************/
+void freeAll(PHOTO_T * pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[])
+{
+    LIST_TAG_T * pTmp = NULL;               //variable to hold pointer to temporary linkedlist
+
+    while(pHead != NULL)
+    {
+        pTmp = pHead->alltag;
+        pHead = pHead->next;
+        free(pTmp);
+    }
+    //freeHash bug : double free error
+    /*freeHash(hashphoto);
+    freeHash(hashtag);*/
+}
+
+
+
+/*
+main function to test the readwrite.c
 int main()
 {
     PHOTO_T * pHead;
@@ -248,3 +340,4 @@ int main()
     writeData(pHead);
     freeAll(pHead,hashphoto,hashtag);
 }
+*/

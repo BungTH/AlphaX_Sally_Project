@@ -10,7 +10,7 @@ all : $(EXECUTABLES)
 dtype.o : dtype.c dtype.h datastruct.h
 	gcc -c dtype.c
 
-readwrite.o : readwrite.c datastruct.h dtype.h
+readwrite.o : readwrite.c readwrite.h dtype.h datastruct.h
 	gcc -c readwrite.c
 
 readwrite$(EXECEXT) : readwrite.o dtype.o
@@ -19,4 +19,4 @@ readwrite$(EXECEXT) : readwrite.o dtype.o
 
 clean : 
 	-rm *.o
-	-rm readwrite 
+	-rm readwrite
