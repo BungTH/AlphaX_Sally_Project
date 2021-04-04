@@ -228,7 +228,7 @@ void readData(PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[]
                 */
                 result_name = add_photo_2_hashphoto(inputData, hashphoto);
                 result_tag = add_photo_2_hashtag(inputData, hashtag);
-                pHead = add_photo_2_masterlist(inputData);
+                add_photo_2_masterlist(inputData,pHead);
             }
         }
         fclose(pIn);
