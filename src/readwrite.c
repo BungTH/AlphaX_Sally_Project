@@ -18,6 +18,7 @@
 
 #include "datastruct.h"
 #include "readwrite.h"
+#include "dtype.h"
 
 #define ALLTAG 512
 #define BUFFER 512
@@ -25,17 +26,35 @@
 
 
 //use dtype.c
-void add_photo_2_hashphoto(PHOTO_T * photo, HASHITEM_T * hashphoto[])
+int add_photo_2_hashphoto(PHOTO_T * photo, HASHITEM_T * hashphoto[])
 {
-
+	int result = 1;
+	if(!insertitem(photo->namephoto,photo,hashphoto))
+		{
+		result = 0;	
+		}
+	return result;
 }
 
 
 
 //use dtype.c
-void add_photo_2_hashtag(PHOTO_T * photo, HASHITEM_T * hashtag[])
+int add_photo_2_hashtag(PHOTO_T * photo, HASHITEM_T * hashtag[])
 {
-
+	int result = 1;
+	LIST_TAG_T* headAlltag = photo->alltag;
+	
+	LIST_TAG_T* tmp = headAlltag;
+	while(tmp != NULL)	
+		{
+		if(!insertitem(tmp->nametag,photo,hashtag))
+			{
+			result = 0;
+			break;	
+			}
+		tmp = tmp->next;
+		}
+	return result;
 }
 
 
@@ -43,7 +62,15 @@ void add_photo_2_hashtag(PHOTO_T * photo, HASHITEM_T * hashtag[])
 //use "next" and hand build link list
 void add_photo_2_masterlist(PHOTO_T * photo, PHOTO_T * pHead)
 {
-
+	if(pHead == NULL)
+		{
+		pHead = photo;
+		}
+	else
+		{
+		photo->next = pHead;
+		pHead = photo;
+		}
 }
 
 
@@ -71,7 +98,7 @@ void createFile()
 
 
 
-void readData(PHOTO_T * pHead, HASHITEM_T * hashphoto[], HASHTAG_T * hashtag[])
+void readData(PHOTO_T * pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[])
 {
     FILE * pIn = NULL;
 
@@ -113,9 +140,12 @@ void readData(PHOTO_T * pHead, HASHITEM_T * hashphoto[], HASHTAG_T * hashtag[])
                 inputData->numtag = pic_tagNum;
                 strcpy(inputData->path,pic_path);
                 //printing first line of info
-                printf("-Printing Picture name, Number of Tag and Path\n");
-                printf("\tName : %s\n\tTag Number : %d\n\tPath : %s\n",pic_name,pic_tagNum,pic_path);
+                //printf("-Printing Picture name, Number of Tag and Path\n");
+                //printf("\tName : %s\n\tTag Number : %d\n\tPath : %s\n",pic_name,pic_tagNum,pic_path);
                 //1st strtok
+                
+                
+                /*set alltag*/
                 pHeadTag = (LIST_TAG_T *)calloc(1,sizeof(LIST_TAG_T));
                 pCurrentTag = pHeadTag;
                 ptr = strtok(pic_tagAll,delim);
@@ -130,6 +160,10 @@ void readData(PHOTO_T * pHead, HASHITEM_T * hashphoto[], HASHTAG_T * hashtag[])
                         pCurrentTag = pCurrentTag->next;
                     }
                 }
+                inputData->alltag = pHeadTag;
+                
+                
+                
                 //printing list
                 printf("-Printing linkedlist data : seperated tags\n");
                 pCurrentTag = pHeadTag;
@@ -138,9 +172,9 @@ void readData(PHOTO_T * pHead, HASHITEM_T * hashphoto[], HASHTAG_T * hashtag[])
                     printf("\ttag = %s\n",pCurrentTag->nametag);
                     pCurrentTag = pCurrentTag->next;
                 }
-                /*add_photo_2_hashphoto(inputData, hashphoto);
+                add_photo_2_hashphoto(inputData, hashphoto);
                 add_photo_2_hashtag(inputData, hashtag);
-                add_photo_2_masterlist(inputData, pHead);*/
+                add_photo_2_masterlist(inputData, pHead);
             }
         }
         fclose(pIn);
@@ -151,9 +185,14 @@ void readData(PHOTO_T * pHead, HASHITEM_T * hashphoto[], HASHTAG_T * hashtag[])
 
 int main()
 {
-    PHOTO_T* dummyHead;
-    HASHITEM_T** dummyhashphoto;
-    HASHTAG_T** dummyhashtag;
-
-    readData(dummyHead,dummyhashphoto,dummyhashtag);
+    PHOTO_T* pHead;
+    HASHITEM_T** hashphoto = intialHash();
+    HASHITEM_T** hashtag = intialHash();
+    readData(pHead,hashphoto,hashtag);
+    //hashphoto = intialHash();
 }
+
+
+
+
+

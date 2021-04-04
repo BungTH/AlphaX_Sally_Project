@@ -45,8 +45,4 @@ typedef struct _hashitem
 	struct _hashitem *next;
 	}HASHITEM_T;
 
-typedef struct _hashtag
-	{
-	PHOTO_T* photo;
-	struct _hashtag *next;
-	}HASHTAG_T;
+

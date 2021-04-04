@@ -259,8 +259,11 @@ void deleteTag(char* namephoto,HASHITEM_T* hashphoto[],HASHITEM_T* hashtag[],cha
 
 	alltag = photo->alltag;/*get head linklist of all tag*/
 
+	while()
+		{
+		 	
+		}
 
-	
 
 	/*delete out of hashtag*/
 
