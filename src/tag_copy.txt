@@ -1,0 +1,6 @@
+ice_cream.jpeg;2;home/bin/ice_cream.jpeg
+White;Cool
+dog.png;5;home/desktop/dog.png
+White;Cool
+cat.jpg;3;home/cat.jpg
+White;Cool

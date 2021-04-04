@@ -60,17 +60,17 @@ int add_photo_2_hashtag(PHOTO_T * photo, HASHITEM_T * hashtag[])
 
 
 //use "next" and hand build link list
-void add_photo_2_masterlist(PHOTO_T * photo, PHOTO_T * pHead)
+void add_photo_2_masterlist(PHOTO_T * photo, PHOTO_T** pHead)
 {
-	if(pHead == NULL)
-		{
-		pHead = photo;
-		}
-	else
-		{
-		photo->next = pHead;
-		pHead = photo;
-		}
+	if(*pHead == NULL)
+        {
+        *pHead = photo;
+        }
+    else
+        {
+        photo->next = *pHead;
+        *pHead = photo;
+        }
 }
 
 
@@ -84,11 +84,43 @@ void freeAll(PHOTO_T * pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[])
 
 
 //write data to
-void writeData(PHOTO_T * pHead)
+void writeData(PHOTO_T* pHead)
 {
+    FILE * pOut = NULL;                     //variable to hold position of output file
 
+    PHOTO_T * pTmp = NULL;
+
+    LIST_TAG_T * pTmpTag = NULL;
+
+    pOut = fopen("tag_copy.txt","w");
+    if(pOut == NULL)
+    {
+        printf("\tERROR - Failed to open output file\n");
+    }
+    else
+    {
+        pTmp = pHead;
+        while(pTmp != NULL)
+        {
+            pTmpTag = pHead->alltag;
+            fprintf(pOut,"%s;%d;%s\n",pTmp->namephoto,pTmp->numtag,pTmp->path);
+            while(pTmpTag != NULL)
+            {
+                fprintf(pOut,"%s",pTmpTag->nametag);
+                //check if there is next element or not
+                if(pTmpTag->next != NULL)
+                {
+                    printf(";");
+                    fprintf(pOut,";");
+                }
+                pTmpTag = pTmpTag->next;
+            }
+            fprintf(pOut,"\n");
+            pTmp = pTmp->next;
+        }
+        fclose(pOut);
+    }
 }
-
 
 
 void createFile()
@@ -98,7 +130,7 @@ void createFile()
 
 
 
-void readData(PHOTO_T * pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[])
+void readData(PHOTO_T** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[])
 {
     FILE * pIn = NULL;
 
@@ -160,7 +192,11 @@ void readData(PHOTO_T * pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[])
                         pCurrentTag = pCurrentTag->next;
                     }
                 }
+
+
                 inputData->alltag = pHeadTag;
+                inputData->count = 0;
+                inputData->state = 0;
                 
                 
                 
@@ -185,11 +221,16 @@ void readData(PHOTO_T * pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[])
 
 int main()
 {
-    PHOTO_T* pHead;
-    HASHITEM_T** hashphoto = intialHash();
-    HASHITEM_T** hashtag = intialHash();
-    readData(pHead,hashphoto,hashtag);
-    //hashphoto = intialHash();
+    PHOTO_T* pHead = NULL;
+    
+    HASHITEM_T ** hashphoto = intialHash();
+    HASHITEM_T ** hashtag = intialHash();
+
+    readData(&pHead,hashphoto,hashtag);
+    //segemnt fault when try to access masterlist
+    printf("-Data from pHead in main :\n");
+    printf("\tName : %s, Number of Tag : %d, Path : %s\n",pHead->namephoto,pHead->numtag,pHead->path);
+    writeData(pHead);
 }
 
 
