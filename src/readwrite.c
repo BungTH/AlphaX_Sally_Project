@@ -168,20 +168,13 @@ void readData(PHOTO_T** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[])
                 sscanf(inputline,"%[^;];%d;%s",pic_name,&pic_tagNum,pic_path);
                 fgets(inputline,sizeof(inputline),pIn);
                 sscanf(inputline,"%s",pic_tagAll);
+                //adding data to structure
                 strcpy(inputData->namephoto,pic_name);
                 inputData->numtag = pic_tagNum;
-                strcpy(inputData->path,pic_path);
-                //printing first line of info
-                //printf("-Printing Picture name, Number of Tag and Path\n");
-                //printf("\tName : %s\n\tTag Number : %d\n\tPath : %s\n",pic_name,pic_tagNum,pic_path);
-                //1st strtok
-                
-                
-                /*set alltag*/
+                strcpy(inputData->path,pic_path);                
                 pHeadTag = (LIST_TAG_T *)calloc(1,sizeof(LIST_TAG_T));
                 pCurrentTag = pHeadTag;
                 ptr = strtok(pic_tagAll,delim);
-                //other strtok 
                 while(ptr != NULL)
                 {
                     strcpy(pCurrentTag->nametag,ptr);
@@ -192,22 +185,9 @@ void readData(PHOTO_T** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[])
                         pCurrentTag = pCurrentTag->next;
                     }
                 }
-
-
                 inputData->alltag = pHeadTag;
                 inputData->count = 0;
                 inputData->state = 0;
-                
-                
-                
-                //printing list
-                printf("-Printing linkedlist data : seperated tags\n");
-                pCurrentTag = pHeadTag;
-                while(pCurrentTag != NULL)
-                {
-                    printf("\ttag = %s\n",pCurrentTag->nametag);
-                    pCurrentTag = pCurrentTag->next;
-                }
                 add_photo_2_hashphoto(inputData, hashphoto);
                 add_photo_2_hashtag(inputData, hashtag);
                 add_photo_2_masterlist(inputData, pHead);
@@ -221,15 +201,12 @@ void readData(PHOTO_T** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[])
 
 int main()
 {
-    PHOTO_T* pHead = NULL;
+    PHOTO_T * pHead = NULL;
     
     HASHITEM_T ** hashphoto = intialHash();
     HASHITEM_T ** hashtag = intialHash();
 
     readData(&pHead,hashphoto,hashtag);
-    //segemnt fault when try to access masterlist
-    printf("-Data from pHead in main :\n");
-    printf("\tName : %s, Number of Tag : %d, Path : %s\n",pHead->namephoto,pHead->numtag,pHead->path);
     writeData(pHead);
 }
 
