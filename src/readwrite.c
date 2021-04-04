@@ -132,7 +132,6 @@ void writeData(PHOTO_T * pHead)
                 //check if there is next element or not
                 if(pTmpTag->next != NULL)
                 {
-                    printf(";");
                     fprintf(pOut,";");
                 }
                 pTmpTag = pTmpTag->next;
