@@ -1,20 +1,32 @@
-/**************************************
+/******************************************************************
  *
- *datastruct.h
+ *	 datastruct.h
  *
- *	this file contain the data structure 
- *	All use in the program
+ *	 this file contain the data structure 
+ *	 All use in the program
  *
- *	Created By Fang
- *		Mar 26 2021
+ *	 Created By Fang
+ *		 Mar 26 2021
  *
- *  Modified by Bung (to prevent HASHTAG error)
- * 		April 3 2021
- **************************************/
+ *   Modified By Bung
+ * 		 April 3 2021 - Added temporary HASHTAG_T to prevent error
+ * 		 April 4 2021 - Deleted HASHTAG_T
+ * 					  - Added BOOL and STATUS data type for more
+ * 						specific usage of int
+ * 
+ ******************************************************************/
+
 #define BUCKET_COUNT 997
 #define PHOTOSIZE 256
 #define PATHSIZE 512
 #define TAGBUFFER 32
+
+#define TRUE 1
+#define FALSE 0
+
+typedef int BOOL;
+
+typedef int STATUS;
 
 typedef struct _listtag
 	{
@@ -44,7 +56,3 @@ typedef struct _hashitem
 	PHOTO_T* photo;
 	struct _hashitem *next;
 	}HASHITEM_T;
-
-
-
-
