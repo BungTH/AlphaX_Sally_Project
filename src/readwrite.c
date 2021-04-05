@@ -27,9 +27,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "dtype.h"
 #include "datastruct.h"
 #include "readwrite.h"
-#include "dtype.h"
+
 
 
 
