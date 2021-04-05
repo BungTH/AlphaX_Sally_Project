@@ -12,9 +12,9 @@ dtype.o : dtype.c dtype.h datastruct.h
 
 readwrite.o : readwrite.c readwrite.h dtype.h datastruct.h
 	gcc -c readwrite.c
-
-readwrite$(EXECEXT) : readwrite.o dtype.o
-	gcc -o readwrite$(EXECEXT) readwrite.o dtype.o
+	
+model.o : model.c dtype.h datastruct.h
+	gcc -c model.c
 
 
 clean : 

@@ -153,6 +153,10 @@ void checkexcept(PHOTO_T* photo,char* except[])
 
 	PHOTO_T* tmpphoto = NULL;
 
+	int sizetag = sizeof(except)/sizeof(char*);
+
+	int i = 0;
+
 	while(tmp != NULL)
 		{ 
 		for(i = 0;i<sizetag;i++)
@@ -184,7 +188,8 @@ void checkexcept(PHOTO_T* photo,char* except[])
 PHOTO_T* searchCondition(char* tag[],char* except[],HASHITEM_T* hashtag[])
 	{
 	int i = 0;
-	PHOTO_T* listresult = NULL,tmp = NULL;	
+	PHOTO_T* listresult = NULL;
+	PHOTO_T* tmp = NULL;	
 	LIST_TAG_T* alltag = NULL;
 	listresult = searchByTag(tag,hashtag);
 
@@ -227,6 +232,7 @@ void addTag(char* namephoto,HASHITEM_T* hashphoto[],HASHITEM_T* hashtag[],char* 
 	int sizetag = sizeof(tag)/sizeof(char*);
 
 	alltag = photo->alltag;/*get head linklist of all tag*/
+	int i=0;
 
 	for(i=0;i<sizetag;i++)
 		{
