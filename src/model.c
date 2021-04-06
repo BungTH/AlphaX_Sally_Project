@@ -236,6 +236,8 @@ void addTag(char* namephoto,
 	alltag = photo->alltag;/*get head linklist of all tag*/
 	int i=0;
 
+	photo->numtag += sizetag;
+
 	for(i=0;i<sizetag;i++)
 		{
 
