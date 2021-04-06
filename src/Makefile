@@ -1,6 +1,11 @@
-# Makefile for readwrite.c
-# of corse in case you are lazy
-# just make readwrite and done
+######################################
+#
+#
+#	Makefile AlphaX
+#
+#
+#
+######################################
 
 EXECUTABLES= photoengine
 
@@ -20,7 +25,7 @@ controller.o : controller.c dtype.h readwrite.h model.h datastruct.h
 	
 photoengine : controller.o model.o readwrite.o dtype.o dtype.h readwrite.h model.h datastruct.h
 	gcc -o photoengine controller.o model.o readwrite.o dtype.o
- 
+
 clean : 
 	-rm *.o
 	-rm photoengine

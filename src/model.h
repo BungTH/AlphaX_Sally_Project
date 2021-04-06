@@ -37,7 +37,7 @@ PHOTO_T* findPhoto(char* namephoto,HASHITEM_T* hashphoto[]);
  *
  *  return	  : 1 for photo have all tag[] 0 for else
  ************************************************************/
-int checktag(PHOTO_T* photo,char* tag[]);
+int checktag(PHOTO_T* photo,char* tag[],int sizetag);
 
 /************************************************************
  *This function find the photo with the 
@@ -49,7 +49,7 @@ int checktag(PHOTO_T* photo,char* tag[]);
  *
  *	return	  : linklist of photo that have tag[] in it
  ************************************************************/
-PHOTO_T* searchByTag(char* tag[],HASHITEM_T* hashtag[]); 
+PHOTO_T* searchByTag(char* tag[],int sizetag,HASHITEM_T* hashtag[]); 
 
 /************************************************************
  *This function delete the photo from the linklist that  
@@ -61,7 +61,7 @@ PHOTO_T* searchByTag(char* tag[],HASHITEM_T* hashtag[]);
  *
  *  return	  : NO
  ************************************************************/
-void checkexcept(PHOTO_T* photo,char* except[]);
+void checkexcept(PHOTO_T* photo,char* except[],int sizeexcept);
 /************************************************************
  *This function find the photo with the 
  *given tag[] that user given and return 
@@ -75,7 +75,9 @@ void checkexcept(PHOTO_T* photo,char* except[]);
  *	return	  : linklist of photo that have tag[] and excluded 
  *				except[] in it
  ************************************************************/
-PHOTO_T* searchCondition(char* tag[],char* except[],HASHITEM_T* hashtag[]); 
+PHOTO_T* searchCondition(char* tag[],char* except[],
+						int sizetag,int sizeexcpet,
+						HASHITEM_T* hashtag[]); 
 
 /************************************************************
  *This function find the similar photo 
@@ -97,7 +99,9 @@ PHOTO_T* findSimilar(char* namephoto,HASHITEM_T* hashtag[]);
  *				
  *	return    : NO
  ************************************************************/
-void addTag(char* namephoto,HASHITEM_T* hashphoto[],HASHITEM_T* hashtag[],char* tag[]);
+void addTag(char* namephoto,
+			HASHITEM_T* hashphoto[],HASHITEM_T* hashtag[]
+			,char* tag[],int sizetag);
 /************************************************************
  *This function delete the tag to the photo
  *

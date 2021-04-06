@@ -62,11 +62,10 @@ PHOTO_T* findPhoto(char* namephoto,HASHITEM_T* hashphoto[])
  *
  *  return	  : 1 for photo have all tag[] 0 for else
  ************************************************************/
-int checktag(PHOTO_T* photo,char* tag[])
+int checktag(PHOTO_T* photo,char* tag[],int sizetag)
 	{
 	int count = 0; 
 	int i = 0;/*use for loop*/
-	int sizetag = sizeof(tag)/sizeof(char*);
 
 	LIST_TAG_T* tmp = photo->alltag;/*linklist of all tag*/
 
@@ -91,13 +90,13 @@ int checktag(PHOTO_T* photo,char* tag[])
  *
  *	return	  : linklist of photo that have tag[] in it
  ************************************************************/
-PHOTO_T* searchByTag(char* tag[],HASHITEM_T* hashtag[])
+PHOTO_T* searchByTag(char* tag[],int sizetag,HASHITEM_T* hashtag[])
 	{
 	HASHITEM_T* tmp = NULL;
 	PHOTO_T* listresult = NULL;
 	PHOTO_T* tmpstate = NULL;
 	int i = 0;
-	int sizetag = sizeof(tag)/sizeof(char*);
+	//int sizetag = sizeof(tag)/sizeof(char*);
 
 	
 	for(i = 0;i<sizetag;i++)
@@ -110,7 +109,7 @@ PHOTO_T* searchByTag(char* tag[],HASHITEM_T* hashtag[])
 			if(!(tmp->photo->state))
 				{
 				/*if the photo include all of the tag */
-				if(checktag(tmp->photo,tag))
+				if(checktag(tmp->photo,tag,sizetag))
 					{
 					/*add the photo to the head of listresult*/
 					tmp->photo->state = 1;/*set state to already in listresult*/
@@ -144,7 +143,7 @@ PHOTO_T* searchByTag(char* tag[],HASHITEM_T* hashtag[])
  *
  *  return	  : NO
  ************************************************************/
-void checkexcept(PHOTO_T* photo,char* except[])
+void checkexcept(PHOTO_T* photo,char* except[],int sizeexcept)
 	{
 	/*get head linklist of alltag next photo*/
 	LIST_TAG_T* nextphototag = photo->nextResult->alltag;
@@ -153,13 +152,13 @@ void checkexcept(PHOTO_T* photo,char* except[])
 
 	PHOTO_T* tmpphoto = NULL;
 
-	int sizetag = sizeof(except)/sizeof(char*);
+	//int sizetag = sizeof(except)/sizeof(char*);
 
 	int i = 0;
 
 	while(tmp != NULL)
 		{ 
-		for(i = 0;i<sizetag;i++)
+		for(i = 0;i<sizeexcept;i++)
 			{
 			if(strcmp(tmp->nametag,except[i]) == 0)
 				{
@@ -185,20 +184,22 @@ void checkexcept(PHOTO_T* photo,char* except[])
  *	return	  : linklist of photo that have tag[] and excluded 
  *				except[] in it
  ************************************************************/
-PHOTO_T* searchCondition(char* tag[],char* except[],HASHITEM_T* hashtag[])
+PHOTO_T* searchCondition(char* tag[],char* except[],
+						int sizetag,int sizeexcpet,
+						HASHITEM_T* hashtag[])
 	{
 	int i = 0;
 	PHOTO_T* listresult = NULL;
 	PHOTO_T* tmp = NULL;	
 	LIST_TAG_T* alltag = NULL;
-	listresult = searchByTag(tag,hashtag);
+	listresult = searchByTag(tag,sizetag,hashtag);
 
-	int sizeexcept = sizeof(except)/sizeof(char*);
+	//int sizeexcept = sizeof(except)/sizeof(char*);
 	/*loop the list*/
 	tmp  = listresult;
 	while(tmp != NULL)
 		{
-		checkexcept(tmp,except);
+		checkexcept(tmp,except,sizeexcpet);
 		tmp = tmp->nextResult;
 		}
 	return listresult;
@@ -224,12 +225,13 @@ PHOTO_T* findSimilar(char* namephoto,HASHITEM_T* hashtag[]);
  *				
  *	return    : NO
  ************************************************************/
-void addTag(char* namephoto,HASHITEM_T* hashphoto[],HASHITEM_T* hashtag[],char* tag[])
+void addTag(char* namephoto,
+			HASHITEM_T* hashphoto[],HASHITEM_T* hashtag[]
+			,char* tag[],int sizetag)
 	{
 	PHOTO_T* photo = findPhoto(namephoto,hashphoto);/*get the photo*/
 	LIST_TAG_T* alltag = NULL;/*alltag of the photo*/
 	LIST_TAG_T* addtag = NULL;/*tag that going to add*/
-	int sizetag = sizeof(tag)/sizeof(char*);
 
 	alltag = photo->alltag;/*get head linklist of all tag*/
 	int i=0;
@@ -238,7 +240,7 @@ void addTag(char* namephoto,HASHITEM_T* hashphoto[],HASHITEM_T* hashtag[],char* 
 		{
 
 		addtag = (LIST_TAG_T*)calloc(1,sizeof(LIST_TAG_T));
-		strcpy(addtag->nametag,tag);
+		strcpy(addtag->nametag,tag[i]);
 
 		/*add to photo*/
 		addtag->next = alltag;
@@ -261,14 +263,10 @@ void deleteTag(char* namephoto,HASHITEM_T* hashphoto[],HASHITEM_T* hashtag[],cha
 	{
 	PHOTO_T* photo = findPhoto(namephoto,hashphoto);/*get the photo*/
 	LIST_TAG_T* alltag = NULL;/*alltag of the photo*/
-	int sizetag = sizeof(tag)/sizeof(char*);
+	//int sizetag = sizeof(tag)/sizeof(char*);
 
 	alltag = photo->alltag;/*get head linklist of all tag*/
 
-	while()
-		{
-		 	
-		}
 
 
 	/*delete out of hashtag*/

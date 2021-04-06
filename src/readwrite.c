@@ -27,8 +27,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "dtype.h"
+
 #include "datastruct.h"
+#include "dtype.h"
 #include "readwrite.h"
 
 
