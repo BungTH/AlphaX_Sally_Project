@@ -96,7 +96,8 @@ void handlemainmenu(PHOTO_T * pHead,HASHITEM_T ** hashphoto,HASHITEM_T ** hashta
 		fgets(input,sizeof(input),stdin);
 		sscanf(input,"%c",&whichcheck);
 		************************************************/
-
+		fgets(input,sizeof(input),stdin);
+		sscanf(input,"%c",&whichcheck);
 		switch(whichcheck)/*check which subprogram user selected*/
 			{
 			case '1':
