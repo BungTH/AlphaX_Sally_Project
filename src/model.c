@@ -31,7 +31,7 @@
  *				HASHITEM_T* hashphoto[] (hash table of photo)
  *
  *	return	  : PHOTO_T* (information about the photo)
- 				NULL for not found
+ *				NULL for not found
  ************************************************************/
 PHOTO_T* findPhoto(char* namephoto,HASHITEM_T* hashphoto[])
 	{

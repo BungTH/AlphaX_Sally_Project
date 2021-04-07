@@ -10,6 +10,7 @@
  #include <stdlib.h>
 
  #include "datastruct.h"
+ #include "controller.h"
  #include "dtype.h"
  #include "readwrite.h"
  #include "model.h"
@@ -43,7 +44,7 @@ void handleSearchByTag(HASHITEM_T ** hashtag)
 	char * tag[256];
 	int sizetag = 0;
 
-	//searchByTagPage(tag,&sizetag); <-- Today Goal
+	searchByTagPage(tag,&sizetag); 
 	PHOTO_T* result = searchByTag(tag,sizetag,hashtag);
 	PHOTO_T* tmp = result;
 	printf("the Result is ");
@@ -52,7 +53,7 @@ void handleSearchByTag(HASHITEM_T ** hashtag)
 		displayphoto(tmp);
 		tmp = tmp->nextResult;
 		}
-	//handlesubmenu();
+	//handleSubMenu();
 	}
 
 void handleSearchCondition()
@@ -70,9 +71,7 @@ void handlemainmenu(PHOTO_T * pHead,HASHITEM_T ** hashphoto,HASHITEM_T ** hashta
 
 	while(whichcheck != '4')
 		{
-
 		menuPage(&whichcheck);
-
 		switch(whichcheck)/*check which subprogram user selected*/
 			{
 			case '1':
@@ -86,7 +85,6 @@ void handlemainmenu(PHOTO_T * pHead,HASHITEM_T ** hashphoto,HASHITEM_T ** hashta
 				 break;
 			case '4':
 				 printf("\nGoodbye\n");
-				 exit(0);
 				 break;
 			default: 
 				 printf("invalid input( enter only 1-5)\n"); 
@@ -94,7 +92,34 @@ void handlemainmenu(PHOTO_T * pHead,HASHITEM_T ** hashphoto,HASHITEM_T ** hashta
             }
         }
 	}
+void handleSubMenu(HASHITEM_T** hashphoto,HASHITEM_T** hashtag)
+	{
+	char whichcheck = '0'; /*collect which validation option user want*/
+	char input[128];/*get data from user*/
 
+	while(whichcheck != '4')
+		{
+		subMenuPage(&whichcheck);
+		switch(whichcheck)/*check which subprogram user selected*/
+			{
+			case '1':
+				 handleAddDeleteTag(hashphoto);
+				 break;
+			case '2':
+				 handlefindSimilar(hashphoto,hashtag);
+				 break;
+			case '3':
+				 handleDisplayBroswer(hashphoto);
+				 break;
+			case '4':
+				 printf("\nGoodbye\n");
+				 break;
+			default: 
+				 printf("invalid input( enter only 1-4)\n"); 
+                 break;   
+            }
+        }
+	}
 int main()
 	{
     PHOTO_T * pHead;

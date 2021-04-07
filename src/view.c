@@ -1,5 +1,8 @@
 /*************************************
  *  
+ * view.c 
+ * 
+ *      
  * 
  * 
  * 
@@ -63,54 +66,234 @@ void displayphoto(PHOTO_T* photo)
 
 
 
-void menuPage(char* which)
-{
+void menuPage(char* choice)
+	{
 	char inputline[32];
-
     char option = 'A';
     printf("--------------------------------------------\n");
-	printf("\t MENU\n");
+	printf("\t MAINMENU\n");
     printf("\t 1 - ADD TAG AND PHOTO\n");
 	printf("\t 2 - SEARCH PHOTO BY TAG\n");
 	printf("\t 3 - SEARCH PHOTO BY TAG AND EXCLUDED TAG\n");
 	printf("\t 4 - EXIT\n");
-	printf("\t Which option do you want to choose?\n");
+	printf("\t Which option do you want to choose?");
 	printf("--------------------------------------------\n");
     
-    while(isalpha(option))
+    while(isalpha(option) != 0)
         {
+		printf("\n\tEnter your option :");
         fgets(inputline,sizeof(inputline),stdin);
 	    sscanf(inputline,"%c",&option);
-        if(isalpha(option))
+        if(allAlpha(option) == 1)
             {
-            printf("Invalid - ..."); 
+            *choice = option;/*set choice*/
             }
+		else
+			{
+			printf("\tInvalid Option Please input again!\n");
+            printf("\nEnter your option :");
+			fgets(inputline, sizeof(inputline), stdin);
+	    	sscanf(inputline, "%c", &option);
+			}
         }
-    *which = option;/*set which*/
-	
-}
+	}
+
+void subMenuPage(char * choice)
+	{
+	char inputline[512];
+	char option = 'A';
+	char alt[512];
+	printf("--------------------------------------------\n");
+	printf("\t What do you want to do?\n");
+    printf("\t 1 - DISPLAY ADD/DELETE TAGS\n");
+	printf("\t 2 - SEARCH SIMILAR PHOTO(S)\n");
+	printf("\t 3 - DISPLAY ON BROWSER\n");
+	printf("\t 4 - GO TO MAIN MENU\n");
+	printf("--------------------------------------------\n");
+	while (isalpha(option) != 0)
+        {
+        printf("\n\tEnter your option :");
+        fgets(inputline, sizeof(inputline), stdin);
+	    sscanf(inputline, "%c", &option);
+		sscanf(inputline, "%s", &alt);
+
+        if (allAlpha(option) == 1)
+            {
+            *choice = option;/*set choice*/	
+            }
+		else
+			{
+			printf("\tInvalid Option Please input again!\n");
+            printf("\nEnter your option :");
+			fgets(inputline, sizeof(inputline), stdin);
+	    	sscanf(inputline, "%c", &option);
+			}
+        }
+	}
 
 void searchByTagPage(char * tag[], int * sizetag)
 	{
-    char inputline[32];
+    char inputline[64];
 	int count = 0;
 	char tags[TAGBUFFER];
-	
-	while(1)
+	printf("--------------------------------------------\n");
+	printf("\tPlease insert Tags (Type \"DONE\" to stop)\n");
+	printf("--------------------------------------------\n");
+    printf("Enter the name tag: ");
+	fgets(inputline, sizeof(inputline), stdin);
+	sscanf(inputline, "%s", tags);
+	while (strcasecmp(tags,"DONE") != 0)
 		{
-		printf("--------------------------------------------\n");
-		printf("\tPlease insert Tags (Type \"DONE\" to stop)\n");
-    	printf("--------------------------------------------\n");
-		fget(inputline, sizeof(inputline), stdin);
-		sscanf(inputline, "%s", tags);
-    	while (strcasecmp(tags,"DONE") != 0)
+		if (allAlpha(tags) == 1)
 			{
-			len = strlen(tags);
-			for (int i = 0; i < len; i++)
+			strcpy(tag[count],tags);
+			count++;
+			}
+		else
+			{
+			printf("\tInvalid tags Must be all alphabetic(Please insert again)\n");
+			}
+        printf("Enter the name tag: ");
+		fgets(inputline, sizeof(inputline), stdin);
+		sscanf(inputline, "%s", tags);			
+		}
+	*sizetag = count;		
+	}
+	
+void searchConPage(char * tag[], int * sizetag, char * except[], int * sizeexcept)
+{
+	char inputline[64];
+	char tags[TAGBUFFER];
+	char excepts[TAGBUFFER];
+    int count = 0;
+	
+	printf("--------------------------------------------\n");
+	printf("\t Search photo dy condition\n");
+	printf("--------------------------------------------\n");
+
+	printf(" Enter tag (Type \"DONE\" to stop): ");
+	fgets(inputline, sizeof(inputline), stdin);
+	sscanf(inputline, "%s", tags);
+	while (strcasecmp(tags,"DONE") != 0)
+		{
+		if (allAlpha(tags) == 1)
+			{
+			strcpy(tag[count],tags);
+			count++;
+			}
+		else 
+			{
+			printf(" Invalid tag! Tag must be all alphabetic.");	
+			}
+        printf(" Enter tag (Type \"DONE\" to stop): ");
+		fgets(inputline, sizeof(inputline), stdin);
+		sscanf(inputline, "%s", tags);			
+		}
+	*sizetag = count;
+
+    count = 0; /*reset count  to zero*/
+	printf(" Enter condition (Type \"DONE\" to stop): ");
+	fgets(inputline, sizeof(inputline), stdin);
+	sscanf(inputline, "%s", excepts);
+	while (strcasecmp(tags,"DONE") != 0)
+		{
+		if (allAlpha(excepts) == 1)
+			{
+			strcpy(excepts[count],excepts);
+			count++;
+			}
+		else 
+			{
+			printf(" Invalid condition! Condition must be all alphabetic.");	
+			}
+        printf(" Enter condition (Type \"DONE\" to stop): ");
+		fgets(inputline, sizeof(inputline), stdin);
+		sscanf(inputline, "%s", excepts);			
+		}
+	*sizeexcept = count;		
+}
+
+void similarPage(char  namephoto[])
+{
+	char inputline[PHOTOSIZE];
+	char photoname[PHOTOSIZE];
+
+	printf("--------------------------------------------\n");
+	printf("\t Find 3 similar photos\n");
+	printf("--------------------------------------------\n");
+
+	printf("\nEnter name of a photo: ");
+	fgets(inputline,sizeof(inputline),stdin);
+	sscanf(inputline,"%s", photoname);
+	while (1)
+		{
+		if (allAlpha(photoname) == 1)
+			{
+            /*assign to namephoto*/
+			strcpy(namephoto,photoname);
+            break;
+			}
+		else
+			{
+			printf(" Invalid name of a photo! Name of a photo must be all alphabetic.");	
+			}	
+        printf("\nEnter name of a photo: ");    
+        fgets(inputline,sizeof(inputline),stdin);
+	    sscanf(inputline,"%s", photoname);
+		}
+}
+
+void addDeleteTagPage(char* namephoto, char* tag[], int sizetag)
+{
+	char inputline[512];
+	char tags[TAGBUFFER];
+	char photoname[PHOTOSIZE];
+
+	printf("--------------------------------------------\n");
+	printf("\t Add/Delete tag\n");
+	printf("--------------------------------------------\n");
+
+	printf("\nEnter name of a photo: ");
+	fgets(inputline,sizeof(inputline),stdin);
+	sscanf(inputline,"%s", photoname);
+	while (1)
+		{
+		if (allAlpha(photoname) == 1)
+			{
+            /*assign to namephoto*/
+			strcpy(namephoto,photoname);
+            break;
+			}
+		else
+			{
+			printf(" Invalid name of a photo! Name of a photo must be all alphabetic.");	
+			}	
+        printf("\nEnter name of a photo: ");    
+        fgets(inputline,sizeof(inputline),stdin);
+	    sscanf(inputline,"%s", photoname);
+		}
+	printf("\nEnter tag to add: ");
+	fgets(inputline,sizeof(inputline),stdin);
+	sscanf(inputline,"%s",tags);
+	while (1)
+		{
+		fgets(inputline, sizeof(inputline), stdin);
+		sscanf(inputline, "%s", tags);
+		while (strcasecmp(tags,"DONE") != 0)
+			{
+			if (allAlpha(tags) == 1)
 				{
-				if (isalpha(tags[i]) == 0)
+            	/*assign to tags*/
+				strcpy(tag,tags);
+            	break;
 				}
+			else 				
+				{
+				printf(" Invalid tag! Tag must be all alphabetic.");	
+				}
+        	printf(" Enter tag (Type \"DONE\" to stop): ");
+			fgets(inputline, sizeof(inputline), stdin);
+			sscanf(inputline, "%s", tags);					
 			}
 		}
-	}
-void search
+}
