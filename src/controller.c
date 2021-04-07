@@ -46,17 +46,18 @@ void handleSearchByTag(HASHITEM_T ** hashtag)
 	//searchByTagPage(tag,&sizetag); <-- Today Goal
 	PHOTO_T* result = searchByTag(tag,sizetag,hashtag);
 	PHOTO_T* tmp = result;
-	printf("the Result is ");https://prod.liveshare.vsengsaas.visualstudio.com/join?CC10CF8739E227A889FB516CF6B26F381071
+	printf("the Result is ");
 	while(tmp != NULL)
 		{
 		displayphoto(tmp);
 		tmp = tmp->nextResult;
 		}
+	//handlesubmenu();
 	}
 
 void handleSearchCondition()
 	{
-
+	//handlesubmenu()
 	}
 /**************************************/
 

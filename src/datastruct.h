@@ -19,7 +19,7 @@
 #define BUCKET_COUNT 997
 #define PHOTOSIZE 256
 #define PATHSIZE 512
-#define TAGBUFFER 32
+#define TAGBUFFER 512
 
 #define TRUE 1
 #define FALSE 0

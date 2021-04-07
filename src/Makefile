@@ -22,9 +22,12 @@ model.o : model.c dtype.h datastruct.h
 	
 controller.o : controller.c dtype.h readwrite.h model.h datastruct.h
 	gcc -c controller.c
+
+view.o : view.c datastruct.h
+	gcc -c  view.c
 	
-photoengine : controller.o model.o readwrite.o dtype.o dtype.h readwrite.h model.h datastruct.h
-	gcc -o photoengine controller.o model.o readwrite.o dtype.o
+photoengine : controller.o model.o readwrite.o dtype.o view.o view.h dtype.h readwrite.h model.h datastruct.h
+	gcc -o photoengine controller.o model.o readwrite.o dtype.o view.o
 
 clean : 
 	-rm *.o

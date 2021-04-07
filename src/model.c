@@ -148,7 +148,7 @@ void checkexcept(PHOTO_T* photo,char* except[],int sizeexcept)
 	/*get head linklist of alltag next photo*/
 	LIST_TAG_T* nextphototag = photo->nextResult->alltag;
 
-	LIST_TAG_T* tmp = nextphototag;
+	LIST_TAG_T* tmptag = nextphototag;
 
 	PHOTO_T* tmpphoto = NULL;
 
@@ -156,11 +156,11 @@ void checkexcept(PHOTO_T* photo,char* except[],int sizeexcept)
 
 	int i = 0;
 
-	while(tmp != NULL)
+	while(tmptag != NULL)
 		{ 
 		for(i = 0;i<sizeexcept;i++)
 			{
-			if(strcmp(tmp->nametag,except[i]) == 0)
+			if(strcmp(tmptag->nametag,except[i]) == 0)
 				{
 				/*delete photo->nextResult and connect new photo*/
 				tmpphoto = photo->nextResult;
@@ -168,7 +168,7 @@ void checkexcept(PHOTO_T* photo,char* except[],int sizeexcept)
 				tmpphoto->nextResult = NULL;
 				}
 			}
-		tmp = tmp->next;
+		tmptag = tmptag->next;
 		}
 	}
 /************************************************************
@@ -199,7 +199,18 @@ PHOTO_T* searchCondition(char* tag[],char* except[],
 	tmp  = listresult;
 	while(tmp != NULL)
 		{
-		checkexcept(tmp,except,sizeexcpet);
+		if(tmp  == listresult)/*if tmp is head*/
+			{
+				printf("Hello");
+				/*checktag*/
+				LIST_TAG_T* alltag =  tmp->alltag;/*get all tag*/
+				//if()
+
+			}
+		else/*if not head*/
+			{
+			checkexcept(tmp,except,sizeexcpet);
+			}	
 		tmp = tmp->nextResult;
 		}
 	return listresult;
@@ -265,11 +276,17 @@ void deleteTag(char* namephoto,HASHITEM_T* hashphoto[],HASHITEM_T* hashtag[],cha
 	{
 	PHOTO_T* photo = findPhoto(namephoto,hashphoto);/*get the photo*/
 	LIST_TAG_T* alltag = NULL;/*alltag of the photo*/
+	LIST_TAG_T* tmp = NULL;
 	//int sizetag = sizeof(tag)/sizeof(char*);
 
 	alltag = photo->alltag;/*get head linklist of all tag*/
 
-		
+	tmp = alltag;
+	while(tmp != NULL)
+		{
+		//if()
+		printf("Hello");	
+		}
 	
 
 	/*delete out of hashtag*/

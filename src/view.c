@@ -5,12 +5,39 @@
  * 
  ************************************/
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
+
+
 #include "datastruct.h"
 #include "view.h"
 
-#include <stdio.h>
-#include <ctype.h>
-#include <string.h>
+/************************************************************
+ *This Function check is the string input is all alphabhetic or not
+ *
+ *	@Arugment => (char* stringTocheck[])
+ *
+ *	@Return => (int) 1 => the string is all alphabhetic 
+ *					 0 => for the string is not all alphabhetic
+ ************************************************************/
+int allAlpha(char stringToCheck[])
+	{
+	  int i = 0;   /* loop counter for looking at characters */
+	  int bOk = 1; /* return value. Assume all okay until we find
+			          a non-digit character */
+
+	  /* loop through all the characters, or until we find a non-digit */
+	  while(bOk && stringToCheck[i] != '\0')
+	    {
+	    if (!isalpha(stringToCheck[i]))
+	    	bOk = 0;
+	    i++;
+	    }
+	  return bOk;
+	}
+
 
 
 
@@ -34,40 +61,7 @@ void displayphoto(PHOTO_T* photo)
 	printf("\n\n-----------------------\n\n");
 	}
 
-void getNametag()
-{
-	char inputline[256];
-	int count = 0;
-	int numberTag[15];		/* number of tag (Maximum:15) */
 
-	printf("---------------------------\n");
-	printf(" \n");
-	printf(" WELCOME TO PHOTO SEARCH ENGINE PROGRAM!");
-	printf(" \n");
-	printf("...........................\n");
-	while (1)
-		{
-		while (numberTag < 1)
-			{
-			printf(" Enter number of tag to search: ");
-			fgets(inputline,sizeof(inputline),stdin);
-			sscanf(inputline,"%d",numberTag);	
-			}
-		while (count > 0)
-			{
-			printf(" Enter tag to search: ");
-			fgets(inputline,sizeof(inputline),stdin);
-			sscanf(inputline,"%s",nametag);
-			for (i = 0 ; i < numberTag ; i++)
-				{
-				if (strcmp(nametag,"\0" == 0))
-					{
-					printf(" ERROR! Please Enter tag.\n");
-					}		
-				}		
-			}
-		}	
-}
 
 void menuPage(char* which)
 {
@@ -75,11 +69,12 @@ void menuPage(char* which)
 
     char option = 'A';
     printf("--------------------------------------------\n");
-	printf(" MENU\n");
-	printf(" 1 - SEARCH PHOTO BY TAG\n");
-	printf(" 2 - SEARCH PHOTO BY TAG AND EXCLUDED TAG\n");
-	printf(" 3 - ADD TAG AND PHOTO\n");
-	printf(" Which option do you want to choose?");
+	printf("\t MENU\n");
+    printf("\t 1 - ADD TAG AND PHOTO\n");
+	printf("\t 2 - SEARCH PHOTO BY TAG\n");
+	printf("\t 3 - SEARCH PHOTO BY TAG AND EXCLUDED TAG\n");
+	printf("\t 4 - EXIT\n");
+	printf("\t Which option do you want to choose?\n");
 	printf("--------------------------------------------\n");
     
     while(isalpha(option))
@@ -93,11 +88,29 @@ void menuPage(char* which)
         }
     *which = option;/*set which*/
 	
-	
-
-
-	
 }
 
-void searchByTagPage()
-
+void searchByTagPage(char * tag[], int * sizetag)
+	{
+    char inputline[32];
+	int count = 0;
+	char tags[TAGBUFFER];
+	
+	while(1)
+		{
+		printf("--------------------------------------------\n");
+		printf("\tPlease insert Tags (Type \"DONE\" to stop)\n");
+    	printf("--------------------------------------------\n");
+		fget(inputline, sizeof(inputline), stdin);
+		sscanf(inputline, "%s", tags);
+    	while (strcasecmp(tags,"DONE") != 0)
+			{
+			len = strlen(tags);
+			for (int i = 0; i < len; i++)
+				{
+				if (isalpha(tags[i]) == 0)
+				}
+			}
+		}
+	}
+void search
