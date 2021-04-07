@@ -326,19 +326,7 @@ void freeAll(PHOTO_T * pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[])
     freeHash(hashtag);*/
 }
 
-/*main function to test the readwrite.c
-int main()
-{
-    PHOTO_T * pHead;
 
-    HASHITEM_T ** hashphoto = intialHash();
-
-    HASHITEM_T ** hashtag = intialHash();
-
-    readData(&pHead,hashphoto,hashtag);
-    writeData(pHead);
-    freeAll(pHead,hashphoto,hashtag);
-}*/
 
 
 

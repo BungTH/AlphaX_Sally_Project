@@ -13,29 +13,10 @@
  #include "dtype.h"
  #include "readwrite.h"
  #include "model.h"
- //#include "view.h"
+ #include "view.h"
 
 
-/*should be in view.c*/
-void displayphoto(PHOTO_T* photo)
-	{
-	LIST_TAG_T* alltag = photo->alltag; /*get all tag of the photo(as a head of linklist)*/
-	LIST_TAG_T* tmp = NULL;
-	printf("\n\n-----------------------\n\n");
-	printf("name : %s\n",photo->namephoto);
-	printf("path : %s\n",photo->path);
-	printf("number of tag : %d\n",photo->numtag);
-	printf("All of the tags:\n");
-	printf("************************\n");
-	tmp = alltag;
-	while(tmp != NULL)
-		{
-		printf("\t%s\n",tmp->nametag);
-		tmp = tmp->next;	
-		}
-	printf("************************\n");
-	printf("\n\n-----------------------\n\n");
-	}
+
 
 void handleAddDeleteTag()
 	{
@@ -59,13 +40,13 @@ void handleAddNewPhoto()
 
 void handleSearchByTag(HASHITEM_T ** hashtag)
 	{
-	char* tag[256];
+	char * tag[256];
 	int sizetag = 0;
-	int i = 0;
-	//searchByTagPage(tag,sizetag);
+
+	//searchByTagPage(tag,&sizetag); <-- Today Goal
 	PHOTO_T* result = searchByTag(tag,sizetag,hashtag);
 	PHOTO_T* tmp = result;
-	printf("the Result is ");
+	printf("the Result is ");https://prod.liveshare.vsengsaas.visualstudio.com/join?CC10CF8739E227A889FB516CF6B26F381071
 	while(tmp != NULL)
 		{
 		displayphoto(tmp);
@@ -89,15 +70,8 @@ void handlemainmenu(PHOTO_T * pHead,HASHITEM_T ** hashphoto,HASHITEM_T ** hashta
 	while(whichcheck != '4')
 		{
 
-		/*****change to menuPage()*****/
-		/*********************************************
-		printmainmenu();/*shortcut to print mainmenu	
+		menuPage(&whichcheck);
 
-		fgets(input,sizeof(input),stdin);
-		sscanf(input,"%c",&whichcheck);
-		************************************************/
-		fgets(input,sizeof(input),stdin);
-		sscanf(input,"%c",&whichcheck);
 		switch(whichcheck)/*check which subprogram user selected*/
 			{
 			case '1':
