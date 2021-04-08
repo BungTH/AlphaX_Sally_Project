@@ -115,8 +115,6 @@ void subMenuPage(char * choice)
         printf("\n\tEnter your option :");
         fgets(inputline, sizeof(inputline), stdin);
 	    sscanf(inputline, "%c", &option);
-		sscanf(inputline, "%s", &alt);
-
         if (allAlpha(option) == 1)
             {
             *choice = option;/*set choice*/	
@@ -137,9 +135,9 @@ void searchByTagPage(char * tag[], int * sizetag)
 	int count = 0;
 	char tags[TAGBUFFER];
 	printf("--------------------------------------------\n");
-	printf("\tPlease insert Tags (Type \"DONE\" to stop)\n");
+	printf("\tSearch by tag\n");
 	printf("--------------------------------------------\n");
-    printf("Enter the name tag: ");
+    printf("Enter the name tag(Type \"DONE\" to stop): ");
 	fgets(inputline, sizeof(inputline), stdin);
 	sscanf(inputline, "%s", tags);
 	while (strcasecmp(tags,"DONE") != 0)
@@ -170,7 +168,6 @@ void searchConPage(char * tag[], int * sizetag, char * except[], int * sizeexcep
 	printf("--------------------------------------------\n");
 	printf("\t Search photo dy condition\n");
 	printf("--------------------------------------------\n");
-
 	printf(" Enter tag (Type \"DONE\" to stop): ");
 	fgets(inputline, sizeof(inputline), stdin);
 	sscanf(inputline, "%s", tags);
@@ -221,7 +218,6 @@ void similarPage(char  namephoto[])
 	printf("--------------------------------------------\n");
 	printf("\t Find 3 similar photos\n");
 	printf("--------------------------------------------\n");
-
 	printf("\nEnter name of a photo: ");
 	fgets(inputline,sizeof(inputline),stdin);
 	sscanf(inputline,"%s", photoname);
@@ -252,7 +248,6 @@ void addDeleteTagPage(char* namephoto, char* tag[], int sizetag)
 	printf("--------------------------------------------\n");
 	printf("\t Add/Delete tag\n");
 	printf("--------------------------------------------\n");
-
 	printf("\nEnter name of a photo: ");
 	fgets(inputline,sizeof(inputline),stdin);
 	sscanf(inputline,"%s", photoname);
