@@ -41,19 +41,31 @@ void handleAddNewPhoto()
 
 void handleSearchByTag(HASHITEM_T ** hashtag)
 	{
-	char * tag[256];
+	char* tag[20];
 	int sizetag = 0;
+	int count = 0;
 
-	searchByTagPage(tag,&sizetag); 
+	searchByTagPage(tag,&sizetag);
 	PHOTO_T* result = searchByTag(tag,sizetag,hashtag);
 	PHOTO_T* tmp = result;
-	printf("the Result is ");
-	while(tmp != NULL)
+	if(result == NULL)
 		{
-		displayphoto(tmp);
-		tmp = tmp->nextResult;
+		printf("No Search result");
 		}
+	else
+		{
+		printf("The Result is \n");
+		while(tmp != NULL)
+			{
+			displayphoto(tmp,count);
+			tmp = tmp->nextResult;
+			count++;
+			}
+		printf("found (%d) search result \n",count);
+		}
+
 	//handleSubMenu();
+	
 	}
 
 void handleSearchCondition()
@@ -76,12 +88,15 @@ void handlemainmenu(PHOTO_T * pHead,HASHITEM_T ** hashphoto,HASHITEM_T ** hashta
 			{
 			case '1':
 				 handleAddNewPhoto(pHead,hashphoto,hashtag);/**/
+				 clearscreen();
 				 break;
 			case '2':
 				 handleSearchByTag(hashtag);/**/
+				 clearscreen();
 				 break;
 			case '3':
 				 handleSearchCondition(hashphoto,hashtag);/**/
+				 clearscreen();
 				 break;
 			case '4':
 				 printf("\nGoodbye\n");
@@ -112,7 +127,7 @@ void handleSubMenu(HASHITEM_T** hashphoto,HASHITEM_T** hashtag)
 				 handleDisplayBroswer(hashphoto);
 				 break;
 			case '4':
-				 printf("\nGoodbye\n");
+				 clearscreen();
 				 break;
 			default: 
 				 printf("invalid input( enter only 1-4)\n"); 

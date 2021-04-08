@@ -1,7 +1,23 @@
 
 
 
+
+
+
+
+
+
+#define CLEAR_ESCAPE "\033[2J" /*use for clear the screen*/
+#define CHARMAX 32 /*use in getLimitedint()*/
+
+
 int allAlpha(char stringToCheck[]);
+
+void getstring(char* prompt,char* string);
+
+
+
+void clearscreen();
 
 void menuPage(char* choice);
 
@@ -13,4 +29,4 @@ void searchConPage(char * tag[], int * sizetag, char * except[], int * sizeexcep
 
 void similarPage(char  namephoto[]);
 
-void displayphoto(PHOTO_T* photo);
+void displayphoto(PHOTO_T* photo,int index);

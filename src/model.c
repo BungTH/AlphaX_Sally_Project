@@ -76,6 +76,7 @@ int checktag(PHOTO_T* photo,char* tag[],int sizetag)
 				count++;
 		tmp = tmp->next;
 		}
+	
 	/*if sizetag == count mean photo include all tag[]*/
 	return  sizetag == count;
 	}
@@ -96,8 +97,6 @@ PHOTO_T* searchByTag(char* tag[],int sizetag,HASHITEM_T* hashtag[])
 	PHOTO_T* listresult = NULL;
 	PHOTO_T* tmpstate = NULL;
 	int i = 0;
-	//int sizetag = sizeof(tag)/sizeof(char*);
-
 	
 	for(i = 0;i<sizetag;i++)
 		{

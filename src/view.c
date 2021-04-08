@@ -17,6 +17,8 @@
 #include "datastruct.h"
 #include "view.h"
 
+
+
 /************************************************************
  *This Function check is the string input is all alphabhetic or not
  *
@@ -42,26 +44,48 @@ int allAlpha(char stringToCheck[])
 	}
 
 
+void getstring(char* prompt,char* string)
+	{
+	char input[512];
+	printf("\n%s",prompt);
+	fgets(input,sizeof(input),stdin);
+	sscanf(input,"%s",string);
+	}
+
+/*
+ *This Function clear the screen
+ *and ask of enter to go the main menu
+ *	@Arugment => NO
+ *
+ *	@Return => NO
+ */
+void clearscreen()
+	{
+	char input[16]; 
+	printf("\nHit RETURN to go to main Menu: ");
+    fgets(input,sizeof(input),stdin);
+    printf("%s",CLEAR_ESCAPE);	
+	}
 
 
-void displayphoto(PHOTO_T* photo)
+void displayphoto(PHOTO_T* photo,int index)
 	{
 	LIST_TAG_T* alltag = photo->alltag; /*get all tag of the photo(as a head of linklist)*/
 	LIST_TAG_T* tmp = NULL;
-	printf("\n\n-----------------------\n\n");
-	printf("name : %s\n",photo->namephoto);
-	printf("path : %s\n",photo->path);
-	printf("number of tag : %d\n",photo->numtag);
+	printf("\n-----------------------\n");
+	printf("No. %d",index);
+	printf("\n-----------------------\n");
+	printf("Name : %s\n",photo->namephoto);
+	printf("Path : %s\n",photo->path);
+	printf("Number of tag : %d\n",photo->numtag);
 	printf("All of the tags:\n");
-	printf("************************\n");
 	tmp = alltag;
 	while(tmp != NULL)
 		{
-		printf("\t%s\n",tmp->nametag);
+		printf("%s,",tmp->nametag);
 		tmp = tmp->next;	
 		}
-	printf("************************\n");
-	printf("\n\n-----------------------\n\n");
+	printf("\n-----------------------\n");
 	}
 
 
@@ -76,15 +100,15 @@ void menuPage(char* choice)
 	printf("\t 2 - SEARCH PHOTO BY TAG\n");
 	printf("\t 3 - SEARCH PHOTO BY TAG AND EXCLUDED TAG\n");
 	printf("\t 4 - EXIT\n");
-	printf("\t Which option do you want to choose?");
+	printf("\t Which option do you want to choose?\n");
 	printf("--------------------------------------------\n");
     
-    while(isalpha(option) != 0)
+    while(isalpha(option))
         {
 		printf("\n\tEnter your option :");
         fgets(inputline,sizeof(inputline),stdin);
 	    sscanf(inputline,"%c",&option);
-        if(allAlpha(option) == 1)
+        if(!isalpha(option))
             {
             *choice = option;/*set choice*/
             }
@@ -96,6 +120,7 @@ void menuPage(char* choice)
 	    	sscanf(inputline, "%c", &option);
 			}
         }
+    printf("%s",CLEAR_ESCAPE);
 	}
 
 void subMenuPage(char * choice)
@@ -110,12 +135,12 @@ void subMenuPage(char * choice)
 	printf("\t 3 - DISPLAY ON BROWSER\n");
 	printf("\t 4 - GO TO MAIN MENU\n");
 	printf("--------------------------------------------\n");
-	while (isalpha(option) != 0)
+	while (!isalpha(option))
         {
         printf("\n\tEnter your option :");
         fgets(inputline, sizeof(inputline), stdin);
 	    sscanf(inputline, "%c", &option);
-        if (allAlpha(option) == 1)
+        if (!isalpha(option))
             {
             *choice = option;/*set choice*/	
             }
@@ -129,53 +154,52 @@ void subMenuPage(char * choice)
         }
 	}
 
-void searchByTagPage(char * tag[], int * sizetag)
+void searchByTagPage(char* tag[], int * sizetag)
 	{
-    char inputline[64];
+    char inputline[512];
 	int count = 0;
-	char tags[TAGBUFFER];
+	char nametag[TAGBUFFER] = "\0";
 	printf("--------------------------------------------\n");
 	printf("\tSearch by tag\n");
 	printf("--------------------------------------------\n");
-    printf("Enter the name tag(Type \"DONE\" to stop): ");
-	fgets(inputline, sizeof(inputline), stdin);
-	sscanf(inputline, "%s", tags);
-	while (strcasecmp(tags,"DONE") != 0)
+    
+	do
 		{
-		if (allAlpha(tags) == 1)
+		getstring("Enter name tag:",nametag);
+		if(strcasecmp(nametag,"DONE") != 0)
 			{
-			strcpy(tag[count],tags);
-			count++;
+			if(allAlpha(nametag))
+				{
+				tag[count] = strdup(nametag);
+				count++;
+				}
+			else
+				printf("Invalid - the nametag have to be alphabhetic\n");
 			}
-		else
-			{
-			printf("\tInvalid tags Must be all alphabetic(Please insert again)\n");
-			}
-        printf("Enter the name tag: ");
-		fgets(inputline, sizeof(inputline), stdin);
-		sscanf(inputline, "%s", tags);			
-		}
-	*sizetag = count;		
+		}while(strcasecmp(nametag,"DONE") != 0);
+
+	*sizetag = count;
+	
 	}
 	
 void searchConPage(char * tag[], int * sizetag, char * except[], int * sizeexcept)
 {
-	char inputline[64];
-	char tags[TAGBUFFER];
+	char inputline[512];
+	char nametag[TAGBUFFER];
 	char excepts[TAGBUFFER];
     int count = 0;
 	
 	printf("--------------------------------------------\n");
 	printf("\t Search photo dy condition\n");
 	printf("--------------------------------------------\n");
-	printf(" Enter tag (Type \"DONE\" to stop): ");
+	printf(" Enter name tag (Type \"DONE\" to stop): ");
 	fgets(inputline, sizeof(inputline), stdin);
 	sscanf(inputline, "%s", tags);
 	while (strcasecmp(tags,"DONE") != 0)
 		{
 		if (allAlpha(tags) == 1)
 			{
-			strcpy(tag[count],tags);
+			tag[count] = strdup(nametag);
 			count++;
 			}
 		else 
@@ -194,9 +218,9 @@ void searchConPage(char * tag[], int * sizetag, char * except[], int * sizeexcep
 	sscanf(inputline, "%s", excepts);
 	while (strcasecmp(tags,"DONE") != 0)
 		{
-		if (allAlpha(excepts) == 1)
+		if (allAlpha(excepts))
 			{
-			strcpy(excepts[count],excepts);
+			strcpy(except[count],excepts);
 			count++;
 			}
 		else 
@@ -223,7 +247,7 @@ void similarPage(char  namephoto[])
 	sscanf(inputline,"%s", photoname);
 	while (1)
 		{
-		if (allAlpha(photoname) == 1)
+		if (allAlpha(photoname))
 			{
             /*assign to namephoto*/
 			strcpy(namephoto,photoname);
@@ -244,6 +268,7 @@ void addDeleteTagPage(char* namephoto, char* tag[], int sizetag)
 	char inputline[512];
 	char tags[TAGBUFFER];
 	char photoname[PHOTOSIZE];
+	int count = 0;
 
 	printf("--------------------------------------------\n");
 	printf("\t Add/Delete tag\n");
@@ -272,14 +297,13 @@ void addDeleteTagPage(char* namephoto, char* tag[], int sizetag)
 	sscanf(inputline,"%s",tags);
 	while (1)
 		{
-		fgets(inputline, sizeof(inputline), stdin);
-		sscanf(inputline, "%s", tags);
-		while (strcasecmp(tags,"DONE") != 0)
+		while(strcasecmp(tags,"DONE") != 0)
 			{
 			if (allAlpha(tags) == 1)
 				{
             	/*assign to tags*/
-				strcpy(tag,tags);
+				strcpy(tag[count],tags);
+				count++;
             	break;
 				}
 			else 				
