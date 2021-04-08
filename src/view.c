@@ -130,7 +130,7 @@ void menuPage(char* choice)
             }
 		else
 			{
-			getCharater("\tInvalid Option Please input again!\nEnter your option <enter to exit with no spacebar> :",&option);
+			printf("\tInvalid Option Please input again!");
 			}
         }
     printf("%s",CLEAR_ESCAPE);
@@ -157,7 +157,7 @@ void subMenuPage(char * choice)
             }
 		else
 			{
-			getCharater("\tInvalid Option Please input again!\nEnter your option <enter to exit with no spacebar> :",&option);
+			printf("\tInvalid Option Please input again!");
 			}
         }
 	}
