@@ -44,24 +44,31 @@ void handleSearchByTag(HASHITEM_T ** hashtag)
 	char* tag[20];
 	int sizetag = 0;
 	int count = 0;
-
+	PHOTO_T* result = NULL;
+	PHOTO_T* tmp = NULL;
+	int i = 0;
 	searchByTagPage(tag,&sizetag);
-	PHOTO_T* result = searchByTag(tag,sizetag,hashtag);
-	PHOTO_T* tmp = result;
+	/*
+	for (i= 0 ;i<sizetag;i++)
+		printf("%s\n",tag[i]);
+	*/
+	result = searchByTag(tag,sizetag,hashtag);
+
 	if(result == NULL)
 		{
-		printf("No Search result");
+		printf("\nFound %d photo(s) \n",count);
 		}
 	else
 		{
-		printf("The Result is \n");
+		printf("\nThe Result is \n");
+		tmp = result;
 		while(tmp != NULL)
 			{
 			displayphoto(tmp,count);
 			tmp = tmp->nextResult;
 			count++;
 			}
-		printf("found (%d) search result \n",count);
+		printf("Found %d photo(s) \n",count);
 		}
 
 	//handleSubMenu();

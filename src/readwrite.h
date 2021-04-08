@@ -26,10 +26,34 @@
  *              HASHITEM_T * hashphoto[] (hash table of photo)
  *              HASHITEM_T * hashtag[] (hash table of tag)
  *
- *	return	  : None
+ *	return	  : BOOL result (result of calloc and insertion)
+ *              - TRUE for succeeded calloc and insertion
+ *              - FALSE for failed calloc or insertion
  *
  ******************************************************************/
-void readData(PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[]);
+STATUS readData(PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[]);
+
+/******************************************************************
+ * 
+ *  This function will read the data from the argument given
+ *  then initialized the data structure required in the program
+ *  and other necessary elements
+ *
+ *	Arugement : char * namephoto (name of photo)
+ *              int * tag_amouth (amouth of tag)
+ *              char * path (path of photo)
+ *              char * tag_all[] (all tag in photo)
+ *              PHOTO_T ** pHead (data structure of master list)
+ *              HASHITEM_T * hashphoto[] (hash table of photo)
+ *              HASHITEM_T * hashtag[] (hash table of tag)
+ *
+ *	return	  : BOOL result (result of calloc and insertion)
+ *              - TRUE for succeeded calloc and insertion
+ *              - FALSE for failed calloc or insertion
+ *
+ ******************************************************************/
+STATUS addPhoto(char * namephoto, int tag_amount, char * path, char * tag_all[],
+                PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[]);
 
 /******************************************************************
  * 

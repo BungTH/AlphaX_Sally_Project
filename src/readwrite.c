@@ -17,6 +17,7 @@
  *                                      data from masterlist in main
  *                                      see add_photo_2_masterlist
  *                    - Added comment for each function
+ *       April 8 2021 - Added code and comment to addPhoto function
  *                    - Module finished
  * 
  ******************************************************************/
@@ -91,7 +92,7 @@ STATUS add_photo_2_hashtag(PHOTO_T * photo, HASHITEM_T * hashtag[])
 	while(pTmp != NULL)
 	{
         result = insertitem(pTmp->nametag,photo,hashtag);
-		if(result == 0)
+		if(result == FALSE)
 		{
 			printf("ERROR - Failed to insert item to the hashtable\n");
 			break;
@@ -172,10 +173,12 @@ void createFile()
  *              HASHITEM_T * hashphoto[] (hash table of photo)
  *              HASHITEM_T * hashtag[] (hash table of tag)
  *
- *	return	  : None
+ *	return	  : BOOL result (result of calloc and insertion)
+ *              - TRUE for succeeded calloc and insertion
+ *              - FALSE for failed calloc or insertion
  *
  ******************************************************************/
-void readData(PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[])
+STATUS readData(PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[])
 {
     FILE * pIn = NULL;                      //variable to hold position of input file
 
@@ -191,9 +194,6 @@ void readData(PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[]
 
     const char delim[] = ";";               //variable to hold delimiter that want to seperate
     char * ptr = NULL;                      //variable to hold seperated tag
-
-    BOOL result_name = FALSE;               //variable to hold result from add_photo_2_hashphoto function
-    BOOL result_tag = FALSE;                //variable to hold result from add_photo_2_hashtag function
 
     char inputline[BUFFER];                 //variable to hold data from input file as buffer
 
@@ -211,40 +211,129 @@ void readData(PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[]
             if(inputData == NULL)
             {
                 printf("\tERROR - Failed to calloc for inputData\n");
+                return FALSE;
             }
-            else
+            //adding data to data structure
+            sscanf(inputline,"%[^;];%d;%s",pic_name,&pic_tagNum,pic_path);
+            fgets(inputline,sizeof(inputline),pIn);
+            sscanf(inputline,"%s",pic_tagAll);
+            strcpy(inputData->namephoto,pic_name);
+            inputData->numtag = pic_tagNum;
+            strcpy(inputData->path,pic_path);
+            
+
+            /*setup all tag to inputData*/
+            pHeadTag = (LIST_TAG_T *)calloc(1,sizeof(LIST_TAG_T));
+            if(pHeadTag == NULL)
             {
-                //adding data to data structure
-                sscanf(inputline,"%[^;];%d;%s",pic_name,&pic_tagNum,pic_path);
-                fgets(inputline,sizeof(inputline),pIn);
-                sscanf(inputline,"%s",pic_tagAll);
-                strcpy(inputData->namephoto,pic_name);
-                inputData->numtag = pic_tagNum;
-                strcpy(inputData->path,pic_path);
-                //seperating alltag to small one
-                pHeadTag = (LIST_TAG_T *)calloc(1,sizeof(LIST_TAG_T));
-                pCurrentTag = pHeadTag;
-                ptr = strtok(pic_tagAll,delim);
-                while(ptr != NULL)
-                {
-                    strcpy(pCurrentTag->nametag,ptr);
-                    ptr = strtok(NULL,delim);
-                    if(ptr != NULL)
-                    {
-                        pCurrentTag->next = (LIST_TAG_T *)calloc(1,sizeof(LIST_TAG_T));
-                        pCurrentTag = pCurrentTag->next;
-                    }
-                }
-                inputData->alltag = pHeadTag;
-                inputData->count = 0;
-                inputData->state = 0;
-                result_name = add_photo_2_hashphoto(inputData, hashphoto);
-                result_tag = add_photo_2_hashtag(inputData, hashtag);
-                add_photo_2_masterlist(inputData,pHead);
+                printf("\tERROR - Failed to calloc for pHeadTag\n");
+                return FALSE;
             }
+            pCurrentTag = pHeadTag;
+            ptr = strtok(pic_tagAll,delim);
+            while(ptr != NULL)
+            {
+                strcpy(pCurrentTag->nametag,ptr);
+                ptr = strtok(NULL,delim);
+                if(ptr != NULL)
+                {
+                    pCurrentTag->next = (LIST_TAG_T *)calloc(1,sizeof(LIST_TAG_T));
+                    if(pCurrentTag->next == NULL)
+                    {
+                        printf("\tERROR - Failed to calloc for pCurrentTag->next\n");
+                        return FALSE;
+                    }
+                    pCurrentTag = pCurrentTag->next;
+                }
+            }
+            inputData->alltag = pHeadTag;
+
+
+            /*set for calculate*/
+            inputData->count = 0;
+            inputData->state = 0;
+            if(!(add_photo_2_hashphoto(inputData, hashphoto) && add_photo_2_hashtag(inputData, hashtag)))
+            {
+                return FALSE;
+            }
+            add_photo_2_masterlist(inputData, pHead);
         }
-        fclose(pIn);
+        return TRUE;
     }
+    fclose(pIn);
+}
+
+
+
+
+/******************************************************************
+ * 
+ *  This function will read the data from the argument given
+ *  then initialized the data structure required in the program
+ *  and other necessary elements
+ *
+ *	Arugement : char * namephoto (name of photo)
+ *              int * tag_amouth (amouth of tag)
+ *              char * path (path of photo)
+ *              char * tag_all[] (all tag in photo)
+ *              PHOTO_T ** pHead (data structure of master list)
+ *              HASHITEM_T * hashphoto[] (hash table of photo)
+ *              HASHITEM_T * hashtag[] (hash table of tag)
+ *
+ *	return	  : BOOL result (result of calloc and insertion)
+ *              - TRUE for succeeded calloc and insertion
+ *              - FALSE for failed calloc or insertion
+ *
+ ******************************************************************/
+STATUS addPhoto(char * namephoto, int tag_amount, char * path, char * tag_all[],
+                PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[])
+{
+    PHOTO_T * inputData;                    //variable to hold pointer to data structure
+
+    LIST_TAG_T * pHeadTag = NULL;           //variable to hold pointer to head of linkedlist
+    LIST_TAG_T * pCurrentTag = NULL;        //variable to hold pointer to current node in linkedlist
+
+    int i;                                  //variable for loop
+
+    inputData = calloc(1,sizeof(PHOTO_T));
+    if(inputData == NULL)
+    {
+        printf("\tERROR - Failed to calloc for inputData\n");
+        return FALSE;
+    }
+    //adding data to data structure
+    strcpy(inputData->namephoto,namephoto);
+    inputData->numtag = tag_amount;
+    strcpy(inputData->path,path);
+    for(i = 0;i < tag_amount;i++)
+    {   
+        pCurrentTag = (LIST_TAG_T *)calloc(1,sizeof(LIST_TAG_T));
+        if(pCurrentTag == NULL)
+        {
+            printf("\tERROR - Failed to calloc for pCurrentTag->next\n");
+            return FALSE;
+        }
+        strcpy(pHeadTag->nametag,tag_all[i]);
+        if(pHeadTag == NULL)     
+        {
+            pHeadTag = pCurrentTag;
+        }
+        else
+        {
+            pCurrentTag->next = pHeadTag;
+            pHeadTag = pCurrentTag;
+        }
+    }
+    inputData->alltag = pHeadTag;
+    
+    inputData->count = 0;
+    inputData->state = 0;
+    if(add_photo_2_hashphoto(inputData, hashphoto) && add_photo_2_hashtag(inputData, hashtag))
+    {
+        return FALSE;
+    }
+    add_photo_2_masterlist(inputData, pHead);
+    return TRUE;
 }
 
 

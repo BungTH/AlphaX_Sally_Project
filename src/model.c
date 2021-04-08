@@ -146,18 +146,17 @@ void checkexcept(PHOTO_T* photo,char* except[],int sizeexcept)
 	{
 	/*get head linklist of alltag next photo*/
 	LIST_TAG_T* nextphototag = photo->nextResult->alltag;
-
 	LIST_TAG_T* tmptag = nextphototag;
-
 	PHOTO_T* tmpphoto = NULL;
 
-	//int sizetag = sizeof(except)/sizeof(char*);
+	int state = 0;/*use to block double edit the linklist*/
 
 	int i = 0;
 
 	while(tmptag != NULL)
 		{ 
-		for(i = 0;i<sizeexcept;i++)
+		state = 0;
+		for(i = 0;i<sizeexcept && !state;i++)
 			{
 			if(strcmp(tmptag->nametag,except[i]) == 0)
 				{
@@ -165,6 +164,7 @@ void checkexcept(PHOTO_T* photo,char* except[],int sizeexcept)
 				tmpphoto = photo->nextResult;
 				photo->nextResult = photo->nextResult->nextResult;
 				tmpphoto->nextResult = NULL;
+				state = 1;
 				}
 			}
 		tmptag = tmptag->next;
@@ -184,31 +184,43 @@ void checkexcept(PHOTO_T* photo,char* except[],int sizeexcept)
  *				except[] in it
  ************************************************************/
 PHOTO_T* searchCondition(char* tag[],char* except[],
-						int sizetag,int sizeexcpet,
+						int sizetag,int sizeexcept,
 						HASHITEM_T* hashtag[])
 	{
 	int i = 0;
 	PHOTO_T* listresult = NULL;
 	PHOTO_T* tmp = NULL;	
 	LIST_TAG_T* alltag = NULL;
+	int state = 0;
 	listresult = searchByTag(tag,sizetag,hashtag);
-
-	//int sizeexcept = sizeof(except)/sizeof(char*);
 	/*loop the list*/
 	tmp  = listresult;
 	while(tmp != NULL)
 		{
 		if(tmp  == listresult)/*if tmp is head*/
 			{
-				printf("Hello");
-				/*checktag*/
-				LIST_TAG_T* alltag =  tmp->alltag;/*get all tag*/
-				//if()
+			LIST_TAG_T* alltag =  tmp->alltag;/*get all tag*/
+			LIST_TAG_T* tmptag =  alltag;
+			while(tmptag != NULL)
+				{ 
+				state = 0;
+				for(i = 0;i<sizeexcept && !state;i++)
+					{
+					if(strcmp(tmptag->nametag,except[i]) == 0)
+						{
+						/*set the new head*/
+						state = 0;
+						listresult = listresult->nextResult;/*change the head to next photo*/
+						tmp->nextResult = NULL;
+						}
+					}
+				tmptag = tmptag->next;
+				}
 
 			}
 		else/*if not head*/
 			{
-			checkexcept(tmp,except,sizeexcpet);
+			checkexcept(tmp,except,sizeexcept);
 			}	
 		tmp = tmp->nextResult;
 		}
