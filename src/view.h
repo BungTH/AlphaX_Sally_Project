@@ -24,6 +24,8 @@ void getCharater(char* prompt, char* character);
 
 void getstring(char* prompt, char* string);
 
+void getAllNameTag(char* tag[],int* sizetag);
+
 void freestring(char* ArrStr[], int ArrSize);
 
 void clearscreen();
