@@ -35,7 +35,7 @@ void handlefindSimilar()
 
 	} 
 /**************************************/
-void handleAddNewPhoto(HASHITEM_T* hashphoto[])
+void handleAddNewPhoto(PHOTO_T* pHead,HASHITEM_T* hashphoto[],HASHITEM_T* hashtag[])
 	{
 	
 	} 

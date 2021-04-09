@@ -90,7 +90,12 @@ void subMenuPage(char * choice)
 
 void addNewPhotoPage(HASHITEM_T* hashphoto[])
 	{
-	printf("");
+	printf("--------------------------------------------\n");
+	printf("\tAdd new photo\n");
+	printf("--------------------------------------------\n");
+	printf("\nPlease input the photo name and tag");
+
+	
 	}
 
 void searchByTagPage(char* tag[], int * sizetag)
