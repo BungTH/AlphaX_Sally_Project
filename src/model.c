@@ -1,4 +1,4 @@
-/*
+/*****************************************
  *
  *model.h
  *
@@ -9,7 +9,7 @@
  *
  *	Created by Fang
  *		Mar 28 2020
- */
+ *****************************************/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,7 +24,7 @@
 /*
  *This function find the photo with the 
  *given name and return the information 
- *about the photo 
+ *about the photo
  *
  *	Arugement : char* namephoto (name of the photo) 
  *				HASHITEM_T* hashphoto[] (hash table of photo)
@@ -58,6 +58,7 @@ PHOTO_T* findPhoto(char* namephoto,HASHITEM_T* hashphoto[])
  *
  *	Arguement : PHOTO_T* photo (information of the photo)
  *			    char* tag[]	   (array tag)
+ *				int sizetag    (size of the array tag[])
  *
  *  return	  : 1 for photo have all tag[] 0 for else
  */
@@ -86,6 +87,7 @@ int checktag(PHOTO_T* photo,char* tag[],int sizetag)
  *linklist photo result that have a all tag in tag[]
  *
  *	Arugement : char* tag[] (photo tag included) 
+ *			  : int sizetag (size of array tag[])
  *			  : HASHITEM_T* hashtag[] (hash table of tag)
  *
  *	return	  : linklist of photo that have tag[] in it
@@ -165,11 +167,17 @@ int checkexcept(PHOTO_T* photo,char* tag[],int sizetag,char* except[],int sizeex
 	return checktag(photo,tag,sizetag) && (countexcept == 0) ;
 	}
 /*
+ *This function find the photo with the 
+ *given tag[] that user given and return 
+ *linklist photo result that have a all tag in tag[]
  *
+ *	Arugement : char* tag[]  ( array of tag included) 
+ *			    int sizetag (size of array tag)
+ *				char* except[] (array of tag excluded)
+ * 				int sizeexcept (sizeof array except[])
+ *			    HASHITEM_T* hashtag[] (hash table of tag)
  *
- * 
- * 
- * 
+ *	return	  : linklist of photo that have tag[] in it
  */
 PHOTO_T* searchCondition(char* tag[],int sizetag,
 						 char* except[],int sizeexcept,

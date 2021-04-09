@@ -34,6 +34,7 @@ PHOTO_T* findPhoto(char* namephoto,HASHITEM_T* hashphoto[]);
  *
  *	Arguement : PHOTO_T* photo (information of the photo)
  *			    char* tag[]	   (array tag)
+ *				int sizetag    (size of the array tag[])
  *
  *  return	  : 1 for photo have all tag[] 0 for else
  */
@@ -45,6 +46,7 @@ int checktag(PHOTO_T* photo,char* tag[],int sizetag);
  *linklist photo result that have a all tag in tag[]
  *
  *	Arugement : char* tag[] (photo tag included) 
+ *			  : int sizetag (size of array tag[])
  *			  : HASHITEM_T* hashtag[] (hash table of tag)
  *
  *	return	  : linklist of photo that have tag[] in it
@@ -76,8 +78,11 @@ int checkexcept(PHOTO_T* photo,char* tag[],int sizetag,char* except[],int sizeex
  *given tag[] that user given and return 
  *linklist photo result that have a all tag in tag[]
  *
- *	Arugement : char* tag[] (photo tag included) 
- *			  : HASHITEM_T* hashtag[] (hash table of tag)
+ *	Arugement : char* tag[]  ( array of tag included) 
+ *			    int sizetag (size of array tag)
+ *				char* except[] (array of tag excluded)
+ * 				int sizeexcept (sizeof array except[])
+ *			    HASHITEM_T* hashtag[] (hash table of tag)
  *
  *	return	  : linklist of photo that have tag[] in it
  */

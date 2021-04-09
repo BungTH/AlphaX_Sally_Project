@@ -1,10 +1,12 @@
 /*************************************
  *  
- * view.c 
+ * view.c
+ *  
+ * 		This file contain all function that display 
+ *      the user interface and receive the data as 
+ * 		a output argument.   
  * 
- *      
- * 
- * 
+ * 		Created by Thitirat[Phukan][63070503413]
  * 
  ************************************/
 
@@ -19,7 +21,7 @@
 #include "getinput.h"
 
 /*
- *This Function clear the screen
+ *This function clear the screen
  *and ask of enter to go the main menu
  *
  *	Arugment : NO
@@ -35,7 +37,16 @@ void clearscreen()
     printf("%s",CLEAR_ESCAPE);	
 	}
 
-
+/*
+ * This function display photo and information
+ * of photo on the screen.
+ *
+ *	Arugment : PHOTO_T* photo => all data of photo 
+ *   		   int index =>  index number of photo
+ *
+ *	Return : NO
+ *
+ */
 void displayphoto(PHOTO_T* photo,int index)
 	{
 	LIST_TAG_T* alltag = photo->alltag; /*get all tag of the photo(as a head of linklist)*/
@@ -56,13 +67,21 @@ void displayphoto(PHOTO_T* photo,int index)
 	printf("\n-----------------------\n");
 	}
 
-
-
+/*
+ * This function will display main menu on the screen
+ * and ask for option that user want to choose. 
+ * Moreover, set value of choice.
+ * 
+ *  Argument : char* choice => store option
+ *
+ *  Return : NO
+ *
+ */
 void menuPage(char* choice)
 	{
     printf("--------------------------------------------\n");
 	printf("\t MAINMENU\n");
-    printf("\t 1 - ADD TAG AND PHOTO\n");
+    printf("\t 1 - ADD NEW PHOTO WITH NEW TAGS\n");
 	printf("\t 2 - SEARCH PHOTO BY TAG\n");
 	printf("\t 3 - SEARCH PHOTO BY TAG AND EXCLUDED TAG\n");
 	printf("\t 4 - EXIT\n");
@@ -73,9 +92,18 @@ void menuPage(char* choice)
     printf("%s",CLEAR_ESCAPE);
 	}
 
+/*
+ * This function display submenu on the screen
+ * and ask for option that user want to choose.
+ * Moreover, set value of choice.
+ * 
+ *  Argument : char* choice => store option
+ *
+ *  Return : NO
+ *
+ */
 void subMenuPage(char * choice)
 	{
-	char option;
 	printf("--------------------------------------------\n");
 	printf("\t What do you want to do?\n");
     printf("\t 1 - DISPLAY ADD/DELETE TAGS\n");
@@ -88,16 +116,51 @@ void subMenuPage(char * choice)
 	printf("%s",CLEAR_ESCAPE);
 	}
 
-void addNewPhotoPage(HASHITEM_T* hashphoto[])
+/*
+ * This function display user interface of add new photo 
+ * and ask for name of photo,path and tag.
+ * Moreover, set value of namephoto,sizetag,path and tag.
+ * 
+ *  Argument : HASHITEM_T* hashphoto[] => hashphoto (use for check unique of the photo)
+ *			   char* namephoto => store and set value of photoname
+ *			   int* sizetag => store and set value of amount 
+ * 							   of nametags that user typed
+ *			   char* path => store and set value of path
+ *	  	       char* tag => store and set value of nametag
+ *
+ *  Return : NO
+ *
+ */
+void addNewPhotoPage(HASHITEM_T* hashphoto[],char* namephoto, int* sizetag
+					,char* path,char* tag[])
 	{
 	printf("--------------------------------------------\n");
 	printf("\tAdd new photo\n");
 	printf("--------------------------------------------\n");
-	printf("\nPlease input the photo name and tag");
-
+	printf("\nPlease input the photo name");
+	getNamePhoto(namephoto);
+	while(!isunique(namephoto, hashphoto))
+		{
+		printf("'%s' have been already use\n",namephoto);
+		getNamePhoto(namephoto);
+		}
+	getPath(path);
+	getAllNameTag(tag, sizetag);
 	
 	}
 
+/*
+ * This function display user interface of search by tag 
+ * and ask for tag and  ask for enter to stop.
+ * Moreover, set value of tag and sizetag in output argument.
+ *
+ *  Argument : char* tag[] => store and set value of nametag
+ * 			   int * sizetag => store and set value of amount 
+ * 								of nametags that user typed 
+ *
+ *  Return : NO
+ *
+ */
 void searchByTagPage(char* tag[], int * sizetag)
 	{
 	int count = 0;
@@ -109,7 +172,25 @@ void searchByTagPage(char* tag[], int * sizetag)
 	printf("\nPlease input the include tag");
     getAllNameTag(tag,sizetag);
 	}
-	
+
+/*
+ * This function display user interface of 
+ * search by include tag and exclude tag 
+ * and ask for include tag and exclude tag 
+ * and also ask for enter to stop.
+ * Moreover set value of tag,sizetag,except 
+ * and sizeexcept in output argument.
+ * 
+ *  Argument : char* tag[] => store and set value of nametag
+ * 			   int * sizetag => store and set value of amount of 
+ * 								nametags that user typed 
+ *             char * except[] => store and set value of exclude tag
+ *             int * sizeexcept => store and set value of amount of 
+ * 								exclude tags that user typed
+ *			
+ *  Return : NO
+ *
+ */	
 void searchConPage(char * tag[], int * sizetag, char * except[], int * sizeexcept)
 {
 	char inputline[512];
@@ -119,15 +200,25 @@ void searchConPage(char * tag[], int * sizetag, char * except[], int * sizeexcep
 	BOOL flag = FALSE;
 	
 	printf("--------------------------------------------\n");
-	printf("\t Search photo dy condition\n");
+	printf("\t SEARCH PHOTO BY TAG AND EXCLUDED TAG\n");
 	printf("--------------------------------------------\n");
-	
 	printf("\nPlease input the include tag");
 	getAllNameTag(tag,sizetag);
+	printf("\n--------------------------------------------\n");
 	printf("\nPlease input the exclude tag");
 	getAllNameTag(except,sizeexcept);
 }		
 
+/*
+ * This function display user interface of find 3 similar photos
+ * and ask for name of photo after that display 3 similar photos.
+ * Moreover this function also store photoname.
+ *
+ *  Argument : char namephoto => store photoname
+ *
+ *  Return : NO
+ *
+ */
 void similarPage(char  namephoto[])
 {
 	char inputline[PHOTOSIZE];
@@ -140,8 +231,23 @@ void similarPage(char  namephoto[])
 	printf("\nPlease name of photo to find the similar photo");
 	getNamePhoto(namephoto);
 }
-	
-void addDeleteTagPage(char* namephoto, char* tag[], int* sizetag,int* options)
+
+/*
+ * This function display user interface of add or delete tag
+ * and ask for add tag or delete tag and also ask for enter to stop.
+ * Moreover, store photoname and set value of tag,sizetag and
+ * options in output argument.
+ * 
+ *  Argument : char namephoto[] => store photoname
+ * 			   char* tag[] => store and set value of nametag 
+ *             int* sizetag => store and set value of amount 
+ * 								of nametags that user typed
+ *             int* options => 0 for add, 1 for delete
+ *			
+ *  Return : NO
+ *
+ */		
+void addDeleteTagPage(char namephoto[], char* tag[], int* sizetag,int* options)
 {
 	char inputline[512];
 	char tags[TAGBUFFER];

@@ -10,18 +10,24 @@
  */
 int checkStr(char stringToCheck[]);
 
+int isunique(char* namephoto,HASHITEM_T* hashphoto[]);
+
 int isEnter(char str[]);
 
 int checkStr(char stringToCheck[]);
+
+int checkPathAndNamePhoto(char pathToCheck[]);
 
 void getCharater(char* prompt, char* character);
 
 void getOption(char* choice);
 
-void getstring(char* prompt, char* string);
+void getString(char* prompt, char* string);
 
 void getNamePhoto(char* namephoto);
 
 void getAllNameTag(char* tag[],int* sizetag);
+
+void getPath(char* path);
 
 void freestring(char* ArrStr[], int ArrSize);

@@ -18,7 +18,7 @@
  #include "getinput.h"
 
 
-
+/************************************************************************************/
 
 void handleAddDeleteTag()
 	{
@@ -34,13 +34,27 @@ void handlefindSimilar()
 	{
 
 	} 
-/**************************************/
-void handleAddNewPhoto(PHOTO_T* pHead,HASHITEM_T* hashphoto[],HASHITEM_T* hashtag[])
+/************************************************************************************/
+void handleAddNewPhoto(PHOTO_T* pHead, HASHITEM_T* hashphoto[], HASHITEM_T* hashtag[])
 	{
-	
+	int sizetag = 0;
+	char path[PATHSIZE];
+	char* tag[TAGBUFFER];
+	char namephoto[PHOTOSIZE];
+	addNewPhotoPage(hashphoto, namephoto, sizetag, tag);
+	addPhotoToStruct(namephoto, sizetag, path, tag, &pHead, hashphoto, hashtag);
 	} 
-
-void handleSearchByTag(HASHITEM_T ** hashtag)
+/*
+ * 
+ *   This function get all the user input, validate the input
+ *   then search for tags that match what user had input and print out the result.
+ * 
+ * 	 Argument: HASHITEM_T* hashtag[]
+ * 
+ *   return:   Non
+ * 
+ */
+void handleSearchByTag(HASHITEM_T* hashtag[])
 	{
 	char* tag[TAGBUFFER];
 	int sizetag = 0;
@@ -48,7 +62,7 @@ void handleSearchByTag(HASHITEM_T ** hashtag)
 	PHOTO_T* result = NULL;
 	PHOTO_T* tmp = NULL;
 	int i = 0;
-	searchByTagPage(tag,&sizetag); /*get all the data*/
+	searchByTagPage(tag,&sizetag); /*get all the data and display UI*/
 	result = searchByTag(tag,sizetag,hashtag);/*get the result*/
 	
 	if(result == NULL)
@@ -64,12 +78,20 @@ void handleSearchByTag(HASHITEM_T ** hashtag)
 			}
 		printf("Found %d photo(s) \n",count);
 		}
-	freestring(tag,sizetag);
+	freestring(tag,sizetag);/*free tag and sizetag use*/
 	//handleSubMenu();
-	
 	}
-
-void handleSearchCondition(HASHITEM_T ** hashtag)
+/* 
+ *
+ *   This function get the input from user, validate the input
+ *   Then search with the conditions and print out the result.
+ * 
+ *   Argument: HASHITEM_T* hashtag[]
+ * 
+ *   return:   Non
+ * 
+ */
+void handleSearchCondition(HASHITEM_T* hashtag[])
 	{
 	char* tag[TAGBUFFER];
 	int sizetag = 0;
@@ -80,8 +102,8 @@ void handleSearchCondition(HASHITEM_T ** hashtag)
 	PHOTO_T* tmp = NULL;
 	int i = 0;
 	
-	searchConPage(tag,&sizetag,except,&sizeexcept);
-	result = searchCondition(tag,sizetag,except,sizeexcept,hashtag);
+	searchConPage(tag,&sizetag,except,&sizeexcept);/*get all the data that user input and display UI*/
+	result = searchCondition(tag,sizetag,except,sizeexcept,hashtag);/*get the result of search with condition*/
 	
 	if(result == NULL)
 		printf("\nFound %d photo(s) \n",count);
@@ -96,13 +118,21 @@ void handleSearchCondition(HASHITEM_T ** hashtag)
 			}
 		printf("Found %d photo(s) \n",count);
 		}
-	freestring(tag,sizetag);
+	freestring(tag,sizetag);/*free tag and sizetag use*/
 	}
-/**************************************/
-
-
-
-void handlemainmenu(PHOTO_T * pHead,HASHITEM_T ** hashphoto,HASHITEM_T ** hashtag)
+/* 
+ *
+ *  This function print out the menu page, and option from user input(from UI), validate the option
+ *  and show the selected option what user want to do.
+ * 
+ *  Argument: PHOTO_T* pHead
+ *            HASHITEM_T* hashphoto[]
+ *            HASHITEM_T* hashtag[]
+ * 
+ *  return:   Non
+ * 
+ */
+void handlemainmenu(PHOTO_T* pHead, HASHITEM_T* hashphoto[], HASHITEM_T* hashtag[])
 	{
 	char whichcheck = 'A'; /*collect which validation option user want*/
 	char input[128];/*get data from user*/
@@ -133,7 +163,19 @@ void handlemainmenu(PHOTO_T * pHead,HASHITEM_T ** hashphoto,HASHITEM_T ** hashta
             }
         }
 	}
-void handleSubMenu(HASHITEM_T** hashphoto,HASHITEM_T** hashtag)
+/*
+ *
+ *  This function print out the sub-menu for extra option
+ *  add or delete tags, find similar and display photo in browser.
+ *  Validate the option and show the function that option selected.
+ * 
+ *  Argument: HASHITEM_T* hashphoto[]
+ * 			 HASHITEM_T* hashtag[]
+ * 
+ *  Return:   Non
+ * 
+ */
+void handleSubMenu(HASHITEM_T* hashphoto[], HASHITEM_T* hashtag[])
 	{
 	char whichcheck = '0'; /*collect which validation option user want*/
 	char input[128];/*get data from user*/
@@ -166,10 +208,10 @@ int main()
     PHOTO_T * pHead;
     HASHITEM_T ** hashphoto = intialHash();
     HASHITEM_T ** hashtag = intialHash();
-    readData(&pHead,hashphoto,hashtag);
+    readData(&pHead, hashphoto, hashtag);
 
-    handlemainmenu(pHead,hashphoto,hashtag);
+    handlemainmenu(pHead, hashphoto, hashtag);
 
     writeData(pHead);
-    freeAll(pHead,hashphoto,hashtag);
+    freeAll(pHead, hashphoto, hashtag);
 	}

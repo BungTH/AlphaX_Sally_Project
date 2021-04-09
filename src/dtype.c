@@ -20,25 +20,25 @@
 
 
 
-/**********************************************
+/*
  *This function use create the array of linklist 
  *or in other word hash table
  *
  * Arugement : NO
  * Return : array of linklist
- **********************************************/
+ */
 HASHITEM_T** intialHash()
 	{
 	return (HASHITEM_T**)calloc(BUCKET_COUNT,sizeof(HASHITEM_T*));
 	}
-/****************************************************
+/*
  *This function convert key to the index of the array
  *use as a hash function both
  *dictionray tag and photo
  *
  * Arugement : char* key (name key)
  * Return    : unsigned long (index of the array)
- ****************************************************/
+ */
 unsigned long hashfunction(char* key)
 	{
 	unsigned int result = 0;
@@ -61,7 +61,7 @@ unsigned long hashfunction(char* key)
 	 return result;
 	}
 
-/***************************************************
+/*
  *This Function insert the hash item to hashtable
  *
  * Arugement : char* key (name key)
@@ -69,7 +69,7 @@ unsigned long hashfunction(char* key)
  *	     : HASHITEM_T* hash[] (hash table)
  *
  * Return    : (int) success for 1 and 0 for fail
- ******************************************************/
+ */
 int insertitem(char* key,PHOTO_T* item,HASHITEM_T* hash[])
 	{
 	unsigned int index = 0;
@@ -92,7 +92,7 @@ int insertitem(char* key,PHOTO_T* item,HASHITEM_T* hash[])
 	return bOk;
 	}
 
-/******************************************************
+/*
  *This Function return the linklist of the hash in
  *the given key
  *
@@ -100,19 +100,19 @@ int insertitem(char* key,PHOTO_T* item,HASHITEM_T* hash[])
  *	     : HASHITEM_T* hash[] (hashtable)
  *
  * Return    : HASHITEM_T* (linklist of HASHITEM_T)
- ******************************************************/
+ */
 HASHITEM_T* getlist(char* key,HASHITEM_T* hash[])
 	{
 	return hash[hashfunction(key)];
 	}
 
-/******************************************************
+/*
  *This Function free all the data in the hash
  *
  * Arugement : HASHITEM_T* hash[] (hashtable)
  *
  * Return    : NO
- *****************************************************/
+ */
 void freeHash(HASHITEM_T* hash[])
 	{
 	int i = 0;/*use for looping*/
