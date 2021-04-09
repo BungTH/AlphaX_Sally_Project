@@ -16,94 +16,16 @@
 
 #include "datastruct.h"
 #include "view.h"
-
-
-
-
-
-/*
- *This Function check is the string input is all alphabhetic or not
- *
- *	Arugment : (char* stringTocheck[])
- *
- *	Return : (int) 1 => the string is all alphabhetic 
- *					 0 => for the string is not all alphabhetic
- */
-int checkStr(char stringToCheck[])
-	{
-	  int i = 0;   /* loop counter for looking at characters */
-	  int bOk = 1; /* return value. Assume all okay until we find
-			          a non-digit character */
-
-	  /* loop through all the characters, or until we find a non-digit */
-	  while(bOk && stringToCheck[i] != '\0')
-	    {
-	    if (!isalpha(stringToCheck[i]) && stringToCheck[i] != ' ')
-	    	bOk = 0;
-	    i++;
-	    }
-	  return bOk;
-	}
-
-void getCharater(char* prompt, char* character)
-	{
-	char input[512];
-	printf("\n%s", prompt);
-	fgets(input,sizeof(input),stdin);
-	*character = input[0];
-	}
-
-	
-void getstring(char* prompt,char* string)
-	{
-	char input[512];
-	printf("\n%s",prompt);
-	fgets(input,sizeof(input),stdin);
-	input[strlen(input)-1] = '\0';
-	strcpy(string,input);
-	}
-
-
-void getAllNameTag(char* tag[],int* sizetag)
-	{
-	int count = 0;
-	char nametag[TAGBUFFER] = "\0";
-	BOOL flag = FALSE;
-    
-	while(flag == FALSE)
-		{
-		getstring("Enter name tag <enter to exit with no spacebar>: ",nametag);
-		flag = isEnter(nametag);
-		if(flag == TRUE)
-			break;
-		else
-			{
-			if(checkStr(nametag))
-				{
-				tag[count] = strdup(nametag);
-				count++;
-				}
-			else
-				printf("Invalid tag! Tag must be all alphabetic.\n");
-			}	
-		strcpy(nametag,"\0");
-		}
-	*sizetag = count;
-	}	
-
-void freestring(char* ArrStr[],int ArrSize)
-	{
-	int i = 0;
-	for(i=0;i<ArrSize;i++)
-		free(ArrStr[i]);
-	}
+#include "getinput.h"
 
 /*
  *This Function clear the screen
  *and ask of enter to go the main menu
- *	@Arugment => NO
  *
- *	@Return => NO
+ *	Arugment : NO
+ *
+ *	Return : NO
+ *
  */
 void clearscreen()
 	{
@@ -138,8 +60,6 @@ void displayphoto(PHOTO_T* photo,int index)
 
 void menuPage(char* choice)
 	{
-	char inputline[32];
-    char option = 'A';
     printf("--------------------------------------------\n");
 	printf("\t MAINMENU\n");
     printf("\t 1 - ADD TAG AND PHOTO\n");
@@ -149,26 +69,13 @@ void menuPage(char* choice)
 	printf("\t Which option do you want to choose?\n");
 	printf("--------------------------------------------\n");
     
-    while(isalpha(option))
-        {
-		getCharater("\n\tEnter your option:",&option);
-        if(!isalpha(option))
-            {
-            *choice = option;/*set choice*/
-            }
-		else
-			{
-			printf("\tInvalid Option Please input again!");
-			}
-        }
+    getOption(choice);
     printf("%s",CLEAR_ESCAPE);
 	}
 
 void subMenuPage(char * choice)
 	{
-	char inputline[512];
-	char option = 'A';
-	char alt[512];
+	char option;
 	printf("--------------------------------------------\n");
 	printf("\t What do you want to do?\n");
     printf("\t 1 - DISPLAY ADD/DELETE TAGS\n");
@@ -176,44 +83,27 @@ void subMenuPage(char * choice)
 	printf("\t 3 - DISPLAY ON BROWSER\n");
 	printf("\t 4 - GO TO MAIN MENU\n");
 	printf("--------------------------------------------\n");
-	while (isalpha(option))
-        {
-        getCharater("\n\tEnter your option: ",&option);
-        if (!isalpha(option))
-            {
-            *choice = option;/*set choice*/	
-            }
-		else
-			{
-			printf("\tInvalid Option Please input again!");
-			}
-        }
+
+	getOption(choice);
+	printf("%s",CLEAR_ESCAPE);
 	}
 
-BOOL isEnter(char str[])
+void addNewPhotoPage(HASHITEM_T* hashphoto[])
 	{
-	BOOL flag = FALSE;
-
-	if(strlen(str) == 0)
-		{
-		flag = TRUE;
-		}
-	return flag;
+	printf("");
 	}
-
 
 void searchByTagPage(char* tag[], int * sizetag)
-{
+	{
 	int count = 0;
 	char nametag[TAGBUFFER] = "\0";
 	BOOL flag = FALSE;
 	printf("--------------------------------------------\n");
 	printf("\tSearch by tag\n");
 	printf("--------------------------------------------\n");
-
+	printf("\nPlease input the include tag");
     getAllNameTag(tag,sizetag);
-	
-}
+	}
 	
 void searchConPage(char * tag[], int * sizetag, char * except[], int * sizeexcept)
 {
@@ -226,54 +116,11 @@ void searchConPage(char * tag[], int * sizetag, char * except[], int * sizeexcep
 	printf("--------------------------------------------\n");
 	printf("\t Search photo dy condition\n");
 	printf("--------------------------------------------\n");
-	while(flag == FALSE)
-		{
-		getstring("Enter name tag <enter to exit with no spacebar>: ",nametag);
-		flag = isEnter(nametag);
-		if(flag == TRUE)
-			{
-			break;
-			}
-		else
-			{
-			if(checkStr(nametag))
-				{
-				tag[count] = strdup(nametag);
-				count++;
-				}
-			else
-				{
-				printf("Invalid tag! Tag must be all alphabetic.\n");
-				}
-			}	
-		strcpy(nametag,"\0");
-		}
-	*sizetag = count;	
-
-    count = 0; /*reset count  to zero*/
-	while (flag == FALSE)
-		{
-		getstring("Enter exclude tag <enter to exit with no spacebar>: ",excepts);
-		flag = isEnter(excepts);
-		if(flag == TRUE)
-			{
-			break;
-			}
-		else
-			{
-			if(checkStr(excepts))
-				{
-				tag[count] = strdup(excepts);
-				count++;
-				}
-			else
-				{
-				printf("Invalid exclude tag! Exclude tag must be all alphabetic.\n");
-				}
-			}	
-		strcpy(excepts,"\0");
-		}
-	*sizeexcept = count;		
+	
+	printf("\nPlease input the include tag");
+	getAllNameTag(tag,sizetag);
+	printf("\nPlease input the exclude tag");
+	getAllNameTag(except,sizeexcept);
 }		
 
 void similarPage(char  namephoto[])
@@ -285,18 +132,11 @@ void similarPage(char  namephoto[])
 	printf("--------------------------------------------\n");
 	printf("\t Find 3 similar photos\n");
 	printf("--------------------------------------------\n");
-	while(flag == FALSE)
-		{
-		getstring("Enter name of photo: ",photoname);
-		flag = isEnter(photoname);
-		if(flag == TRUE)
-			{
-			break;
-			}
-		}	
+	printf("\nPlease name of photo to find the similar photo");
+	getNamePhoto(namephoto);
 }
 	
-void addDeleteTagPage(char* namephoto, char* tag[], int* sizetag)
+void addDeleteTagPage(char* namephoto, char* tag[], int* sizetag,int* options)
 {
 	char inputline[512];
 	char tags[TAGBUFFER];
@@ -307,50 +147,8 @@ void addDeleteTagPage(char* namephoto, char* tag[], int* sizetag)
 	printf("--------------------------------------------\n");
 	printf("\t Add/Delete tag\n");
 	printf("--------------------------------------------\n");
-	while(flag == FALSE)
-		{
-		getstring("Enter name of photo: ",photoname);
-		flag = isEnter(photoname);
-		if(flag == TRUE)
-			{
-			break;
-			}
-		else
-			{
-			if(checkStr(photoname))
-				{
-				tag[count] = strdup(photoname);
-				count++;
-				}
-			else
-				{
-				printf("Invalid name of photo! Name of photo must be all alphabetic.\n");
-				}
-			}	
-		strcpy(photoname,"\0");
-		}
-	while(flag == FALSE)
-		{
-		getstring("Enter tag to add <enter to finish>: ",tags);	
-		flag = isEnter(tags);
-		if(flag == TRUE)
-			{
-			break;
-			}
-		else
-			{
-			if(checkStr(tags))
-				{
-				tag[count] = strdup(tags);
-				count++;
-				}
-			else
-				{
-				printf("Invalid tag! Tag must be all alphabetic.\n");
-				}
-			}
-		strcpy(tags,"\0");		
-		}
-	*sizetag = count;			
+
+	getNamePhoto(namephoto);
+	getAllNameTag(tag,sizetag);	
 }
 

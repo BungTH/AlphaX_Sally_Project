@@ -332,10 +332,10 @@ STATUS addPhotoToStruct(char * namephoto, int tag_amount, char * path, char * ta
     
     inputData->count = 0;
     inputData->state = 0;
-    if(add_photo_2_hashphoto(inputData, hashphoto) && add_photo_2_hashtag(inputData, hashtag))
-    {
+    if(!(add_photo_2_hashphoto(inputData, hashphoto) && add_photo_2_hashtag(inputData, hashtag)))
+        {
         return FALSE;
-    }
+        }
     add_photo_2_masterlist(inputData, pHead);
     return TRUE;
 }

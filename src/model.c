@@ -1,6 +1,5 @@
 /*
  *
- *
  *model.h
  *
  *	This file contain function handling s
@@ -133,97 +132,86 @@ PHOTO_T* searchByTag(char* tag[],int sizetag,HASHITEM_T* hashtag[])
 	return listresult;
 	}
 /*
- *This function delete the photo from the linklist that  
- *have tag in except[] !!!!! this function look forward check
- *photo->nextResult and delete the next item not the photo
- *
- *	Arguement : PHOTO_T* photo (linklist of result)
- *			    char* except[]	   (except tag)
- *
- *  return	  : NO
+ *This Function check the photo have a tag in tag[]
+ *but not in except[] tag or not
+ * 
+ * 
+ *  Arguement : PHOTO_T* photo (information of the photo) 
+ * 				char* tag[] (array of tag include)
+ * 				int sizetag (array sizeof tag[])
+ * 				char* except[] (array of tag exclude)
+ * 				int sizeexcept (array sizeof except[]) 
+ * 
+ *  Return :  TRUE if the photo have all tag in tag[] and
+ * 			  not have any tag in except[]
+ * 
+ * 			  otherwise FALSE				
+ * 
  */
-void checkexcept(PHOTO_T* photo,char* except[],int sizeexcept)
+int checkexcept(PHOTO_T* photo,char* tag[],int sizetag,char* except[],int sizeexcept)
 	{
-	/*get head linklist of alltag next photo*/
-	LIST_TAG_T* nextphototag = photo->nextResult->alltag;
-	LIST_TAG_T* tmptag = nextphototag;
-	PHOTO_T* tmpphoto = NULL;
+	int countexcept = 0; 
+	int i = 0;/*use for loop*/
 
-	int state = 0;/*use to block double edit the linklist*/
+	LIST_TAG_T* tmp = photo->alltag;/*linklist of all tag*/
 
-	int i = 0;
-
-	while(tmptag != NULL)
+	while(tmp != NULL)
 		{ 
-		state = 0;
-		for(i = 0;i<sizeexcept && !state;i++)
-			{
-			if(strcmp(tmptag->nametag,except[i]) == 0)
-				{
-				/*delete photo->nextResult and connect new photo*/
-				tmpphoto = photo->nextResult;
-				photo->nextResult = photo->nextResult->nextResult;
-				tmpphoto->nextResult = NULL;
-				state = 1;
-				}
-			}
-		tmptag = tmptag->next;
+		for(i = 0;i<sizetag;i++)
+			if(strcmp(tmp->nametag,except[i]) == 0)
+				countexcept++;
+		tmp = tmp->next;
 		}
+	return checktag(photo,tag,sizetag) && (countexcept == 0) ;
 	}
 /*
- *This function find the photo with the 
- *given tag[] that user given and return 
- *linklist photo result that have a all tag in tag[]
- *but not exclude all except[]
  *
- *	Arugement : char* tag[] (photo tag included) 
- *			    char* except[] (photo not include)	
- *			    HASHITEM_T* hashtag[] (hash table of tag)
  *
- *	return	  : linklist of photo that have tag[] and excluded 
- *				except[] in it
+ * 
+ * 
+ * 
  */
-PHOTO_T* searchCondition(char* tag[],char* except[],
-						int sizetag,int sizeexcept,
+PHOTO_T* searchCondition(char* tag[],int sizetag,
+						 char* except[],int sizeexcept,
 						HASHITEM_T* hashtag[])
 	{
-	int i = 0;
+	HASHITEM_T* tmp = NULL;
 	PHOTO_T* listresult = NULL;
-	PHOTO_T* tmp = NULL;	
-	LIST_TAG_T* alltag = NULL;
-	int state = 0;
-	listresult = searchByTag(tag,sizetag,hashtag);
-	/*loop the list*/
-	tmp  = listresult;
-	while(tmp != NULL)
+	PHOTO_T* tmpstate = NULL;
+	int i = 0;
+	
+	for(i = 0;i<sizetag;i++)
 		{
-		if(tmp  == listresult)/*if tmp is head*/
+		/*go to each tag*/
+		tmp = getlist(tag[i],hashtag);
+		while(tmp != NULL)
 			{
-			LIST_TAG_T* alltag =  tmp->alltag;/*get all tag*/
-			LIST_TAG_T* tmptag =  alltag;
-			while(tmptag != NULL)
-				{ 
-				state = 0;
-				for(i = 0;i<sizeexcept && !state;i++)
+			/*check if the photo haven't been in listresult*/
+			if(!(tmp->photo->state))
+				{
+				/*if the photo include all of the tag but not in except*/
+				if(checkexcept(tmp->photo,tag,sizetag,except,sizeexcept))
 					{
-					if(strcmp(tmptag->nametag,except[i]) == 0)
-						{
-						/*set the new head*/
-						state = 0;
-						listresult = listresult->nextResult;/*change the head to next photo*/
-						tmp->nextResult = NULL;
-						}
+					/*add the photo to the head of listresult*/
+					tmp->photo->state = 1;/*set state to already in listresult*/
+					if(listresult == NULL)
+						tmp->photo->nextResult = NULL;/*set tail to NULL*/
+					else 
+						tmp->photo->nextResult = listresult;
+					listresult = tmp->photo;
 					}
-				tmptag = tmptag->next;
 				}
-
+			tmp = tmp->next;
 			}
-		else/*if not head*/
-			{
-			checkexcept(tmp,except,sizeexcept);
-			}	
-		tmp = tmp->nextResult;
 		}
+	/*loop listresult set all state to 0 (for next search use)*/
+	tmpstate = listresult;
+	while(tmpstate != NULL)
+		{
+		tmpstate->state = 0;
+		tmpstate = tmpstate->nextResult;	
+		}
+
 	return listresult;
 	}
 
@@ -255,25 +243,29 @@ void addTag(char* namephoto,
 	LIST_TAG_T* alltag = NULL;/*alltag of the photo*/
 	LIST_TAG_T* addtag = NULL;/*tag that going to add*/
 
-	alltag = photo->alltag;/*get head linklist of all tag*/
-	int i=0;
+	int i = 0;
 
-	photo->numtag += sizetag;
-
-	for(i=0;i<sizetag;i++)
+	if(photo != NULL)
 		{
+		alltag = photo->alltag;/*get head linklist of all tag*/
+		photo->numtag += sizetag;
 
-		addtag = (LIST_TAG_T*)calloc(1,sizeof(LIST_TAG_T));
-		strcpy(addtag->nametag,tag[i]);
+		for(i=0;i<sizetag;i++)
+			{
 
-		/*add to photo*/
-		addtag->next = alltag;
-		alltag = addtag;
+			addtag = (LIST_TAG_T*)calloc(1,sizeof(LIST_TAG_T));
+			strcpy(addtag->nametag,tag[i]);
 
-		/*add to hashtag*/
-		insertitem(tag[i],photo,hashtag);
+			/*add to photo*/
+			addtag->next = alltag;
+			alltag = addtag;
 
+			/*add to hashtag*/
+			insertitem(tag[i],photo,hashtag);
+
+			}
 		}
+	
 	}
 /*
  *This function delete the tag to the photo

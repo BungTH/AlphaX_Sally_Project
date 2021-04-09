@@ -14,7 +14,7 @@ void handleAddNewPhoto();
 
 void handleSearchByTag(HASHITEM_T ** hashtag);
 
-void handleSearchCondition();
+void handleSearchCondition(HASHITEM_T ** hashtag);
 
 void handlemainmenu(PHOTO_T * pHead,HASHITEM_T ** hashphoto,HASHITEM_T ** hashtag);
 

@@ -15,6 +15,7 @@
  #include "readwrite.h"
  #include "model.h"
  #include "view.h"
+ #include "getinput.h"
 
 
 
@@ -34,34 +35,26 @@ void handlefindSimilar()
 
 	} 
 /**************************************/
-void handleAddNewPhoto()
+void handleAddNewPhoto(HASHITEM_T* hashphoto[])
 	{
-
+	
 	} 
 
 void handleSearchByTag(HASHITEM_T ** hashtag)
 	{
-	char* tag[20];
+	char* tag[TAGBUFFER];
 	int sizetag = 0;
 	int count = 0;
 	PHOTO_T* result = NULL;
 	PHOTO_T* tmp = NULL;
 	int i = 0;
-	searchByTagPage(tag,&sizetag);
-	/*
-	for (i= 0 ;i<sizetag;i++)
-		printf("%s\n",tag[i]);
-	*/
-	result = searchByTag(tag,sizetag,hashtag);
-	freestring(tag,sizetag);
+	searchByTagPage(tag,&sizetag); /*get all the data*/
+	result = searchByTag(tag,sizetag,hashtag);/*get the result*/
 	
 	if(result == NULL)
-		{
 		printf("\nFound %d photo(s) \n",count);
-		}
 	else
 		{
-		printf("\nThe Result is \n");
 		tmp = result;
 		while(tmp != NULL)
 			{
@@ -71,14 +64,39 @@ void handleSearchByTag(HASHITEM_T ** hashtag)
 			}
 		printf("Found %d photo(s) \n",count);
 		}
-
+	freestring(tag,sizetag);
 	//handleSubMenu();
 	
 	}
 
-void handleSearchCondition()
+void handleSearchCondition(HASHITEM_T ** hashtag)
 	{
-	//handlesubmenu()
+	char* tag[TAGBUFFER];
+	int sizetag = 0;
+	char* except[TAGBUFFER];
+	int sizeexcept = 0;
+	int count = 0;
+	PHOTO_T* result = NULL;
+	PHOTO_T* tmp = NULL;
+	int i = 0;
+	
+	searchConPage(tag,&sizetag,except,&sizeexcept);
+	result = searchCondition(tag,sizetag,except,sizeexcept,hashtag);
+	
+	if(result == NULL)
+		printf("\nFound %d photo(s) \n",count);
+	else
+		{
+		tmp = result;
+		while(tmp != NULL)
+			{
+			displayphoto(tmp,count);
+			tmp = tmp->nextResult;
+			count++;
+			}
+		printf("Found %d photo(s) \n",count);
+		}
+	freestring(tag,sizetag);
 	}
 /**************************************/
 
@@ -86,7 +104,7 @@ void handleSearchCondition()
 
 void handlemainmenu(PHOTO_T * pHead,HASHITEM_T ** hashphoto,HASHITEM_T ** hashtag)
 	{
-	char whichcheck = '0'; /*collect which validation option user want*/
+	char whichcheck = 'A'; /*collect which validation option user want*/
 	char input[128];/*get data from user*/
 
 	while(whichcheck != '4')
@@ -103,7 +121,7 @@ void handlemainmenu(PHOTO_T * pHead,HASHITEM_T ** hashphoto,HASHITEM_T ** hashta
 				 clearscreen();
 				 break;
 			case '3':
-				 handleSearchCondition(hashphoto,hashtag);/**/
+				 handleSearchCondition(hashtag);/**/
 				 clearscreen();
 				 break;
 			case '4':
