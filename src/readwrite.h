@@ -1,4 +1,4 @@
-/******************************************************************
+/*
  *
  *   readwrite.h
  *
@@ -11,12 +11,22 @@
  *   Modified By Bung
  *       4 April 2021 - Added necessary comment and function
  * 
- ******************************************************************/
+ */
 
 #define ALLTAG 512
 #define BUFFER 512
 
-/******************************************************************
+
+
+STATUS add_photo_2_hashphoto(PHOTO_T * photo, HASHITEM_T * hashphoto[]);
+
+STATUS add_photo_2_hashtag(PHOTO_T * photo, HASHITEM_T * hashtag[]);
+
+void add_photo_2_masterlist(PHOTO_T * photo, PHOTO_T ** pHead);
+
+void checkNULL(void* pointer,STATUS result);
+
+/*
  * 
  *  This function will read the data from the data base file
  *  then initialized the data structure required in the program
@@ -30,10 +40,10 @@
  *              - TRUE for succeeded calloc and insertion
  *              - FALSE for failed calloc or insertion
  *
- ******************************************************************/
+ */
 STATUS readData(PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[]);
 
-/******************************************************************
+/*
  * 
  *  This function will read the data from the argument given
  *  then initialized the data structure required in the program
@@ -51,11 +61,13 @@ STATUS readData(PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag
  *              - TRUE for succeeded calloc and insertion
  *              - FALSE for failed calloc or insertion
  *
- ******************************************************************/
-STATUS addPhoto(char * namephoto, int tag_amount, char * path, char * tag_all[],
+ **/
+STATUS addPhotoToStruct(char * namephoto, int tag_amount, char * path, char * tag_all[],
                 PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[]);
 
-/******************************************************************
+
+
+/*
  * 
  *  This function will write the data into the output file
  *  that will be used in the other module or function in
@@ -65,10 +77,10 @@ STATUS addPhoto(char * namephoto, int tag_amount, char * path, char * tag_all[],
  *
  *	return	  : None
  *
- ******************************************************************/
+ */
 void writeData(PHOTO_T * pHead);
 
-/******************************************************************
+/*
  * 
  *  This function will free all the used memory allocated to
  *  the data structure and linked list
@@ -79,5 +91,5 @@ void writeData(PHOTO_T * pHead);
  *
  *	return	  : None
  *
- ******************************************************************/
+ */
 void freeAll(PHOTO_T * pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[]);

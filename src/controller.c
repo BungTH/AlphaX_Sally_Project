@@ -53,7 +53,8 @@ void handleSearchByTag(HASHITEM_T ** hashtag)
 		printf("%s\n",tag[i]);
 	*/
 	result = searchByTag(tag,sizetag,hashtag);
-
+	freestring(tag,sizetag);
+	
 	if(result == NULL)
 		{
 		printf("\nFound %d photo(s) \n",count);

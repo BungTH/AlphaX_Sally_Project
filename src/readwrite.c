@@ -1,4 +1,4 @@
-/******************************************************************
+/*
  *
  *   readwrite.c
  *
@@ -20,7 +20,7 @@
  *       April 8 2021 - Added code and comment to addPhoto function
  *                    - Module finished
  * 
- ******************************************************************/
+ */
 
 
 
@@ -38,9 +38,7 @@
 
 /*---------------------------------------PRIVATE FUNCTION---------------------------------------*/
 
-
-
-/******************************************************************
+/*
  * 
  *  This function will add the information of data structure 
  *  for each photo into the hash table
@@ -52,7 +50,7 @@
  *              - TRUE for succeeded insertion
  *              - FALSE for failed insertion
  * 
- ******************************************************************/
+ */
 STATUS add_photo_2_hashphoto(PHOTO_T * photo, HASHITEM_T * hashphoto[])
 {
 	BOOL result = FALSE;                    //variable to hold result of insertitem function
@@ -67,7 +65,7 @@ STATUS add_photo_2_hashphoto(PHOTO_T * photo, HASHITEM_T * hashphoto[])
 
 
 
-/******************************************************************
+/*
  * 
  *  This function will add the information of linked list
  *  for tag(s) in photo into the hash table
@@ -79,7 +77,7 @@ STATUS add_photo_2_hashphoto(PHOTO_T * photo, HASHITEM_T * hashphoto[])
  *              - TRUE for succeeded insertion
  *              - FALSE for failed insertion
  *
- ******************************************************************/
+ */
 STATUS add_photo_2_hashtag(PHOTO_T * photo, HASHITEM_T * hashtag[])
 {
 	LIST_TAG_T * pHeadAlltag = NULL;        //variable to hold pointer to head of linkedlist
@@ -104,7 +102,7 @@ STATUS add_photo_2_hashtag(PHOTO_T * photo, HASHITEM_T * hashtag[])
 
 
 
-/******************************************************************
+/*
  * 
  *  This function will copy the information from one data
  *  structure to the master list which will be used to compare
@@ -115,7 +113,7 @@ STATUS add_photo_2_hashtag(PHOTO_T * photo, HASHITEM_T * hashtag[])
  *
  *	return	  : None
  *
- ******************************************************************/
+ */
 void add_photo_2_masterlist(PHOTO_T * photo, PHOTO_T ** pHead)
 {
 	if(*pHead == NULL)
@@ -131,7 +129,7 @@ void add_photo_2_masterlist(PHOTO_T * photo, PHOTO_T ** pHead)
 
 
 
-/******************************************************************
+/*
  * 
  *  This function will create the data base file if the program
  *  failed to open the file or the file doesn't existed
@@ -140,7 +138,7 @@ void add_photo_2_masterlist(PHOTO_T * photo, PHOTO_T ** pHead)
  *
  *	return	  : None
  *
- ******************************************************************/
+ */
 void createFile()
 {
     FILE * pTmp = NULL;                     //variable to hold position of temporary file
@@ -157,13 +155,19 @@ void createFile()
     }
 }
 
+void checkNULL(void* pointer,STATUS result)
+    {
+    if(pointer == NULL)
+        {
+        printf("\tERROR - Failed to calloc \n");
+        result = FALSE;
+        }
+    }
 
 
 /*---------------------------------------PUBLIC FUNCTION---------------------------------------*/
 
-
-
-/******************************************************************
+/*
  * 
  *  This function will read the data from the data base file
  *  then initialized the data structure required in the program
@@ -177,7 +181,7 @@ void createFile()
  *              - TRUE for succeeded calloc and insertion
  *              - FALSE for failed calloc or insertion
  *
- ******************************************************************/
+ */
 STATUS readData(PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[])
 {
     FILE * pIn = NULL;                      //variable to hold position of input file
@@ -266,7 +270,7 @@ STATUS readData(PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag
 
 
 
-/******************************************************************
+/*
  * 
  *  This function will read the data from the argument given
  *  then initialized the data structure required in the program
@@ -284,8 +288,8 @@ STATUS readData(PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag
  *              - TRUE for succeeded calloc and insertion
  *              - FALSE for failed calloc or insertion
  *
- ******************************************************************/
-STATUS addPhoto(char * namephoto, int tag_amount, char * path, char * tag_all[],
+ */
+STATUS addPhotoToStruct(char * namephoto, int tag_amount, char * path, char * tag_all[],
                 PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[])
 {
     PHOTO_T * inputData;                    //variable to hold pointer to data structure
@@ -337,8 +341,7 @@ STATUS addPhoto(char * namephoto, int tag_amount, char * path, char * tag_all[],
 }
 
 
-
-/******************************************************************
+/*
  * 
  *  This function will write the data into the output file
  *  that will be used in the other module or function in
@@ -348,7 +351,7 @@ STATUS addPhoto(char * namephoto, int tag_amount, char * path, char * tag_all[],
  *
  *	return	  : None
  *
- ******************************************************************/
+ */
 void writeData(PHOTO_T * pHead)
 {
     FILE * pOut = NULL;                     //variable to hold position of output file
@@ -387,8 +390,7 @@ void writeData(PHOTO_T * pHead)
 }
 
 
-
-/******************************************************************
+/*
  * 
  *  This function will free all the used memory allocated to
  *  the data structure and linked list
@@ -399,7 +401,7 @@ void writeData(PHOTO_T * pHead)
  *
  *	return	  : None
  *
- ******************************************************************/
+ */
 void freeAll(PHOTO_T * pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[])
 {
     LIST_TAG_T * pTmp = NULL;               //variable to hold pointer to temporary linkedlist
