@@ -131,22 +131,25 @@ void subMenuPage(char * choice)
  *  Return : NO
  *
  */
-void addNewPhotoPage(HASHITEM_T* hashphoto[],char* namephoto, int* sizetag
+void addNewPhotoPage(HASHITEM_T* hashphoto[],char* namephoto, int * sizetag
 					,char* path,char* tag[])
 	{
 	printf("--------------------------------------------\n");
 	printf("\tAdd new photo\n");
 	printf("--------------------------------------------\n");
+	
 	printf("\nPlease input the photo name");
 	getNamePhoto(namephoto);
+	
 	while(!isunique(namephoto, hashphoto))
 		{
 		printf("'%s' have been already use\n",namephoto);
 		getNamePhoto(namephoto);
 		}
+	printf("\nPlease input the photo path");
 	getPath(path);
-	getAllNameTag(tag, sizetag);
-	
+	printf("\nPlease input the all photo tag");
+	getAllNameTag(tag,sizetag);
 	}
 
 /*

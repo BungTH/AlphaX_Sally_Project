@@ -81,7 +81,8 @@ void subMenuPage(char* choice);
  *  Return : NO
  *
  */
-void addNewPhotoPage();
+void addNewPhotoPage(HASHITEM_T* hashphoto[],char* namephoto, int * sizetag
+					,char* path,char* tag[]);
 
 /*
  * This function display user interface of search by tag 

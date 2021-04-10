@@ -35,14 +35,15 @@ void handlefindSimilar()
 
 	} 
 /************************************************************************************/
-void handleAddNewPhoto(PHOTO_T* pHead, HASHITEM_T* hashphoto[], HASHITEM_T* hashtag[])
+void handleAddNewPhoto(PHOTO_T** pHead, HASHITEM_T* hashphoto[], HASHITEM_T* hashtag[])
 	{
 	int sizetag = 0;
 	char path[PATHSIZE];
 	char* tag[TAGBUFFER];
 	char namephoto[PHOTOSIZE];
-	addNewPhotoPage(hashphoto, namephoto, sizetag, tag);
-	addPhotoToStruct(namephoto, sizetag, path, tag, &pHead, hashphoto, hashtag);
+	addNewPhotoPage(hashphoto,namephoto,&sizetag,path,tag);
+	addPhotoToStruct(namephoto, sizetag, path, tag, pHead, hashphoto, hashtag);
+	//printf("\nhandleAddNewPhoto phead %s\n",(*pHead)->namephoto);
 	} 
 /*
  * 
@@ -143,7 +144,8 @@ void handlemainmenu(PHOTO_T* pHead, HASHITEM_T* hashphoto[], HASHITEM_T* hashtag
 		switch(whichcheck)/*check which subprogram user selected*/
 			{
 			case '1':
-				 handleAddNewPhoto(pHead,hashphoto,hashtag);/**/
+				 handleAddNewPhoto(&pHead,hashphoto,hashtag);/**/
+				 //printf("handlemainmenu phead %s",pHead->namephoto);
 				 clearscreen();
 				 break;
 			case '2':
@@ -155,6 +157,7 @@ void handlemainmenu(PHOTO_T* pHead, HASHITEM_T* hashphoto[], HASHITEM_T* hashtag
 				 clearscreen();
 				 break;
 			case '4':
+				 writeData(pHead);
 				 printf("\nGoodbye\n");
 				 break;
 			default: 
@@ -212,6 +215,5 @@ int main()
 
     handlemainmenu(pHead, hashphoto, hashtag);
 
-    writeData(pHead);
     freeAll(pHead, hashphoto, hashtag);
 	}

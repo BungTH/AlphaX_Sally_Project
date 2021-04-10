@@ -317,7 +317,7 @@ STATUS addPhotoToStruct(char * namephoto, int tag_amount, char * path, char * ta
             printf("\tERROR - Failed to calloc for pCurrentTag->next\n");
             return FALSE;
         }
-        strcpy(pHeadTag->nametag,tag_all[i]);
+        strcpy(pCurrentTag->nametag,tag_all[i]);
         if(pHeadTag == NULL)     
         {
             pHeadTag = pCurrentTag;
@@ -355,11 +355,9 @@ STATUS addPhotoToStruct(char * namephoto, int tag_amount, char * path, char * ta
 void writeData(PHOTO_T * pHead)
 {
     FILE * pOut = NULL;                     //variable to hold position of output file
-
     PHOTO_T * pTmp = NULL;                  //variable to hold position of temporary data structure
-
     LIST_TAG_T * pTmpTag = NULL;            //variable to hold position of temporary linkedlist
-
+    
     pOut = fopen("tag_copy.txt","w");
     if(pOut == NULL)
     {
