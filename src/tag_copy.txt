@@ -1,5 +1,3 @@
-Napas.jpg;2;home/Napas.jpg
-handsome boy;White
 beach_and_sky.jpg;3;Project/photo/beach_and_sky.jpg
 Beach;Sky;Blue
 white_rose.jpg;2;Project/photo/white_rose.jpg

@@ -8,7 +8,7 @@
  
  #include <stdio.h>
  #include <stdlib.h>
-
+ #include <string.h>
  #include "datastruct.h"
  #include "controller.h"
  #include "dtype.h"
@@ -25,15 +25,20 @@ void handleAddDeleteTag()
 
 	}
 
-void handleDisplayBroswer()
-	{
-
-	}
 
 void handlefindSimilar()
 	{
 
 	} 
+
+void handleDisplayBroswer()
+	{
+	char namephoto[PHOTOSIZE];
+	char command[5 + PHOTOSIZE] = "eog image/test.jpg";
+	displayBrowserPage(namephoto);
+	//strcat(command,namephoto);
+	system(command);
+	}
 /************************************************************************************/
 void handleAddNewPhoto(PHOTO_T** pHead, HASHITEM_T* hashphoto[], HASHITEM_T* hashtag[])
 	{
@@ -55,7 +60,7 @@ void handleAddNewPhoto(PHOTO_T** pHead, HASHITEM_T* hashphoto[], HASHITEM_T* has
  *   return:   Non
  * 
  */
-void handleSearchByTag(HASHITEM_T* hashtag[])
+void handleSearchByTag(HASHITEM_T* hashtag[],HASHITEM_T* hashphoto[])
 	{
 	char* tag[TAGBUFFER];
 	int sizetag = 0;
@@ -80,7 +85,7 @@ void handleSearchByTag(HASHITEM_T* hashtag[])
 		printf("Found %d photo(s) \n",count);
 		}
 	freestring(tag,sizetag);/*free tag and sizetag use*/
-	//handleSubMenu();
+	handleSubMenu(hashphoto,hashtag);
 	}
 /* 
  *
@@ -92,7 +97,7 @@ void handleSearchByTag(HASHITEM_T* hashtag[])
  *   return:   Non
  * 
  */
-void handleSearchCondition(HASHITEM_T* hashtag[])
+void handleSearchCondition(HASHITEM_T* hashtag[],HASHITEM_T* hashphoto[])
 	{
 	char* tag[TAGBUFFER];
 	int sizetag = 0;
@@ -120,6 +125,7 @@ void handleSearchCondition(HASHITEM_T* hashtag[])
 		printf("Found %d photo(s) \n",count);
 		}
 	freestring(tag,sizetag);/*free tag and sizetag use*/
+	handleSubMenu(hashphoto,hashtag);
 	}
 /* 
  *
@@ -149,12 +155,10 @@ void handlemainmenu(PHOTO_T* pHead, HASHITEM_T* hashphoto[], HASHITEM_T* hashtag
 				 clearscreen();
 				 break;
 			case '2':
-				 handleSearchByTag(hashtag);/**/
-				 clearscreen();
+				 handleSearchByTag(hashtag,hashphoto);/**/
 				 break;
 			case '3':
-				 handleSearchCondition(hashtag);/**/
-				 clearscreen();
+				 handleSearchCondition(hashtag,hashphoto);/**/
 				 break;
 			case '4':
 				 writeData(pHead);
@@ -183,27 +187,24 @@ void handleSubMenu(HASHITEM_T* hashphoto[], HASHITEM_T* hashtag[])
 	char whichcheck = '0'; /*collect which validation option user want*/
 	char input[128];/*get data from user*/
 
-	while(whichcheck != '4')
+	subMenuPage(&whichcheck);
+	switch(whichcheck)/*check which subprogram user selected*/
 		{
-		subMenuPage(&whichcheck);
-		switch(whichcheck)/*check which subprogram user selected*/
-			{
-			case '1':
-				 handleAddDeleteTag(hashphoto);
-				 break;
-			case '2':
-				 handlefindSimilar(hashphoto,hashtag);
-				 break;
-			case '3':
-				 handleDisplayBroswer(hashphoto);
-				 break;
-			case '4':
-				 clearscreen();
-				 break;
-			default: 
-				 printf("invalid input( enter only 1-4)\n"); 
-                 break;   
-            }
+		case '1':
+			handleAddDeleteTag(hashphoto);
+			break;
+		case '2':
+			handlefindSimilar(hashphoto,hashtag);
+			break;
+		case '3':
+			handleDisplayBroswer(hashphoto);
+			break;
+		case '4':
+			clearscreen();	 
+			break;
+		default: 
+			printf("invalid input( enter only 1-4)\n"); 
+            break;   
         }
 	}
 int main()

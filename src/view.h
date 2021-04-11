@@ -120,17 +120,7 @@ void searchConPage(char* tag[], int* sizetag, char* except[], int* sizeexcept);
 
 /**************************************************/
 
-/*
- * This function display user interface of find 3 similar photos
- * and ask for name of photo after that display 3 similar photos.
- * Moreover this function also store photoname.
- *
- *  Argument : char namephoto => store photoname
- *
- *  Return : NO
- *
- */
- void similarPage(char  namephoto[]);
+
 
 /*
  * This function display user interface of add or delete tag
@@ -148,6 +138,19 @@ void searchConPage(char* tag[], int* sizetag, char* except[], int* sizeexcept);
  *
  */	
 void addDeleteTagPage(char* namephoto, char* tag[], int* sizetag,int* options);
+
+/*
+ * This function display user interface of find 3 similar photos
+ * and ask for name of photo after that display 3 similar photos.
+ * Moreover this function also store photoname.
+ *
+ *  Argument : char namephoto => store photoname
+ *
+ *  Return : NO
+ *
+ */
+ void similarPage(char  namephoto[]);
+
 
 
 void displayBrowserPage();

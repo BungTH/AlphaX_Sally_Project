@@ -63,7 +63,8 @@ int checkPathAndNamePhoto(char pathToCheck[])
 
 	while(bOk && pathToCheck[i] != '\0')
 		{
-	    if (!isalpha(pathToCheck[i]) && (pathToCheck[i] != '/') && (pathToCheck[i] != '.') && (pathToCheck[i] != '_'))
+	    if (!isalpha(pathToCheck[i]) && (pathToCheck[i] != '/') 
+		&& (pathToCheck[i] != '.') && (pathToCheck[i] != '_'))
 			bOk = 0;
 		i++;
 		}
@@ -168,8 +169,8 @@ void getString(char* prompt,char* string)
 
 /*
  *This Function get input of name of photo 
- *and check if it is all alphabhetic or spacebar
- *
+ *and check if it is all alphabhetic or spacebar or . or /
+ *and asking the name photo until it valid
  * 
  *	Argument : char* namephoto => set and store value of namephoto
  *
@@ -251,7 +252,7 @@ void getPath(char* path)
 	}
 
 /*
- *This Function free string
+ *This Function free string in array of string
  * 
  *	Argument : char* ArrStr[] => array of string to free data 
  *			   int ArrSize => size of Arrsize[]

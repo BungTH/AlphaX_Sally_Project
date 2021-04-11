@@ -166,9 +166,6 @@ void addNewPhotoPage(HASHITEM_T* hashphoto[],char* namephoto, int * sizetag
  */
 void searchByTagPage(char* tag[], int * sizetag)
 	{
-	int count = 0;
-	char nametag[TAGBUFFER] = "\0";
-	BOOL flag = FALSE;
 	printf("--------------------------------------------\n");
 	printf("\tSearch by tag\n");
 	printf("--------------------------------------------\n");
@@ -196,12 +193,6 @@ void searchByTagPage(char* tag[], int * sizetag)
  */	
 void searchConPage(char * tag[], int * sizetag, char * except[], int * sizeexcept)
 {
-	char inputline[512];
-	char nametag[TAGBUFFER];
-	char excepts[TAGBUFFER];
-    int count = 0;
-	BOOL flag = FALSE;
-	
 	printf("--------------------------------------------\n");
 	printf("\t SEARCH PHOTO BY TAG AND EXCLUDED TAG\n");
 	printf("--------------------------------------------\n");
@@ -212,28 +203,7 @@ void searchConPage(char * tag[], int * sizetag, char * except[], int * sizeexcep
 	getAllNameTag(except,sizeexcept);
 }		
 
-/*
- * This function display user interface of find 3 similar photos
- * and ask for name of photo after that display 3 similar photos.
- * Moreover this function also store photoname.
- *
- *  Argument : char namephoto => store photoname
- *
- *  Return : NO
- *
- */
-void similarPage(char  namephoto[])
-{
-	char inputline[PHOTOSIZE];
-	char photoname[PHOTOSIZE];
-	BOOL flag = FALSE;
 
-	printf("--------------------------------------------\n");
-	printf("\t Find 3 similar photos\n");
-	printf("--------------------------------------------\n");
-	printf("\nPlease name of photo to find the similar photo");
-	getNamePhoto(namephoto);
-}
 
 /*
  * This function display user interface of add or delete tag
@@ -252,17 +222,40 @@ void similarPage(char  namephoto[])
  */		
 void addDeleteTagPage(char namephoto[], char* tag[], int* sizetag,int* options)
 {
-	char inputline[512];
-	char tags[TAGBUFFER];
-	char photoname[PHOTOSIZE];
-	int count = 0;
-	BOOL flag = FALSE;
-
 	printf("--------------------------------------------\n");
 	printf("\t Add/Delete tag\n");
 	printf("--------------------------------------------\n");
-
 	getNamePhoto(namephoto);
 	getAllNameTag(tag,sizetag);	
 }
+
+
+/*
+ * This function display user interface of find 3 similar photos
+ * and ask for name of photo after that display 3 similar photos.
+ * Moreover this function also store photoname.
+ *
+ *  Argument : char namephoto => store photoname
+ *
+ *  Return : NO
+ *
+ */
+void similarPage(char  namephoto[])
+{
+	printf("--------------------------------------------\n");
+	printf("\t Find 3 similar photos\n");
+	printf("--------------------------------------------\n");
+	printf("\nPlease name of photo to find the similar photo");
+	getNamePhoto(namephoto);
+}
+
+
+
+void displayBrowserPage(char namephoto[])
+	{
+	printf("--------------------------------------------\n");
+	printf("\t DISPLAY ON BROWSER\n");
+	printf("--------------------------------------------\n");
+	getNamePhoto(namephoto);
+	}
 
