@@ -122,22 +122,7 @@ void searchConPage(char* tag[], int* sizetag, char* except[], int* sizeexcept);
 
 
 
-/*
- * This function display user interface of add or delete tag
- * and ask for add tag or delete tag and also ask for enter to stop.
- * Moreover, store photoname and set value of tag,sizetag and
- * options in output argument.
- * 
- *  Argument : char namephoto[] => store photoname
- * 			   char* tag[] => store and set value of nametag 
- *             int* sizetag => store and set value of amount 
- * 								of nametags that user typed
- *             int* options => 0 for add, 1 for delete
- *			
- *  Return : NO
- *
- */	
-void addDeleteTagPage(char* namephoto, char* tag[], int* sizetag,int* options);
+
 
 /*
  * This function display user interface of find 3 similar photos
@@ -153,7 +138,7 @@ void addDeleteTagPage(char* namephoto, char* tag[], int* sizetag,int* options);
 
 
 
-void displayBrowserPage();
+void displayInBrowserPage(char namephoto[]);
 
 
 /**************************************************/

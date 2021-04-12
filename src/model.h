@@ -102,23 +102,3 @@ PHOTO_T* searchCondition(char* tag[],int sizetag,
  */
 PHOTO_T* findSimilar(char* namephoto,HASHITEM_T* hashtag[]);
 
-/*
- *This function add the tag to the photo
- *
- *	Arguement : char* namephoto (name of the photo to add tag)
- *				char* tag[] (array of the tag to add)
- *				
- *	return    : NO
- */
-void addTag(char* namephoto,
-			HASHITEM_T* hashphoto[],HASHITEM_T* hashtag[]
-			,char* tag[],int sizetag);
-/*
- *This function delete the tag to the photo
- *
- *	Arguement : char* namephoto (name of the photo to add tag)
- *				char* tag[] (array of the tag to delete)
- *				
- *	return    : NO
- */
-void deleteTag(char* namephoto,HASHITEM_T* hashphoto[],HASHITEM_T* hashtag[],char* tag[]);

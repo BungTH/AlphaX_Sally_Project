@@ -18,28 +18,7 @@
  #include "getinput.h"
 
 
-/************************************************************************************/
 
-void handleAddDeleteTag()
-	{
-
-	}
-
-
-void handlefindSimilar()
-	{
-
-	} 
-
-void handleDisplayBroswer()
-	{
-	char namephoto[PHOTOSIZE];
-	char command[5 + PHOTOSIZE] = "eog image/test.jpg";
-	displayBrowserPage(namephoto);
-	//strcat(command,namephoto);
-	system(command);
-	}
-/************************************************************************************/
 void handleAddNewPhoto(PHOTO_T** pHead, HASHITEM_T* hashphoto[], HASHITEM_T* hashtag[])
 	{
 	int sizetag = 0;
@@ -127,6 +106,25 @@ void handleSearchCondition(HASHITEM_T* hashtag[],HASHITEM_T* hashphoto[])
 	freestring(tag,sizetag);/*free tag and sizetag use*/
 	handleSubMenu(hashphoto,hashtag);
 	}
+
+
+/************************************************************************************/
+
+
+void handlefindSimilar()
+	{
+
+	} 
+
+void handleDisplayInBroswer(HASHITEM_T* hashphoto[])
+	{
+	char namephoto[PHOTOSIZE];
+	char command[5 + PHOTOSIZE] = "eog image/test.jpg";
+	displayInBrowserPage(namephoto);
+	//strcat(command,namephoto);
+	system(command);
+	}
+/************************************************************************************/
 /* 
  *
  *  This function print out the menu page, and option from user input(from UI), validate the option
@@ -191,19 +189,16 @@ void handleSubMenu(HASHITEM_T* hashphoto[], HASHITEM_T* hashtag[])
 	switch(whichcheck)/*check which subprogram user selected*/
 		{
 		case '1':
-			handleAddDeleteTag(hashphoto);
-			break;
-		case '2':
 			handlefindSimilar(hashphoto,hashtag);
 			break;
-		case '3':
-			handleDisplayBroswer(hashphoto);
+		case '2':
+			handleDisplayInBroswer(hashphoto);
 			break;
-		case '4':
+		case '3':
 			clearscreen();	 
 			break;
 		default: 
-			printf("invalid input( enter only 1-4)\n"); 
+			printf("invalid input( enter only 1-3)\n"); 
             break;   
         }
 	}
