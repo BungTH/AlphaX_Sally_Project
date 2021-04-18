@@ -137,7 +137,15 @@ void searchConPage(char* tag[], int* sizetag, char* except[], int* sizeexcept);
  void similarPage(char  namephoto[]);
 
 
-
+/*
+ * This function display user interface of display 
+ * on the browser
+ * 
+ *  Argument : char namephoto => store photoname
+ *
+ *  Return : NO
+ *
+ */
 void displayInBrowserPage(char namephoto[]);
 
 

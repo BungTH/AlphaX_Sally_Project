@@ -226,6 +226,15 @@ void similarPage(char  namephoto[])
 
 
 
+/*
+ * This function display user interface of display 
+ * on the browser
+ * 
+ *  Argument : char namephoto => store photoname
+ *
+ *  Return : NO
+ *
+ */
 void displayInBrowserPage(char namephoto[])
 	{
 	printf("--------------------------------------------\n");

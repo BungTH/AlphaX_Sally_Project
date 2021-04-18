@@ -358,7 +358,7 @@ void writeData(PHOTO_T * pHead)
     PHOTO_T * pTmp = NULL;                  //variable to hold position of temporary data structure
     LIST_TAG_T * pTmpTag = NULL;            //variable to hold position of temporary linkedlist
     
-    pOut = fopen("tag_copy.txt","w");
+    pOut = fopen("tag.txt","w");
     if(pOut == NULL)
     {
         printf("\tERROR - Failed to open output file\n");

@@ -26,3 +26,5 @@ white_rose.jpg;2;Project/photo/white_rose.jpg
 White;Flower
 beach_and_sky.jpg;3;Project/photo/beach_and_sky.jpg
 Beach;Sky;Blue
+Napas.jpg;3;home/Napas.jpg
+thailand;hello
