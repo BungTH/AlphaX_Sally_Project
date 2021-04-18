@@ -35,7 +35,6 @@
 
 
 
-
 /*---------------------------------------PRIVATE FUNCTION---------------------------------------*/
 
 /*
@@ -155,19 +154,33 @@ void createFile()
     }
 }
 
-BOOL checkNULL(void* pointer)
-    {
-    BOOL result = TRUE;
-    if(pointer == NULL)
-        {
-        printf("\tERROR - Failed to calloc \n");
-        result  = FALSE;
-        }
-    return result;
-    }
 
 
 /*---------------------------------------PUBLIC FUNCTION---------------------------------------*/
+
+/*
+ * 
+ *  This function will check calloc operation, is it successful or not,
+ *  it will display error if calloc is not successful
+ *
+ *	Arugement : void * pointer (input data to validate calloc operation)
+ *
+ *	return	  : result (result of operation)
+ *
+ */
+BOOL checkNULL(void * pointer)
+{
+    BOOL result = TRUE;                     //variable to hold result of operation
+
+    if(pointer == NULL)
+    {
+        printf("\tERROR - Failed to calloc \n");
+        result  = FALSE;
+    }
+    return result;
+}
+
+
 
 /*
  * 
@@ -262,7 +275,6 @@ STATUS readData(PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag
 
 
 
-
 /*
  * 
  *  This function will read the data from the argument given
@@ -328,6 +340,7 @@ STATUS addPhotoToStruct(char * namephoto, int tag_amount, char * path, char * ta
 }
 
 
+
 /*
  * 
  *  This function will write the data into the output file
@@ -375,6 +388,7 @@ void writeData(PHOTO_T * pHead)
 }
 
 
+
 /*
  * 
  *  This function will free all the used memory allocated to
@@ -401,8 +415,3 @@ void freeAll(PHOTO_T * pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[])
     /*freeHash(hashphoto);
     freeHash(hashtag);*/
 }
-
-
-
-
-

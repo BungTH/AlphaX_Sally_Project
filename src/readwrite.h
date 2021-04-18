@@ -10,62 +10,23 @@
  * 
  *  Modified By Bung
  *      4 April 2021 - Added necessary comment and function
- * 
+ *      18 April 2021 - Added checkNULL function
  */
 
 #define ALLTAG 512
 #define BUFFER 512
 
-
-
 /*
  * 
- *  This function will add the information of data structure 
- *  for each photo into the hash table
+ *  This function will check calloc operation, is it successful or not,
+ *  it will display error if calloc is not successful
  *
- *	Arugement: PHOTO_T * photo (data structure of photo)
- *			   HASHITEM_T * hashphoto[] (hash table of photo)
+ *	Arugement : void * pointer (input data to validate calloc operation)
  *
- *	return:    BOOL result (result of insertion)
- *             - TRUE for succeeded insertion
- *             - FALSE for failed insertion
- * 
- */
-STATUS add_photo_2_hashphoto(PHOTO_T * photo, HASHITEM_T * hashphoto[]);
-
-
-
-/*
- * 
- *  This function will add the information of linked list
- *  for tag(s) in photo into the hash table
- *
- *	Arugement : PHOTO_T * photo (data structure of photo)
- *				HASHITEM_T * hashtag[] (hash table of tag)
- *
- *	return	  : BOOL result (result of insertion)
- *              - TRUE for succeeded insertion
- *              - FALSE for failed insertion
+ *	return	  : result (result of operation)
  *
  */
-STATUS add_photo_2_hashtag(PHOTO_T * photo, HASHITEM_T * hashtag[]);
-
-
-/*
- * 
- *  This function will copy the information from one data
- *  structure to the master list which will be used to compare
- *  and search in other function
- *
- *	Arugement : PHOTO_T * photo (data structure of photo)
- *				PHOTO_T ** pHead (data structure of master list)
- *
- *	return	  : None
- *
- */
-void add_photo_2_masterlist(PHOTO_T * photo, PHOTO_T ** pHead);
-
-BOOL checkNULL(void* pointer);
+BOOL checkNULL(void * pointer)
 
 /*
  * 
