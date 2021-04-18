@@ -155,13 +155,15 @@ void createFile()
     }
 }
 
-void checkNULL(void* pointer,STATUS result)
+BOOL checkNULL(void* pointer)
     {
+    BOOL result = TRUE;
     if(pointer == NULL)
         {
         printf("\tERROR - Failed to calloc \n");
-        result = FALSE;
+        result  = FALSE;
         }
+    return result;
     }
 
 
@@ -199,6 +201,8 @@ STATUS readData(PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag
     const char delim[] = ";";               //variable to hold delimiter that want to seperate
     char * ptr = NULL;                      //variable to hold seperated tag
 
+    BOOL result = TRUE;                     //variable to hold result of operation
+
     char inputline[BUFFER];                 //variable to hold data from input file as buffer
 
     pIn = fopen("tag.txt","r");
@@ -212,15 +216,12 @@ STATUS readData(PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag
         while(fgets(inputline,sizeof(inputline),pIn) != NULL)
         {
             inputData = calloc(1,sizeof(PHOTO_T));
-            if(inputData == NULL)
-            {
-                printf("\tERROR - Failed to calloc for inputData\n");
-                return FALSE;
-            }
+            result = (result && checkNULL(inputData));
             //adding data to data structure
             sscanf(inputline,"%[^;];%d;%s",pic_name,&pic_tagNum,pic_path);
             fgets(inputline,sizeof(inputline),pIn);
-            sscanf(inputline,"%s",pic_tagAll);
+            sscanf(inputline,"%[^\n]s",pic_tagAll);
+            printf("DEBUG - pic_tagAll = %s\n",pic_tagAll);
             strcpy(inputData->namephoto,pic_name);
             inputData->numtag = pic_tagNum;
             strcpy(inputData->path,pic_path);
@@ -228,11 +229,7 @@ STATUS readData(PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag
 
             /*setup all tag to inputData*/
             pHeadTag = (LIST_TAG_T *)calloc(1,sizeof(LIST_TAG_T));
-            if(pHeadTag == NULL)
-            {
-                printf("\tERROR - Failed to calloc for pHeadTag\n");
-                return FALSE;
-            }
+            result = (result && checkNULL(pHeadTag));
             pCurrentTag = pHeadTag;
             ptr = strtok(pic_tagAll,delim);
             while(ptr != NULL)
@@ -242,11 +239,7 @@ STATUS readData(PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag
                 if(ptr != NULL)
                 {
                     pCurrentTag->next = (LIST_TAG_T *)calloc(1,sizeof(LIST_TAG_T));
-                    if(pCurrentTag->next == NULL)
-                    {
-                        printf("\tERROR - Failed to calloc for pCurrentTag->next\n");
-                        return FALSE;
-                    }
+                    result = (result && checkNULL(pCurrentTag->next));
                     pCurrentTag = pCurrentTag->next;
                 }
             }
@@ -258,11 +251,11 @@ STATUS readData(PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag
             inputData->state = 0;
             if(!(add_photo_2_hashphoto(inputData, hashphoto) && add_photo_2_hashtag(inputData, hashtag)))
             {
-                return FALSE;
+                result = FALSE;
             }
             add_photo_2_masterlist(inputData, pHead);
         }
-        return TRUE;
+        return result;
     }
     fclose(pIn);
 }
@@ -297,14 +290,12 @@ STATUS addPhotoToStruct(char * namephoto, int tag_amount, char * path, char * ta
     LIST_TAG_T * pHeadTag = NULL;           //variable to hold pointer to head of linkedlist
     LIST_TAG_T * pCurrentTag = NULL;        //variable to hold pointer to current node in linkedlist
 
+    BOOL result = TRUE;                     //variable to hold result of operation
+
     int i;                                  //variable for loop
 
     inputData = calloc(1,sizeof(PHOTO_T));
-    if(inputData == NULL)
-    {
-        printf("\tERROR - Failed to calloc for inputData\n");
-        return FALSE;
-    }
+    result = (result && checkNULL(inputData));
     //adding data to data structure
     strcpy(inputData->namephoto,namephoto);
     inputData->numtag = tag_amount;
@@ -312,11 +303,7 @@ STATUS addPhotoToStruct(char * namephoto, int tag_amount, char * path, char * ta
     for(i = 0;i < tag_amount;i++)
     {   
         pCurrentTag = (LIST_TAG_T *)calloc(1,sizeof(LIST_TAG_T));
-        if(pCurrentTag == NULL)
-        {
-            printf("\tERROR - Failed to calloc for pCurrentTag->next\n");
-            return FALSE;
-        }
+        result = (result && checkNULL(pCurrentTag));
         strcpy(pCurrentTag->nametag,tag_all[i]);
         if(pHeadTag == NULL)     
         {
@@ -358,7 +345,7 @@ void writeData(PHOTO_T * pHead)
     PHOTO_T * pTmp = NULL;                  //variable to hold position of temporary data structure
     LIST_TAG_T * pTmpTag = NULL;            //variable to hold position of temporary linkedlist
     
-    pOut = fopen("tag.txt","w");
+    pOut = fopen("tag_copy.txt","w");
     if(pOut == NULL)
     {
         printf("\tERROR - Failed to open output file\n");

@@ -65,7 +65,7 @@ STATUS add_photo_2_hashtag(PHOTO_T * photo, HASHITEM_T * hashtag[]);
  */
 void add_photo_2_masterlist(PHOTO_T * photo, PHOTO_T ** pHead);
 
-void checkNULL(void* pointer,STATUS result);
+BOOL checkNULL(void* pointer);
 
 /*
  * 

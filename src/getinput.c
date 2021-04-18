@@ -15,8 +15,6 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
-
-
 #include "datastruct.h"
 #include "getinput.h"
 #include "model.h"
@@ -211,10 +209,15 @@ void getAllNameTag(char* tag[],int* sizetag)
     
 	while(flag == FALSE)
 		{
-		getString("Enter name tag <enter to exit with no spacebar>: ",nametag);
+		getString("Enter name tag one by one <press ENTER to exit> : ",nametag);
 		flag = isEnter(nametag);
 		if(flag == TRUE)
 			break;
+		else if(count == 20)
+			{
+			printf("The max 20 tag for each photo");
+			break;
+			}
 		else if(checkStr(nametag))
 			{
 			tag[count] = strdup(nametag);
@@ -246,7 +249,7 @@ void getPath(char* path)
 		if(flag == TRUE)
 			break;
 		else
-			printf("Invalid Path! Path must be only A-Z,'.','/'.\n");
+			printf("Invalid Path! Path must be only A-Z,'.',_,'/'.\n");
 		strcpy(path,"\0");
 		}
 	}

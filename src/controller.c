@@ -1,9 +1,11 @@
 /****************************************
+ *controller.c
+ *  
+ * This file contain all handle option
+ * to controll all system in This project.
  *
- *
- *
- *
- *
+ * Created by Manutsawin (Sern) ID: 63070503442
+ * 	   Mar 30 2021
  ****************************************/
  
  #include <stdio.h>
@@ -18,7 +20,18 @@
  #include "getinput.h"
 
 
-
+/* 
+ * 
+ *  This function get all the user input, validate the input
+ *  Then add new photo with new tag and path in the structure file.
+ * 
+ *  Argument:  PHOTO_T** pHead => head of the photo linked list.
+ * 			  HASHITEM_T* hashphoto[] => hash photo.
+ * 			  HASHITEM_T* hashtag[] => hash tag.
+ * 
+ *  return:    Non
+ * 								
+ */
 void handleAddNewPhoto(PHOTO_T** pHead, HASHITEM_T* hashphoto[], HASHITEM_T* hashtag[])
 	{
 	int sizetag = 0;
@@ -27,14 +40,15 @@ void handleAddNewPhoto(PHOTO_T** pHead, HASHITEM_T* hashphoto[], HASHITEM_T* has
 	char namephoto[PHOTOSIZE];
 	addNewPhotoPage(hashphoto,namephoto,&sizetag,path,tag);
 	addPhotoToStruct(namephoto, sizetag, path, tag, pHead, hashphoto, hashtag);
-	//printf("\nhandleAddNewPhoto phead %s\n",(*pHead)->namephoto);
 	} 
+
 /*
  * 
  *   This function get all the user input, validate the input
  *   then search for tags that match what user had input and print out the result.
  * 
  * 	 Argument: HASHITEM_T* hashtag[]
+ * 			   HASHITEM_T* hashphoto[]	
  * 
  *   return:   Non
  * 
@@ -66,13 +80,15 @@ void handleSearchByTag(HASHITEM_T* hashtag[],HASHITEM_T* hashphoto[])
 	freestring(tag,sizetag);/*free tag and sizetag use*/
 	handleSubMenu(hashphoto,hashtag);
 	}
+
 /* 
  *
  *   This function get the input from user, validate the input
  *   Then search with the conditions and print out the result.
  * 
  *   Argument: HASHITEM_T* hashtag[]
- * 
+ * 			   HASHITEM_T* hashphoto[]
+ * 				
  *   return:   Non
  * 
  */
@@ -107,16 +123,33 @@ void handleSearchCondition(HASHITEM_T* hashtag[],HASHITEM_T* hashphoto[])
 	handleSubMenu(hashphoto,hashtag);
 	}
 
-
-/************************************************************************************/
-
-
-void handlefindSimilar()
+/* 
+ * 
+ *   This function get the input from user, validate the input
+ * 	 Then find the similar photo.
+ * 
+ * 	 Argument:  HASHITEM_T* hashphoto[] => hash photo.
+ * 				HASHITEM_T* hashtag[] => hash tag.
+ * 
+ * 	 return:    Non
+ * 
+ */
+void handlefindSimilar(HASHITEM_T* hashphoto[],HASHITEM_T* hashtag[])
 	{
 
 	} 
 
-void handleDisplayInBroswer(HASHITEM_T* hashphoto[])
+/* 
+ * 
+ *   This function get the input from user, validate the input
+ *   Then display photo in browser
+ *	 
+ *   Argument:  HASHITEM_T* hashphoto[] => hash photo.
+ * 
+ * 	 return:    Non
+ * 
+ */
+void handleDisplayInBrowser(HASHITEM_T* hashphoto[])
 	{
 	char namephoto[PHOTOSIZE];
 	char command[5 + PHOTOSIZE] = "eog image/test.jpg";
@@ -124,7 +157,7 @@ void handleDisplayInBroswer(HASHITEM_T* hashphoto[])
 	//strcat(command,namephoto);
 	system(command);
 	}
-/************************************************************************************/
+
 /* 
  *
  *  This function print out the menu page, and option from user input(from UI), validate the option
@@ -168,6 +201,7 @@ void handlemainmenu(PHOTO_T* pHead, HASHITEM_T* hashphoto[], HASHITEM_T* hashtag
             }
         }
 	}
+
 /*
  *
  *  This function print out the sub-menu for extra option
@@ -192,7 +226,7 @@ void handleSubMenu(HASHITEM_T* hashphoto[], HASHITEM_T* hashtag[])
 			handlefindSimilar(hashphoto,hashtag);
 			break;
 		case '2':
-			handleDisplayInBroswer(hashphoto);
+			handleDisplayInBrowser(hashphoto);
 			break;
 		case '3':
 			clearscreen();	 
@@ -202,6 +236,7 @@ void handleSubMenu(HASHITEM_T* hashphoto[], HASHITEM_T* hashtag[])
             break;   
         }
 	}
+	
 int main()
 	{
     PHOTO_T * pHead;
