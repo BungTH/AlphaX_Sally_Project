@@ -26,7 +26,7 @@
  *	return	  : result (result of operation)
  *
  */
-BOOL checkNULL(void * pointer)
+BOOL checkNULL(void * pointer);
 
 /*
  * 

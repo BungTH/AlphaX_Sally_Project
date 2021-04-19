@@ -234,7 +234,6 @@ STATUS readData(PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag
             sscanf(inputline,"%[^;];%d;%s",pic_name,&pic_tagNum,pic_path);
             fgets(inputline,sizeof(inputline),pIn);
             sscanf(inputline,"%[^\n]s",pic_tagAll);
-            printf("DEBUG - pic_tagAll = %s\n",pic_tagAll);
             strcpy(inputData->namephoto,pic_name);
             inputData->numtag = pic_tagNum;
             strcpy(inputData->path,pic_path);
