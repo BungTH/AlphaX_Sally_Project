@@ -70,3 +70,5 @@ dog.png;5;image/dog.png
 Brown;Big;Dog;Smile;Cute
 cat.jpg;3;image/cat.jpg
 Brown;White;Cat
+Phone.jpg;3;Phone.jpg
+awesome thing;Mobile;Phone
