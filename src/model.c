@@ -159,7 +159,7 @@ int checkexcept(PHOTO_T* photo,char* tag[],int sizetag,char* except[],int sizeex
 
 	while(tmp != NULL)
 		{ 
-		for(i = 0;i<sizetag;i++)
+		for(i = 0;i<sizeexcept;i++)
 			if(strcmp(tmp->nametag,except[i]) == 0)
 				countexcept++;
 		tmp = tmp->next;
