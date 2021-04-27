@@ -2,15 +2,15 @@
  *
  *dtype.h
  *
- *	This function include all astract data type 
- *	that use in the program
+ *	This function include all abstract data type 
+ *	including hash and sorting algorithm
+ *  that use in the program
  *
  *	Created By Napas 
  *		Mar 26 2021
  *************************************************/
 
 
-/**************** Linklist ADT *****************/
 
 /**************** HASH ADT ********************/
 
@@ -67,3 +67,12 @@ HASHITEM_T* getlist(char* key,HASHITEM_T* hash[]);
 void freeHash(HASHITEM_T* hash[]);
 
  
+
+
+/*****************sort algorithm*********************/
+
+
+void insertArray(PHOTO_T* data,PHOTO_T* photoarray[],int arrsize);
+
+
+

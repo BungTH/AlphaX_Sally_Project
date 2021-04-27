@@ -91,6 +91,16 @@ PHOTO_T* searchCondition(char* tag[],int sizetag,
 						HASHITEM_T* hashtag[]);
 
 /*
+ *This function calculate the each photo
+ *similiar with the given alltag
+ * 
+ * 
+ * 	Arguement : LIST_TAG_T* alltag (linklist of tag used)
+ * 
+ * 	Return 	  : NO
+ */
+void calculateSimiliar(LIST_TAG_T* alltag,PHOTO_T* photo);
+/*
  *This function find the similar photo 
  *with the given namephoto and return 
  *the linklist of the top 3 similar
@@ -98,7 +108,7 @@ PHOTO_T* searchCondition(char* tag[],int sizetag,
  *	Arugement : char* namephoto (name of the photo)
  *			    HASHITEM_T* hashtag[] (hash table of tag[])
  *	
- *	return 	  : linklist of the result (top 3 similar photo)
+ *	return 	  : Array of sorted photo
  */
-PHOTO_T* findSimilar(char* namephoto,HASHITEM_T* hashtag[]);
+PHOTO_T** findSimilar(char* namephoto,HASHITEM_T* hashtag[],HASHITEM_T* hashphoto[]);
 

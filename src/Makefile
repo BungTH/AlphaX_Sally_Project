@@ -26,8 +26,8 @@ view.o : view.c view.h getinput.h datastruct.h
 getinput.o : getinput.c model.h getinput.h datastruct.h	
 	gcc -c getinput.c
 
-photoengine : controller.o model.o readwrite.o dtype.o getinput.o view.o getinput.o
-	gcc -o photoengine controller.o model.o readwrite.o dtype.o view.o getinput.o
+photoengine : controller.o model.o readwrite.o dtype.o getinput.o view.o getinput.o 
+	gcc -o photoengine controller.o model.o readwrite.o dtype.o view.o getinput.o  
 
 clean : 
 	-rm *.o

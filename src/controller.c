@@ -136,7 +136,16 @@ void handleSearchCondition(HASHITEM_T* hashtag[],HASHITEM_T* hashphoto[])
  */
 void handlefindSimilar(HASHITEM_T* hashphoto[],HASHITEM_T* hashtag[])
 	{
+	char namephoto[PHOTOSIZE];
+	int i = 0;
+	similarPage(namephoto);
 
+	PHOTO_T** result = findSimilar(namephoto,hashtag,hashphoto);
+	for(i = 0;i<3;i++)
+		{
+		printf("\n%s",result[i]->namephoto);
+		}
+	
 	} 
 
 /* 

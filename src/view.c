@@ -79,7 +79,7 @@ void displayphoto(PHOTO_T* photo,int index)
  */
 void menuPage(char* choice)
 	{
-    printf("--------------------------------------------\n");
+    printf("\n--------------------------------------------\n");
 	printf("\t MAINMENU\n");
     printf("\t 1 - ADD NEW PHOTO WITH NEW TAGS\n");
 	printf("\t 2 - SEARCH PHOTO BY TAG\n");
@@ -104,7 +104,7 @@ void menuPage(char* choice)
  */
 void subMenuPage(char * choice)
 	{
-	printf("--------------------------------------------\n");
+	printf("\n--------------------------------------------\n");
 	printf("\t What do you want to do?\n");
 	printf("\t 1 - SEARCH SIMILAR PHOTO(S)\n");
 	printf("\t 2 - DISPLAY ON BROWSER\n");
@@ -112,7 +112,6 @@ void subMenuPage(char * choice)
 	printf("--------------------------------------------\n");
 
 	getOption(choice);
-	printf("%s",CLEAR_ESCAPE);
 	}
 
 /*

@@ -96,7 +96,7 @@ PHOTO_T* searchByTag(char* tag[],int sizetag,HASHITEM_T* hashtag[])
 	{
 	HASHITEM_T* tmp = NULL;
 	PHOTO_T* listresult = NULL;
-	PHOTO_T* tmpstate = NULL;
+	PHOTO_T* tmpstate = NULL;/*use to reset the state value of the listresult*/
 	int i = 0;
 	
 	for(i = 0;i<sizetag;i++)
@@ -185,7 +185,7 @@ PHOTO_T* searchCondition(char* tag[],int sizetag,
 	{
 	HASHITEM_T* tmp = NULL;
 	PHOTO_T* listresult = NULL;
-	PHOTO_T* tmpstate = NULL;
+	PHOTO_T* tmpstate = NULL;/*use to reset the state value of the listresult*/
 	int i = 0;
 	
 	for(i = 0;i<sizetag;i++)
@@ -224,6 +224,31 @@ PHOTO_T* searchCondition(char* tag[],int sizetag,
 	}
 
 /*
+ *This function calculate the each photo
+ *similiar with the given alltag
+ * 
+ * 
+ * 	Arguement : LIST_TAG_T* alltag (linklist of tag used)
+ * 				photo to 
+ * 	Return 	  : NO
+ */
+void calculateSimiliar(LIST_TAG_T* alltag,PHOTO_T* photo)
+	{
+	LIST_TAG_T* tmp = alltag;
+	LIST_TAG_T* alltagphoto = photo->alltag;
+	LIST_TAG_T* tmpphototag = alltagphoto;
+	while(tmp != NULL)
+		{
+		while(tmpphototag != NULL)
+			{
+			if(strcmp(tmp->nametag,tmpphototag->nametag) == 0)
+				photo->count++;
+			tmpphototag = tmpphototag->next;
+			}
+		tmp = tmp->next;
+		}
+	}
+/*
  *This function find the similar photo 
  *with the given namephoto and return 
  *the linklist of the top 3 similar
@@ -231,7 +256,41 @@ PHOTO_T* searchCondition(char* tag[],int sizetag,
  *	Arugement : char* namephoto (name of the photo)
  *			    HASHITEM_T* hashtag[] (hash table of tag[])
  *	
- *	return 	  : linklist of the result (top 3 similar photo)
+ *	return 	  : Array of sorted photo
  */
-PHOTO_T* findSimilar(char* namephoto,HASHITEM_T* hashtag[]);
+PHOTO_T** findSimilar(char* namephoto,HASHITEM_T* hashtag[],HASHITEM_T* hashphoto[])
+	{
+	PHOTO_T* photo =  findPhoto(namephoto,hashphoto);
+	/*get alltag of the photo*/
+	LIST_TAG_T* alltag = photo->alltag;
+	LIST_TAG_T* tmptag = alltag;
+	HASHITEM_T* tmphash = NULL; 
+	PHOTO_T* tmpstate = NULL;/*use to reset the state value of the listresult*/
+
+	PHOTO_T** arraysort = calloc(1,sizeof(PHOTO_T*));
+	int count = 0;
+
+	if(photo != NULL)
+		{/*go to all tag that photo have*/
+		while(tmptag != NULL)
+			{/*get the linklist of the hash[nametag]*/
+			tmphash = getlist(tmptag->nametag,hashtag);
+			while(tmphash != NULL)
+				{/*if the photo is not already in arraysort*/
+				if(!(tmphash->photo->state)&& tmphash->photo != photo)
+					{/*calculate the similiar and add to arraysort*/
+					calculateSimiliar(alltag,tmphash->photo);
+					insertArray(tmphash->photo,arraysort,count);
+					tmphash->photo->state = 1;/*already in array*/
+					count++;
+					}
+				tmphash = tmphash->next;/*go to next photo linklist*/
+				}
+			tmptag = tmptag->next;/*go to next hash key*/
+			}
+		}
+	
+	
+	return arraysort;
+	}
 

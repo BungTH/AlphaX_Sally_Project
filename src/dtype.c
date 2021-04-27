@@ -131,3 +131,30 @@ void freeHash(HASHITEM_T* hash[])
 		}
 	free(hash);
 	}
+
+
+/*****************sort algorithm*********************/
+
+void insertArray(PHOTO_T* data,PHOTO_T* photoarray[],int arrsize)
+    {
+    if(arrsize == 0)
+        {
+        photoarray[0] = data;
+		//printf("first data is %s",data->namephoto);
+        }
+    else
+        {
+        photoarray = realloc(photoarray,(arrsize+1)*sizeof(PHOTO_T*));
+        photoarray[arrsize] = data;
+		//printf("\nphotoarray %d is %s\n",arrsize,data->namephoto);
+        }
+    }
+
+
+
+
+
+
+
+
+
