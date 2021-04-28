@@ -228,8 +228,11 @@ PHOTO_T* searchCondition(char* tag[],int sizetag,
  *similiar with the given alltag
  * 
  * 
- * 	Arguement : LIST_TAG_T* alltag (linklist of tag used)
- * 				photo to 
+ * 	Arguement : LIST_TAG_T* alltag (linklist of alltag of photo 
+ * 				we want to find similiar)
+ * 
+ * 				PHOTO_T* photo photo we want to calculate the similiar
+ *   
  * 	Return 	  : NO
  */
 void calculateSimiliar(LIST_TAG_T* alltag,PHOTO_T* photo)
@@ -237,17 +240,27 @@ void calculateSimiliar(LIST_TAG_T* alltag,PHOTO_T* photo)
 	LIST_TAG_T* tmp = alltag;
 	LIST_TAG_T* alltagphoto = photo->alltag;
 	LIST_TAG_T* tmpphototag = alltagphoto;
-	while(tmp != NULL)
+	while(tmpphototag != NULL)
 		{
-		while(tmpphototag != NULL)
+		while(tmp != NULL)
 			{
 			if(strcmp(tmp->nametag,tmpphototag->nametag) == 0)
 				photo->count++;
-			tmpphototag = tmpphototag->next;
+			tmp = tmp->next;
 			}
-		tmp = tmp->next;
+		tmp = alltag;
+		tmpphototag = tmpphototag->next;
 		}
 	}
+
+int comparator(const void *p, const void *q)
+	{
+	PHOTO_T* l = (PHOTO_T*)p;
+    PHOTO_T* r = (PHOTO_T*)q;
+	printf(" %s %d",l->namephoto,l->count - r->count);
+    return (l->count - r->count);
+	}
+
 /*
  *This function find the similar photo 
  *with the given namephoto and return 
@@ -255,6 +268,10 @@ void calculateSimiliar(LIST_TAG_T* alltag,PHOTO_T* photo)
  *
  *	Arugement : char* namephoto (name of the photo)
  *			    HASHITEM_T* hashtag[] (hash table of tag[])
+ *				use for get linklist of photo that have that 
+ *				tag
+ *				HASHITEM_T* hashphoto[](hash photo)
+ *				use for find all tag of the photo
  *	
  *	return 	  : Array of sorted photo
  */
@@ -276,7 +293,7 @@ PHOTO_T** findSimilar(char* namephoto,HASHITEM_T* hashtag[],HASHITEM_T* hashphot
 			{/*get the linklist of the hash[nametag]*/
 			tmphash = getlist(tmptag->nametag,hashtag);
 			while(tmphash != NULL)
-				{/*if the photo is not already in arraysort*/
+				{/*if the photo is not already in arraysort and not photo that user input*/
 				if(!(tmphash->photo->state)&& tmphash->photo != photo)
 					{/*calculate the similiar and add to arraysort*/
 					calculateSimiliar(alltag,tmphash->photo);
@@ -290,7 +307,8 @@ PHOTO_T** findSimilar(char* namephoto,HASHITEM_T* hashtag[],HASHITEM_T* hashphot
 			}
 		}
 	
-	
+	qsort(arraysort,count,sizeof(PHOTO_T*),comparator);
+
 	return arraysort;
 	}
 

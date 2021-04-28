@@ -198,7 +198,7 @@ BOOL checkNULL(void * pointer)
  *
  */
 STATUS readData(PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[])
-{
+    {
     FILE * pIn = NULL;                      //variable to hold position of input file
 
     PHOTO_T * inputData;                    //variable to hold pointer to data structure
@@ -220,14 +220,14 @@ STATUS readData(PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag
 
     pIn = fopen("tag.txt","r");
     if(pIn == NULL)
-    {
+        {
         printf("\tERROR - Failed to open input file\n");
         createFile();
-    }
+        }
     else
-    {
-        while(fgets(inputline,sizeof(inputline),pIn) != NULL)
         {
+        while(fgets(inputline,sizeof(inputline),pIn) != NULL)
+            {
             inputData = calloc(1,sizeof(PHOTO_T));
             result = (result && checkNULL(inputData));
             //adding data to data structure
@@ -245,16 +245,16 @@ STATUS readData(PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag
             pCurrentTag = pHeadTag;
             ptr = strtok(pic_tagAll,delim);
             while(ptr != NULL)
-            {
+                {
                 strcpy(pCurrentTag->nametag,ptr);
                 ptr = strtok(NULL,delim);
                 if(ptr != NULL)
-                {
+                    {
                     pCurrentTag->next = (LIST_TAG_T *)calloc(1,sizeof(LIST_TAG_T));
                     result = (result && checkNULL(pCurrentTag->next));
                     pCurrentTag = pCurrentTag->next;
+                    }
                 }
-            }
             inputData->alltag = pHeadTag;
 
 
@@ -262,15 +262,15 @@ STATUS readData(PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag
             inputData->count = 0;
             inputData->state = 0;
             if(!(add_photo_2_hashphoto(inputData, hashphoto) && add_photo_2_hashtag(inputData, hashtag)))
-            {
+                {
                 result = FALSE;
-            }
+                }
             add_photo_2_masterlist(inputData, pHead);
-        }
+            }
+        fclose(pIn);
         return result;
+        }
     }
-    fclose(pIn);
-}
 
 
 
@@ -295,7 +295,7 @@ STATUS readData(PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag
  */
 STATUS addPhotoToStruct(char * namephoto, int tag_amount, char * path, char * tag_all[],
                 PHOTO_T ** pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[])
-{
+    {
     PHOTO_T * inputData;                    //variable to hold pointer to data structure
 
     LIST_TAG_T * pHeadTag = NULL;           //variable to hold pointer to head of linkedlist
@@ -312,20 +312,20 @@ STATUS addPhotoToStruct(char * namephoto, int tag_amount, char * path, char * ta
     inputData->numtag = tag_amount;
     strcpy(inputData->path,path);
     for(i = 0;i < tag_amount;i++)
-    {   
+        {   
         pCurrentTag = (LIST_TAG_T *)calloc(1,sizeof(LIST_TAG_T));
         result = (result && checkNULL(pCurrentTag));
         strcpy(pCurrentTag->nametag,tag_all[i]);
         if(pHeadTag == NULL)     
-        {
+            {
             pHeadTag = pCurrentTag;
-        }
+            }
         else
-        {
+            {
             pCurrentTag->next = pHeadTag;
             pHeadTag = pCurrentTag;
+            }
         }
-    }
     inputData->alltag = pHeadTag;
     
     inputData->count = 0;
@@ -336,7 +336,7 @@ STATUS addPhotoToStruct(char * namephoto, int tag_amount, char * path, char * ta
         }
     add_photo_2_masterlist(inputData, pHead);
     return TRUE;
-}
+    }
 
 
 
@@ -352,39 +352,39 @@ STATUS addPhotoToStruct(char * namephoto, int tag_amount, char * path, char * ta
  *
  */
 void writeData(PHOTO_T * pHead)
-{
+    {
     FILE * pOut = NULL;                     //variable to hold position of output file
     PHOTO_T * pTmp = NULL;                  //variable to hold position of temporary data structure
     LIST_TAG_T * pTmpTag = NULL;            //variable to hold position of temporary linkedlist
     
     pOut = fopen("tag.txt","w");
     if(pOut == NULL)
-    {
+        {
         printf("\tERROR - Failed to open output file\n");
-    }
+        }
     else
-    {
+        {
         pTmp = pHead;
         while(pTmp != NULL)
-        {
+            {
             pTmpTag = pTmp->alltag;
             fprintf(pOut,"%s;%d;%s\n",pTmp->namephoto,pTmp->numtag,pTmp->path);
             while(pTmpTag != NULL)
-            {
+                {
                 fprintf(pOut,"%s",pTmpTag->nametag);
                 //check if there is next element or not
                 if(pTmpTag->next != NULL)
-                {
+                    {
                     fprintf(pOut,";");
-                }
+                    }
                 pTmpTag = pTmpTag->next;
-            }
+                }
             fprintf(pOut,"\n");
             pTmp = pTmp->next;
-        }
+            }
         fclose(pOut);
+        }
     }
-}
 
 
 
@@ -401,16 +401,16 @@ void writeData(PHOTO_T * pHead)
  *
  */
 void freeAll(PHOTO_T * pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[])
-{
+    {
     LIST_TAG_T * pTmp = NULL;               //variable to hold pointer to temporary linkedlist
     
     while(pHead != NULL)
-    {
+        {
         pTmp = pHead->alltag;
         pHead = pHead->next;
         free(pTmp);
-    }
+        }
     //freeHash bug : double free error
     /*freeHash(hashphoto);
     freeHash(hashtag);*/
-}
+    }

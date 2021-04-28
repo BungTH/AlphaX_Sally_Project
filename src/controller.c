@@ -141,10 +141,12 @@ void handlefindSimilar(HASHITEM_T* hashphoto[],HASHITEM_T* hashtag[])
 	similarUI(namephoto);
 
 	PHOTO_T** result = findSimilar(namephoto,hashtag,hashphoto);
-	for(i = 0;i<3;i++)
+
+	for(i = 0;i<18;i++)
 		{
-		printf("\n%s",result[i]->namephoto);
+		printf("\n%s %d",result[i]->namephoto,result[i]->count);
 		}
+	free(result);
 	
 	} 
 

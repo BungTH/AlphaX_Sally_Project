@@ -90,6 +90,9 @@ PHOTO_T* searchCondition(char* tag[],int sizetag,
 						 char* except[],int sizeexcept,
 						HASHITEM_T* hashtag[]);
 
+
+int comparator(const void *p, const void *q);
+
 /*
  *This function calculate the each photo
  *similiar with the given alltag
