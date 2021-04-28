@@ -77,7 +77,7 @@ void displayphoto(PHOTO_T* photo,int index)
  *  Return : NO
  *
  */
-void menuPage(char* choice)
+void menuUI(char* choice)
 	{
     printf("\n--------------------------------------------\n");
 	printf("\t MAINMENU\n");
@@ -102,7 +102,7 @@ void menuPage(char* choice)
  *  Return : NO
  *
  */
-void subMenuPage(char * choice)
+void subMenuUI(char * choice)
 	{
 	printf("\n--------------------------------------------\n");
 	printf("\t What do you want to do?\n");
@@ -129,7 +129,7 @@ void subMenuPage(char * choice)
  *  Return : NO
  *
  */
-void addNewPhotoPage(HASHITEM_T* hashphoto[],char* namephoto, int * sizetag
+void addNewPhotoUI(HASHITEM_T* hashphoto[],char* namephoto, int * sizetag
 					,char* path,char* tag[])
 	{
 	printf("--------------------------------------------\n");
@@ -162,7 +162,7 @@ void addNewPhotoPage(HASHITEM_T* hashphoto[],char* namephoto, int * sizetag
  *  Return : NO
  *
  */
-void searchByTagPage(char* tag[], int * sizetag)
+void searchByTagUI(char* tag[], int * sizetag)
 	{
 	printf("--------------------------------------------\n");
 	printf("\tSearch by tag\n");
@@ -189,7 +189,7 @@ void searchByTagPage(char* tag[], int * sizetag)
  *  Return : NO
  *
  */	
-void searchConPage(char * tag[], int * sizetag, char * except[], int * sizeexcept)
+void searchConUI(char * tag[], int * sizetag, char * except[], int * sizeexcept)
 {
 	printf("--------------------------------------------\n");
 	printf("\t SEARCH PHOTO BY TAG AND EXCLUDED TAG\n");
@@ -214,7 +214,7 @@ void searchConPage(char * tag[], int * sizetag, char * except[], int * sizeexcep
  *  Return : NO
  *
  */
-void similarPage(char  namephoto[])
+void similarUI(char  namephoto[])
 {
 	printf("--------------------------------------------\n");
 	printf("\t Find 3 similar photos\n");
@@ -234,7 +234,7 @@ void similarPage(char  namephoto[])
  *  Return : NO
  *
  */
-void displayInBrowserPage(char namephoto[])
+void displayInBrowserUI(char namephoto[])
 	{
 	printf("--------------------------------------------\n");
 	printf("\t DISPLAY ON BROWSER\n");

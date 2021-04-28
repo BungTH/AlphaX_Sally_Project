@@ -51,7 +51,7 @@ void displayphoto(PHOTO_T* photo,int index);
  *  Return : NO
  *
  */
-void menuPage(char* choice);
+void menuUI(char* choice);
 
 /*
  * This function display submenu on the screen
@@ -63,7 +63,7 @@ void menuPage(char* choice);
  *  Return : NO
  *
  */
-void subMenuPage(char* choice);
+void subMenuUI(char* choice);
 
 /**************************************************/
 /*
@@ -81,7 +81,7 @@ void subMenuPage(char* choice);
  *  Return : NO
  *
  */
-void addNewPhotoPage(HASHITEM_T* hashphoto[],char* namephoto, int * sizetag
+void addNewPhotoUI(HASHITEM_T* hashphoto[],char* namephoto, int * sizetag
 					,char* path,char* tag[]);
 
 /*
@@ -96,7 +96,7 @@ void addNewPhotoPage(HASHITEM_T* hashphoto[],char* namephoto, int * sizetag
  *  Return : NO
  *
  */
-void searchByTagPage(char* tag[], int* sizetag);
+void searchByTagUI(char* tag[], int* sizetag);
 
 /*
  * This function display user interface of 
@@ -116,7 +116,7 @@ void searchByTagPage(char* tag[], int* sizetag);
  *  Return : NO
  *
  */	
-void searchConPage(char* tag[], int* sizetag, char* except[], int* sizeexcept);
+void searchConUI(char* tag[], int* sizetag, char* except[], int* sizeexcept);
 
 /**************************************************/
 
@@ -134,7 +134,7 @@ void searchConPage(char* tag[], int* sizetag, char* except[], int* sizeexcept);
  *  Return : NO
  *
  */
- void similarPage(char  namephoto[]);
+ void similarUI(char  namephoto[]);
 
 
 /*
@@ -146,7 +146,7 @@ void searchConPage(char* tag[], int* sizetag, char* except[], int* sizeexcept);
  *  Return : NO
  *
  */
-void displayInBrowserPage(char namephoto[]);
+void displayInBrowserUI(char namephoto[]);
 
 
 /**************************************************/
