@@ -38,7 +38,7 @@ void handleAddNewPhoto(PHOTO_T** pHead, HASHITEM_T* hashphoto[], HASHITEM_T* has
 	char path[PATHSIZE];
 	char* tag[TAGBUFFER];
 	char namephoto[PHOTOSIZE];
-	addNewPhotoPage(hashphoto,namephoto,&sizetag,path,tag);
+	addNewPhotoUI(hashphoto,namephoto,&sizetag,path,tag);
 	addPhotoToStruct(namephoto, sizetag, path, tag, pHead, hashphoto, hashtag);
 	} 
 
@@ -61,7 +61,7 @@ void handleSearchByTag(HASHITEM_T* hashtag[],HASHITEM_T* hashphoto[])
 	PHOTO_T* result = NULL;
 	PHOTO_T* tmp = NULL;
 	int i = 0;
-	searchByTagPage(tag,&sizetag); /*get all the data and display UI*/
+	searchByTagUI(tag,&sizetag); /*get all the data and display UI*/
 	result = searchByTag(tag,sizetag,hashtag);/*get the result*/
 	
 	if(result == NULL)
@@ -103,7 +103,7 @@ void handleSearchCondition(HASHITEM_T* hashtag[],HASHITEM_T* hashphoto[])
 	PHOTO_T* tmp = NULL;
 	int i = 0;
 	
-	searchConPage(tag,&sizetag,except,&sizeexcept);/*get all the data that user input and display UI*/
+	searchConUI(tag,&sizetag,except,&sizeexcept);/*get all the data that user input and display UI*/
 	result = searchCondition(tag,sizetag,except,sizeexcept,hashtag);/*get the result of search with condition*/
 	
 	if(result == NULL)
@@ -138,7 +138,7 @@ void handlefindSimilar(HASHITEM_T* hashphoto[],HASHITEM_T* hashtag[])
 	{
 	char namephoto[PHOTOSIZE];
 	int i = 0;
-	similarPage(namephoto);
+	similarUI(namephoto);
 
 	PHOTO_T** result = findSimilar(namephoto,hashtag,hashphoto);
 	for(i = 0;i<3;i++)
@@ -162,14 +162,14 @@ void handleDisplayInBrowser(HASHITEM_T* hashphoto[])
 	{
 	char namephoto[PHOTOSIZE];
 	char command[5 + PHOTOSIZE] = "eog image/test.jpg";
-	displayInBrowserPage(namephoto);
+	displayInBrowserUI(namephoto);
 	//strcat(command,namephoto);
 	system(command);
 	}
 
 /* 
  *
- *  This function print out the menu page, and option from user input(from UI), validate the option
+ *  This function print out the menu UI, and option from user input(from UI), validate the option
  *  and show the selected option what user want to do.
  * 
  *  Argument: PHOTO_T* pHead
@@ -186,7 +186,7 @@ void handlemainmenu(PHOTO_T* pHead, HASHITEM_T* hashphoto[], HASHITEM_T* hashtag
 
 	while(whichcheck != '4')
 		{
-		menuPage(&whichcheck);
+		menuUI(&whichcheck);
 		switch(whichcheck)/*check which subprogram user selected*/
 			{
 			case '1':
@@ -228,7 +228,7 @@ void handleSubMenu(HASHITEM_T* hashphoto[], HASHITEM_T* hashtag[])
 	char whichcheck = '0'; /*collect which validation option user want*/
 	char input[128];/*get data from user*/
 
-	subMenuPage(&whichcheck);
+	subMenuUI(&whichcheck);
 	switch(whichcheck)/*check which subprogram user selected*/
 		{
 		case '1':
@@ -248,7 +248,7 @@ void handleSubMenu(HASHITEM_T* hashphoto[], HASHITEM_T* hashtag[])
 	
 int main()
 	{
-    PHOTO_T * pHead;
+    PHOTO_T * pHead = NULL;
     HASHITEM_T ** hashphoto = intialHash();
     HASHITEM_T ** hashtag = intialHash();
     readData(&pHead, hashphoto, hashtag);
