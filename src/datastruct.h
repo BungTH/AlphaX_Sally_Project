@@ -21,6 +21,8 @@
 #define PATHSIZE 512
 #define TAGBUFFER 512
 
+#define DEFAULTSIZE 100
+
 #define TRUE 1
 #define FALSE 0
 

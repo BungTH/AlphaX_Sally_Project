@@ -1,6 +1,6 @@
 /**************************************************
  *
- *dtype.h
+ *  dtype.h
  *
  *	This function include all astract data type 
  *	that use in the program
@@ -21,23 +21,25 @@
 
 
 /*
- *This function use create the array of linklist 
- *or in other word hash table
+ *  This function use create the array of linklist 
+ *  or in other word hash table
  *
- * Arugement : NO
- * Return : array of linklist
+ *  Arugement : NO
+ * 
+ *  Return : array of linklist
  */
 HASHITEM_T** intialHash()
 	{
 	return (HASHITEM_T**)calloc(BUCKET_COUNT,sizeof(HASHITEM_T*));
 	}
 /*
- *This function convert key to the index of the array
- *use as a hash function both
- *dictionray tag and photo
+ *  This function convert key to the index of the array
+ *  use as a hash function both
+ *  dictionray tag and photo
  *
- * Arugement : char* key (name key)
- * Return    : unsigned long (index of the array)
+ *  Arugement : char* key (name key)
+ * 
+ *  Return    : unsigned long (index of the array)
  */
 unsigned long hashfunction(char* key)
 	{
@@ -62,13 +64,13 @@ unsigned long hashfunction(char* key)
 	}
 
 /*
- *This Function insert the hash item to hashtable
+ *  This Function insert the hash item to hashtable
  *
- * Arugement : char* key (name key)
+ *  Arugement : char* key (name key)
  *	     : PHOTO_T* item (information of the photo)
  *	     : HASHITEM_T* hash[] (hash table)
  *
- * Return    : (int) success for 1 and 0 for fail
+ *  Return    : (int) success for 1 and 0 for fail
  */
 int insertitem(char* key,PHOTO_T* item,HASHITEM_T* hash[])
 	{
@@ -93,13 +95,13 @@ int insertitem(char* key,PHOTO_T* item,HASHITEM_T* hash[])
 	}
 
 /*
- *This Function return the linklist of the hash in
- *the given key
+ *  This Function return the linklist of the hash in
+ *  the given key
  *
- * Arugement : char* key (name of the key)
+ *  Arugement : char* key (name of the key)
  *	     : HASHITEM_T* hash[] (hashtable)
  *
- * Return    : HASHITEM_T* (linklist of HASHITEM_T)
+ *  Return    : HASHITEM_T* (linklist of HASHITEM_T)
  */
 HASHITEM_T* getlist(char* key,HASHITEM_T* hash[])
 	{
@@ -107,11 +109,11 @@ HASHITEM_T* getlist(char* key,HASHITEM_T* hash[])
 	}
 
 /*
- *This Function free all the data in the hash
+ *  This Function free all the data in the hash
  *
- * Arugement : HASHITEM_T* hash[] (hashtable)
+ *  Arugement : HASHITEM_T* hash[] (hashtable)
  *
- * Return    : NO
+ *  Return    : NO
  */
 void freeHash(HASHITEM_T* hash[])
 	{
@@ -135,21 +137,16 @@ void freeHash(HASHITEM_T* hash[])
 
 /*****************sort algorithm*********************/
 
-void insertArray(PHOTO_T* data,PHOTO_T* photoarray[],int arrsize)
-    {
-    if(arrsize == 0)
-        {
-        photoarray[0] = data;
-		//printf("first data is %s",data->namephoto);
-        }
-    else
-        {
-        photoarray = realloc(photoarray,(arrsize+1)*sizeof(PHOTO_T*));
-        photoarray[arrsize] = data;
-		//printf("\nphotoarray %d is %s\n",arrsize,data->namephoto);
-        }
-    }
-
+int insertArray(PHOTO_T* data,PHOTO_T* photoarray[],int arrsize,int currentCount)
+     {
+     if(currentCount >= arrsize)
+         {
+         arrsize += DEFAULTSIZE;
+         photoarray = realloc(photoarray,(arrsize)*sizeof(PHOTO_T*));
+         }
+      photoarray[currentCount] = data;
+	return arrsize;
+     }
 
 
 

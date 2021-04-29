@@ -42,17 +42,16 @@ void clearscreen()
  * of photo on the screen.
  *
  *	Arugment : PHOTO_T* photo => all data of photo 
- *   		   int index =>  index number of photo
+ *   		   
  *
  *	Return : NO
  *
  */
-void displayphoto(PHOTO_T* photo,int index)
+void displayphoto(PHOTO_T* photo)
 	{
 	LIST_TAG_T* alltag = photo->alltag; /*get all tag of the photo(as a head of linklist)*/
 	LIST_TAG_T* tmp = NULL;
-	printf("\n-----------------------\n");
-	printf("No. %d",index+1);
+
 	printf("\n-----------------------\n");
 	printf("Name : %s\n",photo->namephoto);
 	printf("Path : %s\n",photo->path);
@@ -79,14 +78,15 @@ void displayphoto(PHOTO_T* photo,int index)
  */
 void menuUI(char* choice)
 	{
-    printf("\n--------------------------------------------\n");
+    printf("\n------------------------------------------------\n");
 	printf("\t MAINMENU\n");
+	printf("\n------------------------------------------------\n");
     printf("\t 1 - ADD NEW PHOTO WITH NEW TAGS\n");
 	printf("\t 2 - SEARCH PHOTO BY TAG\n");
 	printf("\t 3 - SEARCH PHOTO BY TAG AND EXCLUDED TAG\n");
 	printf("\t 4 - EXIT\n");
 	printf("\t Which option do you want to choose?\n");
-	printf("--------------------------------------------\n");
+	printf("\n------------------------------------------------\n");
     
     getOption(choice);
     printf("%s",CLEAR_ESCAPE);
@@ -98,18 +98,19 @@ void menuUI(char* choice)
  * Moreover, set value of choice.
  * 
  *  Argument : char* choice => store option
- *
+ *	
  *  Return : NO
  *
  */
 void subMenuUI(char * choice)
 	{
-	printf("\n--------------------------------------------\n");
+	printf("\n------------------------------------------------\n");
 	printf("\t What do you want to do?\n");
+	printf("\n------------------------------------------------\n");
 	printf("\t 1 - SEARCH SIMILAR PHOTO(S)\n");
 	printf("\t 2 - DISPLAY ON BROWSER\n");
 	printf("\t 3 - GO TO MAIN MENU\n");
-	printf("--------------------------------------------\n");
+	printf("\n------------------------------------------------\n");
 
 	getOption(choice);
 	}
@@ -132,22 +133,40 @@ void subMenuUI(char * choice)
 void addNewPhotoUI(HASHITEM_T* hashphoto[],char* namephoto, int * sizetag
 					,char* path,char* tag[])
 	{
-	printf("--------------------------------------------\n");
-	printf("\tAdd new photo\n");
-	printf("--------------------------------------------\n");
+	int i =0; 
+	char confirm = 'Y';
+	printf("------------------------------------------------\n");
+	printf("\t||Add new photo||\n");
+	printf("------------------------------------------------\n");
 	
-	printf("\nPlease input the photo name");
-	getNamePhoto(namephoto);
-	
-	while(!isunique(namephoto, hashphoto))
+	do
 		{
-		printf("'%s' have been already use\n",namephoto);
+		printf("\nPlease input the photo name");
 		getNamePhoto(namephoto);
+		
+		while(!isunique(namephoto, hashphoto))
+			{
+			printf("'%s' have been already use\n",namephoto);
+			getNamePhoto(namephoto);
+			}
+			
+		printf("\nPlease input the photo path");
+		getPath(path);
+		printf("\nPlease input the all photo tag");
+		getAllNameTag(tag,sizetag);
+
+		//display data 
+		printf("\nPhoto name: %s",namephoto);
+		printf("\nPhoto path: %s\n",path);
+		for (i = 0 ; i < *sizetag ; i++)
+			{
+			printf("%s,",tag[i]);
+			}
+		printf("\n");
+		getCharater("Enter Y to confirm: ",&confirm);
 		}
-	printf("\nPlease input the photo path");
-	getPath(path);
-	printf("\nPlease input the all photo tag");
-	getAllNameTag(tag,sizetag);
+	while(confirm != 'y' && confirm !='Y');
+
 	}
 
 /*
@@ -164,10 +183,11 @@ void addNewPhotoUI(HASHITEM_T* hashphoto[],char* namephoto, int * sizetag
  */
 void searchByTagUI(char* tag[], int * sizetag)
 	{
-	printf("--------------------------------------------\n");
-	printf("\tSearch by tag\n");
-	printf("--------------------------------------------\n");
+	printf("------------------------------------------------\n");
+	printf("\t||Search by tag||\n");
+	printf("------------------------------------------------\n");
 	printf("\nPlease input the include tag");
+	printf("\n------------------------------------------------\n");
     getAllNameTag(tag,sizetag);
 	}
 
@@ -191,12 +211,12 @@ void searchByTagUI(char* tag[], int * sizetag)
  */	
 void searchConUI(char * tag[], int * sizetag, char * except[], int * sizeexcept)
 {
-	printf("--------------------------------------------\n");
+	printf("------------------------------------------------\n");
 	printf("\t SEARCH PHOTO BY TAG AND EXCLUDED TAG\n");
-	printf("--------------------------------------------\n");
+	printf("------------------------------------------------\n");
 	printf("\nPlease input the include tag");
 	getAllNameTag(tag,sizetag);
-	printf("\n--------------------------------------------\n");
+	printf("\n------------------------------------------------\n");
 	printf("\nPlease input the exclude tag");
 	getAllNameTag(except,sizeexcept);
 }		
@@ -216,9 +236,9 @@ void searchConUI(char * tag[], int * sizetag, char * except[], int * sizeexcept)
  */
 void similarUI(char  namephoto[])
 {
-	printf("--------------------------------------------\n");
+	printf("------------------------------------------------\n");
 	printf("\t Find 3 similar photos\n");
-	printf("--------------------------------------------\n");
+	printf("------------------------------------------------\n");
 	printf("\nPlease name of photo to find the similar photo");
 	getNamePhoto(namephoto);
 }
@@ -230,15 +250,23 @@ void similarUI(char  namephoto[])
  * on the browser
  * 
  *  Argument : char namephoto => store photoname
- *
+ *			   char* option => option browser to display
  *  Return : NO
  *
  */
-void displayInBrowserUI(char namephoto[])
+void displayInBrowserUI(char namephoto[],char* option)
 	{
-	printf("--------------------------------------------\n");
+	printf("------------------------------------------------\n");
 	printf("\t DISPLAY ON BROWSER\n");
-	printf("--------------------------------------------\n");
+	printf("------------------------------------------------\n");
+	printf("Please select your browser\n");
+	printf("1 - Google Chrome\n");
+	printf("2 - Microsoft Edge\n");
+	printf("3 - Safari\n");
+	printf("4 - Firefox\n");
+	printf("5 - eog\n");
+	printf("------------------------------------------------\n");
+	getOption(option);
 	getNamePhoto(namephoto);
 	}
 

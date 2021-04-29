@@ -62,7 +62,8 @@ int checkPathAndNamePhoto(char pathToCheck[])
 	while(bOk && pathToCheck[i] != '\0')
 		{
 	    if (!isalpha(pathToCheck[i]) && (pathToCheck[i] != '/') 
-		&& (pathToCheck[i] != '.') && (pathToCheck[i] != '_'))
+		&& (pathToCheck[i] != '.') && (pathToCheck[i] != '_')
+		&& !(isdigit(pathToCheck[i])))
 			bOk = 0;
 		i++;
 		}

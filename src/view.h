@@ -19,8 +19,8 @@
 
 
 /*
- *This Function clear the screen
- *and ask of enter to go the main menu
+ *  This Function clear the screen
+ *  and ask of enter to go the main menu
  *
  *	Arugment : NO
  *
@@ -30,33 +30,33 @@
 void clearscreen();
 
 /*
- * This function display photo and information
- * of photo on the screen.
+ *  This function display photo and information
+ *  of photo on the screen.
  *
  *	Arugment : PHOTO_T* photo => all data of photo 
- *   		   int index =>  index number of photo
+ *   		   
  *
  *	Return : NO
  *
  */
-void displayphoto(PHOTO_T* photo,int index);
+void displayphoto(PHOTO_T* photo);
 
 /*
- * This function will display main menu on the screen
- * and ask for option that user want to choose. 
- * Moreover, set value of choice.
+ *  This function will display main menu on the screen
+ *  and ask for option that user want to choose. 
+ *  Moreover, set value of choice.
  * 
  *  Argument : char* choice => store option
- *
+ 
  *  Return : NO
  *
  */
 void menuUI(char* choice);
 
 /*
- * This function display submenu on the screen
- * and ask for option that user want to choose.
- * Moreover, set value of choice.
+ *  This function display submenu on the screen
+ *  and ask for option that user want to choose.
+ *  Moreover, set value of choice.
  * 
  *  Argument : char* choice => store option
  *
@@ -67,9 +67,9 @@ void subMenuUI(char* choice);
 
 /**************************************************/
 /*
- * This function display user interface of add new photo 
- * and ask for name of photo,path and tag.
- * Moreover, set value of namephoto,sizetag,path and tag.
+ *  This function display user interface of add new photo 
+ *  and ask for name of photo,path and tag.
+ *  Moreover, set value of namephoto,sizetag,path and tag.
  * 
  *  Argument : HASHITEM_T* hashphoto[] => hashphoto (use for check unique of the photo)
  *			   char* namephoto => store and set value of photoname
@@ -85,9 +85,9 @@ void addNewPhotoUI(HASHITEM_T* hashphoto[],char* namephoto, int * sizetag
 					,char* path,char* tag[]);
 
 /*
- * This function display user interface of search by tag 
- * and ask for tag and  ask for enter to stop.
- * Moreover, set value of tag and sizetag in output argument.
+ *  This function display user interface of search by tag 
+ *  and ask for tag and  ask for enter to stop.
+ *  Moreover, set value of tag and sizetag in output argument.
  *
  *  Argument : char* tag[] => store and set value of nametag
  * 			   int * sizetag => store and set value of amount 
@@ -99,12 +99,12 @@ void addNewPhotoUI(HASHITEM_T* hashphoto[],char* namephoto, int * sizetag
 void searchByTagUI(char* tag[], int* sizetag);
 
 /*
- * This function display user interface of 
- * search by include tag and exclude tag 
- * and ask for include tag and exclude tag 
- * and also ask for enter to stop.
- * Moreover set value of tag,sizetag,except 
- * and sizeexcept in output argument.
+ *  This function display user interface of 
+ *  search by include tag and exclude tag 
+ *  and ask for include tag and exclude tag 
+ *  and also ask for enter to stop.
+ *  Moreover set value of tag,sizetag,except 
+ *  and sizeexcept in output argument.
  * 
  *  Argument : char* tag[] => store and set value of nametag
  * 			   int * sizetag => store and set value of amount of 
@@ -125,9 +125,9 @@ void searchConUI(char* tag[], int* sizetag, char* except[], int* sizeexcept);
 
 
 /*
- * This function display user interface of find 3 similar photos
- * and ask for name of photo after that display 3 similar photos.
- * Moreover this function also store photoname.
+ *  This function display user interface of find 3 similar photos
+ *  and ask for name of photo after that display 3 similar photos.
+ *  Moreover this function also store photoname.
  *
  *  Argument : char namephoto => store photoname
  *
@@ -138,15 +138,15 @@ void searchConUI(char* tag[], int* sizetag, char* except[], int* sizeexcept);
 
 
 /*
- * This function display user interface of display 
- * on the browser
+ *  This function display user interface of display 
+ *  on the browser
  * 
  *  Argument : char namephoto => store photoname
- *
+ *			   char* option => option browser to display
  *  Return : NO
  *
  */
-void displayInBrowserUI(char namephoto[]);
+void displayInBrowserUI(char namephoto[],char* option);
 
 
 /**************************************************/

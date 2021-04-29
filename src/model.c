@@ -1,6 +1,6 @@
 /*****************************************
  *
- *model.h
+ *  model.h
  *
  *	This file contain function handling s
  *	search for photo(s) that user want 
@@ -20,16 +20,16 @@
 #include "model.h"
 
 
-
 /*
- *This function find the photo with the 
- *given name and return the information 
- *about the photo
+ *  This function find the photo with the 
+ *  given name and return the information 
+ *  about the photo
  *
  *	Arugement : char* namephoto (name of the photo) 
- *				HASHITEM_T* hashphoto[] (hash table of photo)
+ *				HASHITEM_T* hashphoto[] data structure for 
+ *				searching photo with the input namephoto
  *
- *	return	  : PHOTO_T* (information about the photo)
+ *	Return	  : PHOTO_T* (information about the photo)
  *				NULL for not found
  */
 PHOTO_T* findPhoto(char* namephoto,HASHITEM_T* hashphoto[])
@@ -41,7 +41,7 @@ PHOTO_T* findPhoto(char* namephoto,HASHITEM_T* hashphoto[])
 
 	while(tmp != NULL)
 		{
-		if(strcmp(tmp->photo->namephoto,namephoto) == 0)
+		if(strcasecmp(tmp->photo->namephoto,namephoto) == 0)
 			{
 			result = tmp->photo;
 			break;
@@ -52,15 +52,15 @@ PHOTO_T* findPhoto(char* namephoto,HASHITEM_T* hashphoto[])
 	} 
 
 /*
- *This function check the photo have all of the tag[] or
- *not if not return false and true for  the photo include 
- *with tag[]
+ *  This function check the photo have all of the tag[] or
+ *  not if not return false and true for  the photo include 
+ *  with tag[]
  *
  *	Arguement : PHOTO_T* photo (information of the photo)
  *			    char* tag[]	   (array tag)
  *				int sizetag    (size of the array tag[])
  *
- *  return	  : 1 for photo have all tag[] 0 for else
+ *  Return	  : 1 for photo have all tag[] 0 for else
  */
 int checktag(PHOTO_T* photo,char* tag[],int sizetag)
 	{
@@ -72,7 +72,7 @@ int checktag(PHOTO_T* photo,char* tag[],int sizetag)
 	while(tmp != NULL)
 		{ 
 		for(i = 0;i<sizetag;i++)
-			if(strcmp(tmp->nametag,tag[i]) == 0)
+			if(strcasecmp(tmp->nametag,tag[i]) == 0)
 				count++;
 		tmp = tmp->next;
 		}
@@ -82,15 +82,15 @@ int checktag(PHOTO_T* photo,char* tag[],int sizetag)
 	}
 
 /*
- *This function find the photo with the 
- *given tag[] that user given and return 
- *linklist photo result that have a all tag in tag[]
+ *  This function find the photo with the 
+ *  given tag[] that user given and return 
+ *  linklist photo result that have a all tag in tag[]
  *
  *	Arugement : char* tag[] (photo tag included) 
  *			  : int sizetag (size of array tag[])
  *			  : HASHITEM_T* hashtag[] (hash table of tag)
  *
- *	return	  : linklist of photo that have tag[] in it
+ *	Return	  : linklist of photo that have tag[] in it
  */
 PHOTO_T* searchByTag(char* tag[],int sizetag,HASHITEM_T* hashtag[])
 	{
@@ -134,8 +134,8 @@ PHOTO_T* searchByTag(char* tag[],int sizetag,HASHITEM_T* hashtag[])
 	return listresult;
 	}
 /*
- *This Function check the photo have a tag in tag[]
- *but not in except[] tag or not
+ *  This Function check the photo have a tag in tag[]
+ *  but not in except[] tag or not
  * 
  * 
  *  Arguement : PHOTO_T* photo (information of the photo) 
@@ -160,16 +160,16 @@ int checkexcept(PHOTO_T* photo,char* tag[],int sizetag,char* except[],int sizeex
 	while(tmp != NULL)
 		{ 
 		for(i = 0;i<sizeexcept;i++)
-			if(strcmp(tmp->nametag,except[i]) == 0)
+			if(strcasecmp(tmp->nametag,except[i]) == 0)
 				countexcept++;
 		tmp = tmp->next;
 		}
 	return checktag(photo,tag,sizetag) && (countexcept == 0) ;
 	}
 /*
- *This function find the photo with the 
- *given tag[] that user given and return 
- *linklist photo result that have a all tag in tag[]
+ *  This function find the photo with the 
+ *  given tag[] that user given and return 
+ *  linklist photo result that have a all tag in tag[]
  *
  *	Arugement : char* tag[]  ( array of tag included) 
  *			    int sizetag (size of array tag)
@@ -177,7 +177,7 @@ int checkexcept(PHOTO_T* photo,char* tag[],int sizetag,char* except[],int sizeex
  * 				int sizeexcept (sizeof array except[])
  *			    HASHITEM_T* hashtag[] (hash table of tag)
  *
- *	return	  : linklist of photo that have tag[] in it
+ *	Return	  : linklist of photo that have tag[] in it
  */
 PHOTO_T* searchCondition(char* tag[],int sizetag,
 						 char* except[],int sizeexcept,
@@ -224,8 +224,8 @@ PHOTO_T* searchCondition(char* tag[],int sizetag,
 	}
 
 /*
- *This function calculate the each photo
- *similiar with the given alltag
+ *  This function calculate the each photo
+ *  similiar with the given alltag
  * 
  * 
  * 	Arguement : LIST_TAG_T* alltag (linklist of alltag of photo 
@@ -244,7 +244,7 @@ void calculateSimiliar(LIST_TAG_T* alltag,PHOTO_T* photo)
 		{
 		while(tmp != NULL)
 			{
-			if(strcmp(tmp->nametag,tmpphototag->nametag) == 0)
+			if(strcasecmp(tmp->nametag,tmpphototag->nametag) == 0)
 				photo->count++;
 			tmp = tmp->next;
 			}
@@ -255,27 +255,27 @@ void calculateSimiliar(LIST_TAG_T* alltag,PHOTO_T* photo)
 
 int comparator(const void *p, const void *q)
 	{
-	PHOTO_T* l = (PHOTO_T*)p;
-    PHOTO_T* r = (PHOTO_T*)q;
-	printf(" %s %d",l->namephoto,l->count - r->count);
+	PHOTO_T* l = *(PHOTO_T**)p;
+    PHOTO_T* r = *(PHOTO_T**)q;
     return (l->count - r->count);
 	}
 
 /*
- *This function find the similar photo 
- *with the given namephoto and return 
- *the linklist of the top 3 similar
+ *  This function find the similar photo 
+ *  with the given namephoto and return 
+ *  the linklist of the top 3 similar
  *
  *	Arugement : char* namephoto (name of the photo)
+ *				int*  numresult (output argument of the number of result)
  *			    HASHITEM_T* hashtag[] (hash table of tag[])
  *				use for get linklist of photo that have that 
  *				tag
  *				HASHITEM_T* hashphoto[](hash photo)
  *				use for find all tag of the photo
  *	
- *	return 	  : Array of sorted photo
+ *	Return 	  : Array of sorted photo
  */
-PHOTO_T** findSimilar(char* namephoto,HASHITEM_T* hashtag[],HASHITEM_T* hashphoto[])
+PHOTO_T** findSimilar(char* namephoto,int *numresult,HASHITEM_T* hashtag[],HASHITEM_T* hashphoto[])
 	{
 	PHOTO_T* photo =  findPhoto(namephoto,hashphoto);
 	/*get alltag of the photo*/
@@ -284,8 +284,10 @@ PHOTO_T** findSimilar(char* namephoto,HASHITEM_T* hashtag[],HASHITEM_T* hashphot
 	HASHITEM_T* tmphash = NULL; 
 	PHOTO_T* tmpstate = NULL;/*use to reset the state value of the listresult*/
 
-	PHOTO_T** arraysort = calloc(1,sizeof(PHOTO_T*));
+	PHOTO_T** arraysort = calloc(DEFAULTSIZE,sizeof(PHOTO_T*));
 	int count = 0;
+	int arraysize = DEFAULTSIZE;
+	int i = 0;
 
 	if(photo != NULL)
 		{/*go to all tag that photo have*/
@@ -294,12 +296,13 @@ PHOTO_T** findSimilar(char* namephoto,HASHITEM_T* hashtag[],HASHITEM_T* hashphot
 			tmphash = getlist(tmptag->nametag,hashtag);
 			while(tmphash != NULL)
 				{/*if the photo is not already in arraysort and not photo that user input*/
+
 				if(!(tmphash->photo->state)&& tmphash->photo != photo)
 					{/*calculate the similiar and add to arraysort*/
 					calculateSimiliar(alltag,tmphash->photo);
-					insertArray(tmphash->photo,arraysort,count);
+					arraysize = insertArray(tmphash->photo,arraysort,arraysize,count);
 					tmphash->photo->state = 1;/*already in array*/
-					count++;
+					count++; 
 					}
 				tmphash = tmphash->next;/*go to next photo linklist*/
 				}
@@ -308,7 +311,8 @@ PHOTO_T** findSimilar(char* namephoto,HASHITEM_T* hashtag[],HASHITEM_T* hashphot
 		}
 	
 	qsort(arraysort,count,sizeof(PHOTO_T*),comparator);
-
+	/*set the numberresult */
+	*numresult = count; 
 	return arraysort;
 	}
 

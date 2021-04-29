@@ -1,78 +1,80 @@
-helloworld.jpg;2;image/helloworld.jpg
+helloworld;2;image/helloworld.jpg
 hello;world
-soba.jpg;3;image/soba.jpg
-Brown;Blue;White
-Napas.jpg;3;Napas.jpg
+soba;5;image/soba.jpg
+Brown;Blue;White;Cat;Animal
+Napas;3;Napas.jpg
 hello world;handsome boy;Napas
-Thailand_national_football_team_logo.png;4;image/Thailand_national_football_team_logo.png
-Football Team;Logo;Thailand;Thai Team
-moon_at_sea.jpg;3;image/moon_at_sea.jpg
+Thailand_national_football_team_logo;7;image/Thailand_national_football_team_logo.png
+Football Team;Logo;Thailand;Thai Team;Blue;Red;White
+moon_at_sea;3;image/moon_at_sea.jpg
 Blue;Sky;White
-Tulip.jpg;3;image/Tulip.jpg
-Flower;White;Pink
-pink_flower.jpg;2;image/pink_flower.jpg
-Pink;Flower
-Brown_ice_cream.jpg;3;image/Brown_ice_cream.jpg
-Brown;ice
-ice_cream.jpg;3;image/ice_cream.jpg
-ice cream
-Real_Madrid_Logo.png;2;image/Real_Madrid_Logo.png
-Football Team;Logo
-bacelona_logo.png;3;image/bacelona_logo.png
-Football Team;Logo;Bacelona Team
-MUN_logo.png;2;image/MUN_logo.png
-Red;Football Team
-old_trafford.jpg;2;image/old_trafford.jpg
-Football Team;Old Trafford
-orca_whale.jpg;2;image/orca_whale.jpg
-White;Big;Black;Killer
-mountain.jpg;4;image/mountain.jpg
+Tulip;4;image/Tulip.jpg
+Flower;White;Pink;Blue
+pink_flower;3;image/pink_flower.jpg
+Pink;Flower;White
+Brown_ice_cream;4;image/Brown_ice_cream.jpg
+Brown;Ice cream;Cool;White
+ice_cream;4;image/ice_cream.jpg
+Ice cream;Cool;Yellow;Pink
+Real_Madrid_Logo;6;image/Real_Madrid_Logo.png
+Football Team;Logo;White;Blue;Yellow;Red
+bacelona_logo;7;image/bacelona_logo.png
+Football Team;Logo;Bacelona Team;Blue;Yellow;White;Red
+MUN_logo;4;image/MUN_logo.png
+Red;Football Team;Yellow;Logo
+old_trafford;3;image/old_trafford.jpg
+Football Team;Old Trafford;Red
+orca_whale;5;image/orca_whale.jpg
+White;Big;Black;Killer;Animal
+mountain;4;image/mountain.jpg
 Big;White;Sky;Blue
-beluga_whale.jpg;3;image/beluga_whale.jpg
-Big;White;Blue
-polar_bear.jpg;3;image/polar_bear.jpg
+beluga_whale;3;image/beluga_whale.jpg
+Big;White;Blue;Animal
+polar_bear;3;image/polar_bear.jpg
 White;Cool;Blue;Wild
-pig.jpg;1;image/pig.jpg
-Pink,normal
-brown.jpg;1;image/brown.jpg
+pig;1;image/pig.jpg
+Pink;Animal
+brown;1;image/brown.jpg
 Brown
-blue_sky_car.jpg;3;image/blue_sky_car.jpg
+blue_sky_car;3;image/blue_sky_car.jpg
 Blue;Sky;Super
-dog_and_car.jpg;2;image/dog_and_car.jpg
+dog_and_car;2;image/dog_and_car.jpg
 Dog;Super
-blue_super_car.jpg;2;image/blue_super_car.jpg
+blue_super_car;2;image/blue_super_car.jpg
 Blue;Super
-white_super_car.jpg;2;image/white_super_car.jpg
+white_super_car;2;image/white_super_car.jpg
 White;Super
-smile_dog.jpg;3;image/smile_dog.jpg
+smile_dog;3;image/smile_dog.jpg
 Dog;Smile;White
-beach_and_sky.jpg;3;image/beach_and_sky.jpg
+beach_and_sky;3;image/beach_and_sky.jpg
 Beach;Sky;Blue
-white_rose.jpg;2;image/white_rose.jpg
+white_rose;2;image/white_rose.jpg
 White;Flower
-small_white_dog.jpg;2;image/small_white_dog.jpg
+small_white_dog;2;image/small_white_dog.jpg
 White;Dog
-tree_and_snow.jpg;2;image/tree_and_snow.jpg
+tree_and_snow;2;image/tree_and_snow.jpg
 White;Cool
-beach.jpg;2;image/beach.jpg
+beach;2;image/beach.jpg
 Beach;Blue
-snow.jpg;2;image/snow.jpg
+snow;2;image/snow.jpg
 White;Cool
-blue_sky.jpg;2;image/blue_sky.jpg
+blue_sky;2;image/blue_sky.jpg
 Blue;Sky
-white_flower.jpg;2;image/white_flower.jpg
+white_flower;2;image/white_flower.jpg
 White;Flower
-blue_flower.jpg;2;image/blue_flower.jpg
+blue_flower;2;image/blue_flower.jpg
 Blue;Flower
-plane.jpg;3;image/plane.jpg
+plane;3;image/plane.jpg
 Plane;Sky;Blue
-white_dog.jpg;2;image/white_dog.jpg
+white_dog;2;image/white_dog.jpg
 White;Dog
-ice_cream.jpeg;2;image/ice_cream.jpeg
+ice_cream;2;image/ice_cream.jpeg
 White;Cool;ice
-dog.png;6;image/dog.png
+dog;6;image/dog.png
 Brown;Big;Dog;Smile;Cute;White
-cat.jpg;3;image/cat.jpg
+thaicat;4;image/cat.jpg
+Brown;White;Cat;blue
+cat;3;image/cat.jpg
 Brown;White;Cat
-Phone.jpg;3;Phone.jpg
+Phone;3;Phone.jpg
 awesome thing;Mobile;Phone

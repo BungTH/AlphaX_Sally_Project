@@ -72,7 +72,7 @@ void freeHash(HASHITEM_T* hash[]);
 /*****************sort algorithm*********************/
 
 
-void insertArray(PHOTO_T* data,PHOTO_T* photoarray[],int arrsize);
+int insertArray(PHOTO_T* data,PHOTO_T* photoarray[],int arrsize,int currentCount);
 
 
 

@@ -25,9 +25,11 @@
  *  This function get all the user input, validate the input
  *  Then add new photo with new tag and path in the structure file.
  * 
- *  Argument:  PHOTO_T** pHead => head of the photo linked list.
- * 			  HASHITEM_T* hashphoto[] => hash photo.
- * 			  HASHITEM_T* hashtag[] => hash tag.
+ *  Argument:  PHOTO_T** pHead => head of the photo linked list. To pass argument to function addPhotoToStruct.
+ * 
+ * 			   HASHITEM_T* hashphoto[] => hash table of photo. Pass argument to addNewPhotoUI and addPhotoToStruct.
+ * 
+ * 			   HASHITEM_T* hashtag[] => hash table of tag. To pass argument to function addPhotoToStruct.
  * 
  *  return:    Non
  * 								
@@ -47,52 +49,19 @@ void handleAddNewPhoto(PHOTO_T** pHead, HASHITEM_T* hashphoto[], HASHITEM_T* has
  *   This function get all the user input, validate the input
  *   then search for tags that match what user had input and print out the result.
  * 
- * 	 Argument: HASHITEM_T* hashtag[]
- * 			   HASHITEM_T* hashphoto[]	
+ * 	 Argument:  HASHITEM_T* hashtag[] => hash table of tag. For pass argument to other functions.
+ * 										 to find result of search.
  * 
- *   return:   Non
+ * 			    HASHITEM_T* hashphoto[] => hash table of photo. Pass argument to go sub-menu.
  * 
- */
-void handleSearchByTag(HASHITEM_T* hashtag[],HASHITEM_T* hashphoto[])
-	{
-	char* tag[TAGBUFFER];
-	int sizetag = 0;
-	int count = 0;
-	PHOTO_T* result = NULL;
-	PHOTO_T* tmp = NULL;
-	int i = 0;
-	searchByTagUI(tag,&sizetag); /*get all the data and display UI*/
-	result = searchByTag(tag,sizetag,hashtag);/*get the result*/
-	
-	if(result == NULL)
-		printf("\nFound %d photo(s) \n",count);
-	else
-		{
-		tmp = result;
-		while(tmp != NULL)
-			{
-			displayphoto(tmp,count);
-			tmp = tmp->nextResult;
-			count++;
-			}
-		printf("Found %d photo(s) \n",count);
-		}
-	freestring(tag,sizetag);/*free tag and sizetag use*/
-	handleSubMenu(hashphoto,hashtag);
-	}
-
-/* 
- *
- *   This function get the input from user, validate the input
- *   Then search with the conditions and print out the result.
+ *              int option => handle the option from the menu to choose what to do
+ *                            1 - to search by tag.
+ *                            2 - to search by condition.
  * 
- *   Argument: HASHITEM_T* hashtag[]
- * 			   HASHITEM_T* hashphoto[]
- * 				
- *   return:   Non
+ *   return:    Non
  * 
  */
-void handleSearchCondition(HASHITEM_T* hashtag[],HASHITEM_T* hashphoto[])
+void handleSearchOption(HASHITEM_T* hashtag[],HASHITEM_T* hashphoto[],int option)
 	{
 	char* tag[TAGBUFFER];
 	int sizetag = 0;
@@ -103,9 +72,17 @@ void handleSearchCondition(HASHITEM_T* hashtag[],HASHITEM_T* hashphoto[])
 	PHOTO_T* tmp = NULL;
 	int i = 0;
 	
-	searchConUI(tag,&sizetag,except,&sizeexcept);/*get all the data that user input and display UI*/
-	result = searchCondition(tag,sizetag,except,sizeexcept,hashtag);/*get the result of search with condition*/
-	
+	if (option == 1)
+		{
+		searchByTagUI(tag,&sizetag); /*get all the data and display UI*/
+		result = searchByTag(tag,sizetag,hashtag);/*get the result*/
+		}
+	else if (option == 2)
+		{
+		searchConUI(tag,&sizetag,except,&sizeexcept);/*get all the data that user input and display UI*/
+		result = searchCondition(tag,sizetag,except,sizeexcept,hashtag);/*get the result of search with conditsion*/	
+		}
+		
 	if(result == NULL)
 		printf("\nFound %d photo(s) \n",count);
 	else
@@ -113,7 +90,9 @@ void handleSearchCondition(HASHITEM_T* hashtag[],HASHITEM_T* hashphoto[])
 		tmp = result;
 		while(tmp != NULL)
 			{
-			displayphoto(tmp,count);
+			printf("\n-----------------------\n");
+			printf("No. %d",count+1);
+			displayphoto(tmp);
 			tmp = tmp->nextResult;
 			count++;
 			}
@@ -128,8 +107,10 @@ void handleSearchCondition(HASHITEM_T* hashtag[],HASHITEM_T* hashphoto[])
  *   This function get the input from user, validate the input
  * 	 Then find the similar photo.
  * 
- * 	 Argument:  HASHITEM_T* hashphoto[] => hash photo.
- * 				HASHITEM_T* hashtag[] => hash tag.
+ * 	 Argument:  HASHITEM_T* hashphoto[] => hash table of photo.
+ * 										   Pass argument to other functions to find similar photo.
+ * 				HASHITEM_T* hashtag[] => hash table of tag.
+ * 										 Pass argument to other functions to find similar photo.
  * 
  * 	 return:    Non
  * 
@@ -138,13 +119,30 @@ void handlefindSimilar(HASHITEM_T* hashphoto[],HASHITEM_T* hashtag[])
 	{
 	char namephoto[PHOTOSIZE];
 	int i = 0;
+	int numresult = 0;
+	int index = 1;
 	similarUI(namephoto);
 
-	PHOTO_T** result = findSimilar(namephoto,hashtag,hashphoto);
-
-	for(i = 0;i<18;i++)
+	PHOTO_T** result = findSimilar(namephoto,&numresult,hashtag,hashphoto);
+	/*
+	for(i = 0;i<numresult;i++)
 		{
-		printf("\n%s %d",result[i]->namephoto,result[i]->count);
+		printf("\n %d %s %d",i,result[i]->namephoto,result[i]->count);
+		//reset the count and state for next use
+		result[i]->count = 0;
+		result[i]->state = 0;
+		}
+	*/
+    printf("-----------------------------------\n");
+	printf("\nphoto %s information\n",namephoto);
+	printf("-----------------------------------\n");
+	displayphoto(findPhoto(namephoto,hashphoto));
+	printf("\nTop 3 similiar photo");
+	for(i = numresult-1;i != numresult-4;i--)
+		{
+		printf("\n%d. have %d same tag",index,result[i]->count);
+		displayphoto(result[i]);
+		index++;
 		}
 	free(result);
 	
@@ -155,63 +153,31 @@ void handlefindSimilar(HASHITEM_T* hashphoto[],HASHITEM_T* hashtag[])
  *   This function get the input from user, validate the input
  *   Then display photo in browser
  *	 
- *   Argument:  HASHITEM_T* hashphoto[] => hash photo.
+ *   Argument:  HASHITEM_T* hashphoto[] => hash table of photo.
  * 
  * 	 return:    Non
  * 
  */
 void handleDisplayInBrowser(HASHITEM_T* hashphoto[])
 	{
-	char namephoto[PHOTOSIZE];
-	char command[5 + PHOTOSIZE] = "eog image/test.jpg";
-	displayInBrowserUI(namephoto);
-	//strcat(command,namephoto);
+	char option = 'A';
+	char path[PATHSIZE]="";
+	char namephoto[PHOTOSIZE]= "";
+	char command[PHOTOSIZE +5] = "";
+	displayInBrowserUI(namephoto,&option);
+	strcpy(path,findPhoto(namephoto,hashphoto)->path);
+	printf("1 - Google Chrome\n");
+	printf("2 - Microsoft Edge\n");
+	printf("3 - Safari\n");
+	if(option == '4')
+		strcat(command,"firefox");
+	if(option == '5')
+		strcat(command,"eog");
+	strcat(command," ");
+	strcat(command,path);
 	system(command);
 	}
 
-/* 
- *
- *  This function print out the menu UI, and option from user input(from UI), validate the option
- *  and show the selected option what user want to do.
- * 
- *  Argument: PHOTO_T* pHead
- *            HASHITEM_T* hashphoto[]
- *            HASHITEM_T* hashtag[]
- * 
- *  return:   Non
- * 
- */
-void handlemainmenu(PHOTO_T* pHead, HASHITEM_T* hashphoto[], HASHITEM_T* hashtag[])
-	{
-	char whichcheck = 'A'; /*collect which validation option user want*/
-	char input[128];/*get data from user*/
-
-	while(whichcheck != '4')
-		{
-		menuUI(&whichcheck);
-		switch(whichcheck)/*check which subprogram user selected*/
-			{
-			case '1':
-				 handleAddNewPhoto(&pHead,hashphoto,hashtag);/**/
-				 //printf("handlemainmenu phead %s",pHead->namephoto);
-				 clearscreen();
-				 break;
-			case '2':
-				 handleSearchByTag(hashtag,hashphoto);/**/
-				 break;
-			case '3':
-				 handleSearchCondition(hashtag,hashphoto);/**/
-				 break;
-			case '4':
-				 writeData(pHead);
-				 printf("\nGoodbye\n");
-				 break;
-			default: 
-				 printf("invalid input( enter only 1-5)\n"); 
-                 break;   
-            }
-        }
-	}
 
 /*
  *
@@ -219,8 +185,10 @@ void handlemainmenu(PHOTO_T* pHead, HASHITEM_T* hashphoto[], HASHITEM_T* hashtag
  *  add or delete tags, find similar and display photo in browser.
  *  Validate the option and show the function that option selected.
  * 
- *  Argument: HASHITEM_T* hashphoto[]
- * 			 HASHITEM_T* hashtag[]
+ *  Argument: HASHITEM_T* hashphoto[] => hash table of photo. Pass argument to other functions.
+ * 										 For each switch case.
+ * 			  HASHITEM_T* hashtag[] => hash table of tag. Pass argument to other functions.
+ * 									   For each switch case.
  * 
  *  Return:   Non
  * 
@@ -253,9 +221,36 @@ int main()
     PHOTO_T * pHead = NULL;
     HASHITEM_T ** hashphoto = intialHash();
     HASHITEM_T ** hashtag = intialHash();
-    readData(&pHead, hashphoto, hashtag);
+   	char whichcheck = 'A'; /*collect which validation option user want*/
+	char input[128];/*get data from user*/
 
-    handlemainmenu(pHead, hashphoto, hashtag);
+	readData(&pHead, hashphoto, hashtag);
+
+	while(whichcheck != '4')
+		{
+		menuUI(&whichcheck);
+		switch(whichcheck)/*check which subprogram user selected*/
+			{
+			case '1':
+				 handleAddNewPhoto(&pHead,hashphoto,hashtag);/**/
+				 //printf("handlemainmenu phead %s",pHead->namephoto);
+				 clearscreen();
+				 break;
+			case '2':
+				 handleSearchOption(hashtag,hashphoto,1);/**/
+				 break;
+			case '3':
+				 handleSearchOption(hashtag,hashphoto,2);/**/
+				 break;
+			case '4':
+				 writeData(pHead);
+				 printf("\nGoodbye\n");
+				 break;
+			default: 
+				 printf("invalid input( enter only 1-5)\n"); 
+                 break;   
+            }
+        }
 
     freeAll(pHead, hashphoto, hashtag);
 	}
