@@ -51,16 +51,16 @@
  * 
  */
 STATUS add_photo_2_hashphoto(PHOTO_T * photo, HASHITEM_T * hashphoto[])
-{
+    {
 	BOOL result = FALSE;                    //variable to hold result of insertitem function
 
     result = insertitem(photo->namephoto,photo,hashphoto);
 	if(result == FALSE)
-    {
+        {
         printf("\tERROR - Failed to insert item to the hashtable\n");
-    }
+        }
     return result;
-}
+    }
 
 
 
@@ -78,7 +78,7 @@ STATUS add_photo_2_hashphoto(PHOTO_T * photo, HASHITEM_T * hashphoto[])
  *
  */
 STATUS add_photo_2_hashtag(PHOTO_T * photo, HASHITEM_T * hashtag[])
-{
+    {
 	LIST_TAG_T * pHeadAlltag = NULL;        //variable to hold pointer to head of linkedlist
 	LIST_TAG_T * pTmp = NULL;               //variable to hold pointer to temporary linkedlist for tag
 
@@ -87,17 +87,17 @@ STATUS add_photo_2_hashtag(PHOTO_T * photo, HASHITEM_T * hashtag[])
     pHeadAlltag = photo->alltag;
     pTmp = pHeadAlltag;
 	while(pTmp != NULL)
-	{
+	    {
         result = insertitem(pTmp->nametag,photo,hashtag);
 		if(result == FALSE)
-		{
+		    {
 			printf("ERROR - Failed to insert item to the hashtable\n");
 			break;
-		}
+		    }
 		pTmp = pTmp->next;
-	}
+	    }
 	return result;
-}
+    }
 
 
 
@@ -114,17 +114,17 @@ STATUS add_photo_2_hashtag(PHOTO_T * photo, HASHITEM_T * hashtag[])
  *
  */
 void add_photo_2_masterlist(PHOTO_T * photo, PHOTO_T ** pHead)
-{
+    {
 	if(*pHead == NULL)
-    {
+        {
         *pHead = photo;
-    }
+        }
     else
-    {
+        {
         photo->next = *pHead;
         *pHead = photo;
+        }
     }
-}
 
 
 
@@ -139,20 +139,20 @@ void add_photo_2_masterlist(PHOTO_T * photo, PHOTO_T ** pHead)
  *
  */
 void createFile()
-{
+    {
     FILE * pTmp = NULL;                     //variable to hold position of temporary file
 
     pTmp = fopen("tag.txt","w");
     if(pTmp == NULL)
-    {
+        {
         printf("\tERROR - Failed to create database file\n");
-    }
+        }
     else
-    {
+        {
         printf("\tNotice - File had been created\n");
         fclose(pTmp);
+        }
     }
-}
 
 
 
@@ -169,16 +169,16 @@ void createFile()
  *
  */
 BOOL checkNULL(void * pointer)
-{
+    {
     BOOL result = TRUE;                     //variable to hold result of operation
 
     if(pointer == NULL)
-    {
+        {
         printf("\tERROR - Failed to calloc \n");
         result  = FALSE;
-    }
+        }
     return result;
-}
+    }
 
 
 
