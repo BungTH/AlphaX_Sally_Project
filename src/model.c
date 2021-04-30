@@ -252,7 +252,15 @@ void calculateSimiliar(LIST_TAG_T* alltag,PHOTO_T* photo)
 		tmpphototag = tmpphototag->next;
 		}
 	}
-
+/*
+ *  This Function is use in function qsort 
+ *  use to compare the priority of two item
+ * 
+ *  Arguement : const void *p => first photo for compare priority 
+ * 			    const void *q => second photo for compare priority
+ * 
+ * 	Return    : the different of two priority
+ */
 int comparator(const void *p, const void *q)
 	{
 	PHOTO_T* l = *(PHOTO_T**)p;

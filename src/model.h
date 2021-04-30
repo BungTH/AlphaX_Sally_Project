@@ -91,11 +91,12 @@ PHOTO_T* searchCondition(char* tag[],int sizetag,
 						HASHITEM_T* hashtag[]);
 /*
  *  This Function is use in function qsort 
- *  use to compare the 
+ *  use to compare the priority of two item
  * 
+ *  Arguement : const void *p => first photo for compare priority 
+ * 			    const void *q => second photo for compare priority
  * 
- * 
- * 
+ * 	Return    : the different of two priority
  */
 int comparator(const void *p, const void *q);
 

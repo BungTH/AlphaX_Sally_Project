@@ -52,7 +52,7 @@ void displayphoto(PHOTO_T* photo)
 	LIST_TAG_T* alltag = photo->alltag; /*get all tag of the photo(as a head of linklist)*/
 	LIST_TAG_T* tmp = NULL;
 
-	printf("\n-----------------------\n");
+	printf("\n------------------------------------------------\n\n");
 	printf("Name : %s\n",photo->namephoto);
 	printf("Path : %s\n",photo->path);
 	printf("Number of tag : %d\n",photo->numtag);
@@ -63,7 +63,7 @@ void displayphoto(PHOTO_T* photo)
 		printf("%s,",tmp->nametag);
 		tmp = tmp->next;	
 		}
-	printf("\n-----------------------\n");
+	printf("\n------------------------------------------------\n");
 	}
 
 /*
@@ -79,7 +79,7 @@ void displayphoto(PHOTO_T* photo)
 void menuUI(char* choice)
 	{
     printf("\n------------------------------------------------\n");
-	printf("\t MAINMENU\n");
+	printf("\t ||MAINMENU||\n");
 	printf("\n------------------------------------------------\n");
     printf("\t 1 - ADD NEW PHOTO WITH NEW TAGS\n");
 	printf("\t 2 - SEARCH PHOTO BY TAG\n");
@@ -105,7 +105,7 @@ void menuUI(char* choice)
 void subMenuUI(char * choice)
 	{
 	printf("\n------------------------------------------------\n");
-	printf("\t What do you want to do?\n");
+	printf("\t ||What do you want to do?||\n");
 	printf("\n------------------------------------------------\n");
 	printf("\t 1 - SEARCH SIMILAR PHOTO(S)\n");
 	printf("\t 2 - DISPLAY ON BROWSER\n");
@@ -135,12 +135,11 @@ void addNewPhotoUI(HASHITEM_T* hashphoto[],char* namephoto, int * sizetag
 	{
 	int i =0; 
 	char confirm = 'Y';
-	printf("------------------------------------------------\n");
-	printf("\t||Add new photo||\n");
-	printf("------------------------------------------------\n");
-	
 	do
 		{
+		printf("------------------------------------------------\n");
+		printf("\t ||Add new photo||\n");
+		printf("------------------------------------------------\n");
 		printf("\nPlease input the photo name");
 		getNamePhoto(namephoto);
 		
@@ -155,15 +154,21 @@ void addNewPhotoUI(HASHITEM_T* hashphoto[],char* namephoto, int * sizetag
 		printf("\nPlease input the all photo tag");
 		getAllNameTag(tag,sizetag);
 
+		printf("------------------------------------------------\n");
+		printf("\tconfirm to add the photo\n");
+		printf("------------------------------------------------\n");
 		//display data 
 		printf("\nPhoto name: %s",namephoto);
 		printf("\nPhoto path: %s\n",path);
+		printf("\nPhoto all of the tag: ");
 		for (i = 0 ; i < *sizetag ; i++)
-			{
 			printf("%s,",tag[i]);
-			}
 		printf("\n");
-		getCharater("Enter Y to confirm: ",&confirm);
+		getCharater("Enter Y to confirm and N for no: ",&confirm);
+		if(confirm != 'y' && confirm !='Y')
+			printf("%s",CLEAR_ESCAPE);
+		else
+			printf("\nData have been added\n");
 		}
 	while(confirm != 'y' && confirm !='Y');
 
@@ -184,9 +189,9 @@ void addNewPhotoUI(HASHITEM_T* hashphoto[],char* namephoto, int * sizetag
 void searchByTagUI(char* tag[], int * sizetag)
 	{
 	printf("------------------------------------------------\n");
-	printf("\t||Search by tag||\n");
+	printf("\t ||Search by tag||\n");
 	printf("------------------------------------------------\n");
-	printf("\nPlease input the include tag");
+	printf("\n||Please input the include tag||");
 	printf("\n------------------------------------------------\n");
     getAllNameTag(tag,sizetag);
 	}
@@ -212,12 +217,12 @@ void searchByTagUI(char* tag[], int * sizetag)
 void searchConUI(char * tag[], int * sizetag, char * except[], int * sizeexcept)
 {
 	printf("------------------------------------------------\n");
-	printf("\t SEARCH PHOTO BY TAG AND EXCLUDED TAG\n");
+	printf("\t ||SEARCH PHOTO BY TAG AND EXCLUDED TAG||\n");
 	printf("------------------------------------------------\n");
-	printf("\nPlease input the include tag");
+	printf("\n||Please input the include tag||");
 	getAllNameTag(tag,sizetag);
 	printf("\n------------------------------------------------\n");
-	printf("\nPlease input the exclude tag");
+	printf("\n||Please input the exclude tag||");
 	getAllNameTag(except,sizeexcept);
 }		
 
@@ -237,9 +242,9 @@ void searchConUI(char * tag[], int * sizetag, char * except[], int * sizeexcept)
 void similarUI(char  namephoto[])
 {
 	printf("------------------------------------------------\n");
-	printf("\t Find 3 similar photos\n");
+	printf("\t||Find 3 similar photos||\n");
 	printf("------------------------------------------------\n");
-	printf("\nPlease name of photo to find the similar photo");
+	printf("\n||Please name of photo to find the similar photo||");
 	getNamePhoto(namephoto);
 }
 
@@ -257,9 +262,9 @@ void similarUI(char  namephoto[])
 void displayInBrowserUI(char namephoto[],char* option)
 	{
 	printf("------------------------------------------------\n");
-	printf("\t DISPLAY ON BROWSER\n");
+	printf("\t||DISPLAY ON BROWSER||\n");
 	printf("------------------------------------------------\n");
-	printf("Please select your browser\n");
+	printf("||Please select your browser||\n");
 	printf("1 - Google Chrome\n");
 	printf("2 - Microsoft Edge\n");
 	printf("3 - Safari\n");

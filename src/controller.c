@@ -11,6 +11,7 @@
  #include <stdio.h>
  #include <stdlib.h>
  #include <string.h>
+ #include <unistd.h>
  #include "datastruct.h"
  #include "controller.h"
  #include "dtype.h"
@@ -133,9 +134,9 @@ void handlefindSimilar(HASHITEM_T* hashphoto[],HASHITEM_T* hashtag[])
 		result[i]->state = 0;
 		}
 	*/
-    printf("-----------------------------------\n");
-	printf("\nphoto %s information\n",namephoto);
-	printf("-----------------------------------\n");
+    printf("------------------------------------------------\n");
+	printf("\nPhoto %s Information\n",namephoto);
+	printf("------------------------------------------------\n");
 	displayphoto(findPhoto(namephoto,hashphoto));
 	printf("\nTop 3 similiar photo");
 	for(i = numresult-1;i != numresult-4;i--)
@@ -174,8 +175,15 @@ void handleDisplayInBrowser(HASHITEM_T* hashphoto[])
 	if(option == '5')
 		strcat(command,"eog");
 	strcat(command," ");
-	strcat(command,path);
-	system(command);
+	if(access(path, F_OK) == 0)
+		{
+		strcat(command,path);
+		system(command);
+		}
+	else 
+		{
+		printf("\n%s is not exist\n",path);
+		}
 	}
 
 

@@ -186,7 +186,7 @@ void getNamePhoto(char* namephoto)
 		if(flag == TRUE)
 			break;
 		else
-			printf("Invalid Path! Path must be only A-Z,'.','/',\n");
+			printf("Invalid Path! Path must be only A-Z,'.','/',0-9\n");
 		strcpy(namephoto,"\0");
 		}
 	}
