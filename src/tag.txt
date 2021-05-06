@@ -1,125 +1,123 @@
-Place;9;image/Yellow_concrete_building
-Place;Building;Sky;Tree;Cube;Blue;Circle
-Place;9;image/Yellow_concrete_building
-Cube_building;7;image/Cube_building.jpg
-Place;9;image/Yellow_concrete_building
-Bigben;11;Bigben.jpg
-Hotel;9;image/Yellow_concrete_building
-Tower_Bridge_Night;7;image/Tower_Bridge_Night.jpg
-Place;9;image/Yellow_concrete_building
-Hotel;8;image/hotel.jpg
-Place;9;image/Yellow_concrete_building
-Tower_Bridge;7;image/Tower_Bridge.jpg
-Place;9;image/Yellow_concrete_building
-Ponte_Vecchio;8;image/Ponte_Vecchio.jpg
-Place;9;image/Yellow_concrete_building
-Greenland;7;image/Greenland.jpg
-Place;9;image/Yellow_concrete_building
-New_York_City;8;image/New_York_City.jpg
-Place;9;image/Yellow_concrete_building
-Mondello;8;image/Mondello.jpg
-Man;9;image/Yellow_concrete_building
-Durdle_Door;8;image/Durdle_Door.jpg
-Laptop;9;image/Yellow_concrete_building
-working;9;image/working.jpg
-Computer;9;image/Yellow_concrete_building
-minimal;7;minimal.jpg
-People;9;image/Yellow_concrete_building
-uxstore;9;image/uxstore.jpg
-People;9;image/Yellow_concrete_building
-BMX;8;image/BMX.jpg
-Bicycle;9;image/Yellow_concrete_building
-Riding_bicycle_sunset;7;image/Riding_bicycle_sunset.jpg
-Man;9;image/Yellow_concrete_building
-bicycle_forest;7;image/bicycle_forest.jpg
-Tree;9;image/Yellow_concrete_building
-Man_standing_on_snow;7;image/Man_standing_on_snow.jpg
-People;9;image/Yellow_concrete_building
-marathon;7;image/marathon
-Car;9;image/Yellow_concrete_building
-surfboard;8;image/surfboard.jpg
-People;9;image/Yellow_concrete_building
-Hong_Kong;7;image/Hong_Kong.jpg
-Man;9;image/Yellow_concrete_building
-football_drill;8;image/football_drill.jpg
-Person;9;image/Yellow_concrete_building
-Surfing;7;image/Surfing.jpg
-People;9;image/Yellow_concrete_building
-Person_walking_on_street;7;image/Person_walking_on_street.jpg
-Concert;9;image/Yellow_concrete_building
-People_on_concert;6;People_on_concert.jpg
-People;9;image/Yellow_concrete_building
-Concert_festival;7;Concert_festival.jpg
-People;9;image/Yellow_concrete_building
-Howard_Street1937;8;image/Howard_Street1937.jpg
-Giraffe;9;image/Yellow_concrete_building
-Ice_cream_in_the_Desert;7;Ice_cream_in_the_Desert.jpg
-Bird;9;image/Yellow_concrete_building
-Giraffe_drinking_water;7;Giraffe_drinking_water.jpg
-Food;9;image/Yellow_concrete_building
-Many_birds;7;image/Many_birds.jpg
-blueberry_muffin/7/image/blueberry_muffin.jpg
-;9;image/Yellow_concrete_building
-7;image/Many_birds.jpg
-Yellow_concrete_building;9;image/Yellow_concrete_building
-Yellow;Building;Street;People;Bicycle;Van;Grass;Traffic lights;Sky
-Yellow_bus;8;image/Yellow_bus.jpg
-Yellow;Bus;People;Electric pole;Footpath;Tree;Sky;Cloud
-People_riding_bicycles;10;image/People_riding_bicycles.jpg
-People;Cycling;Bicycle;Tree;Building;Car;Crosswalk;Traffic light;Sky;Road
-boat_and_building;9;image/boat_and_building.jpg
-Boat;Building;People;Water;Bridge;Stairs;Electric pole;Greyscle;Sign board
-Christmas_cake;11;image/Christmas_cake.jpg
-Christmas;Cake;Ginger bread;Cookie;Cherry;Book;Glass;Rose marry;Food;Dessert;Sweet
-Happy_Easter;11;image/Happy_Easter.jpg
-Icing Cookie;Cookie;Egg;Carrot;Rabbit;Flower;Easter;Festival;Food;Dessert;Sweet
-Breakfast;7;image/Breakfast.jpg
-Egg;Bread;Cookie;tomato;Coffee;Food;Breakfast
-Christmas_and_building;10;image/Christmas_and_building.jpg
-Christmas;Christmas tree;Tree;Snow;Building;Electric pole;Light;Sky;Festival;Night
-Wooden_house;9;iamge/Wooden_house.jpg
-Wooden;House;Tree;Snow;Mountain;Pond;Sky;Nature;Winter
-Christmas_room;8;image/Christmas_room.jpg
-Christmas;Festival;Sofa;Present;Sock;Fireplace;Christmas tree;Tree
-Gizeh;7;image/Gizeh.jpg
-Gizeh;Pyramid;Eqypt;People;History;Antiques;Camel
-Fast_food;7;image/Fast_food.jpg
-Hamburger;Nugget;Potato;French fries;Food;Fast food;Sauce
-Man_and_dog;9;image/Man_and_Dog
-Dog;Animal;Man;Mountain;Sky;Cloud;Tree;Camping;Bag
-Riding_horse_with_dog;8;image/Riding_horse_with_dog.jpg
-Field;Dog;Horse;Animal;Sky;Man;Cloud;Riding
-work_at_cafe;10;image/work_at_cafe.jpg
-Cafe;Coffee;Strawberry;Cheesecake;Water;Food;Dessert;Laptop;Spoon;Glasses;Sweet
-City_road;9;image/City_road.jpg
-Taxi;Traffic lights;Building;Car;People;London;UK;Phone booth;Road
-London_Eye;8;image/London_Eye
-Sky;Ship;Water;Cloud;Light;London_Eye_London;UK
-BusandBigben;8;image/BusandBigben.jpg
-Bus;Bigben;London;UK;Road;People;Car;Sky
-boltinUS;7;image/boltinUS.jpg
-Building;Sky;Bolt;New York;Light;US;Night
-Bridge;8;image/Bridge
-Bridge;Car;Building;Night;Street;Light;New York;US;Sky
-Christmas_warm;9;mage/Christmas_warm.jpg
-Christmas;Christmas tree;Present;Festival;Family;Child;Mother;Dog;Animal
-Crosswalk;8;image/Crosswalk.jpg
-People;Building;Tree;Traffic lights;Bus;Car;Road;Crosswalk
-picnic;8;image/picnic.jpg
-People;Tree;Food;Building;Sky;Bicycle;Field;Picnic	
-vacation;7;image/vacation.jpg
-People;Picnic;Tree;Building;Sky;Vacation;Field
-simple;7;image/simple.jpg
-People;Building;Sky;Cloud;Car;Tree;Walk
-Children_Easter;8;image/Children_Easter
-Easter;Egg;Festival;Children;Food;Colour;Decorating;Art
-painting_of_bunny;7;image/painting_of_bunny
-Art;Painting;Colour;Water colour;Bunny;Flower;Paint brush
-baking_cake;9;image/baking_cake.jpg
-Cake;Food;Dessert;Baking;Child;Sweet;Decorating;Mother;Family
-Iceland_mountain;7;image/Iceland_mountain.jpg
-Place;Mountain;Nature;Iceland;Rainbow;Sky;Cloud
-bathtub_mountain;7;image/bathtub_mountain.jpg
-Nature;Mountain;Stone;Bathtub;Woman;Pond;House
 family_vacation;7;image/family_vacation.jpg
 Family;Beach;Vacation;Silhouette;Sun;Sky;Bridge
+bathtub_mountain;7;image/bathtub_mountain.jpg
+Nature;Mountain;Stone;Bathtub;Woman;Pond;House
+Iceland_mountain;7;image/Iceland_mountain.jpg
+Place;Mountain;Nature;Iceland;Rainbow;Sky;Cloud
+baking_cake;9;image/baking_cake.jpg
+Cake;Food;Dessert;Baking;Child;Sweet;Decoration;Mother;Family
+painting_of_bunny;7;image/painting_of_bunny
+Art;Painting;Colour;Water colour;Bunny;Flower;Paint brush
+Children_Easter;8;image/Children_Easter
+Easter;Egg;Festival;Children;Food;Colour;Decoration;Art
+simple;7;image/simple.jpg
+People;Building;Sky;Cloud;Car;Tree;Walk
+vacation;7;image/vacation.jpg
+People;Picnic;Tree;Building;Sky;Vacation;Field
+picnic;8;image/picnic.jpg1
+People;Tree;Food;Building;Sky;Bicycle;Field;Picnic	
+Crosswalk;8;image/Crosswalk.jpg
+People;Building;Tree;Traffic lights;Bus;Car;Road;Crosswalk
+Christmas_warm;9;mage/Christmas_warm.jpg
+Christmas;Christmas tree;Present;Festival;Family;Child;Mother;Dog;Animal;Decoration
+Bridge;8;image/Bridge
+Bridge;Car;Building;Night;Street;Light;New York;US;Sky
+boltinUS;7;image/boltinUS.jpg
+Building;Sky;Bolt;New York;Light;US;Night
+BusandBigben;8;image/BusandBigben.jpg
+Bus;Bigben;London;UK;Road;People;Car;Sky
+London_Eye;8;image/London_Eye
+Sky;Ship;Water;Cloud;Light;London_Eye_London;London;UK
+City_road;9;image/City_road.jpg
+Taxi;Traffic lights;Building;Car;People;London;UK;Phone booth;Road
+work_at_cafe;10;image/work_at_cafe.jpg
+Cafe;Coffee;Strawberry;Cheesecake;Water;Food;Dessert;Laptop;Spoon;Glasses;Sweet
+Riding_horse_with_dog;8;image/Riding_horse_with_dog.jpg
+Field;Dog;Horse;Animal;Sky;Man;Cloud;Riding
+Man_and_dog;9;image/Man_and_Dog
+Dog;Animal;Man;Mountain;Sky;Cloud;Tree;Camping;Bag
+Fast_food;7;image/Fast_food.jpg
+Hamburger;Nugget;Potato;French fries;Food;Fast food;Sauce
+Gizeh;7;image/Gizeh.jpg
+Gizeh;Pyramid;Eqypt;People;History;Antiques;Camel
+Christmas_room;8;image/Christmas_room.jpg
+Christmas;Festival;Sofa;Present;Sock;Fireplace;Christmas tree;Tree;Decoration
+Wooden_house;9;iamge/Wooden_house.jpg
+Wooden;House;Tree;Snow;Mountain;Pond;Sky;Nature;Winter
+Christmas_and_building;10;image/Christmas_and_building.jpg
+Christmas;Christmas tree;Tree;Snow;Building;Electric pole;Light;Sky;Festival;Night
+Breakfast;7;image/Breakfast.jpg
+Egg;Bread;Cookie;tomato;Coffee;Food;Breakfast
+Happy_Easter;11;image/Happy_Easter.jpg
+Icing Cookie;Cookie;Egg;Carrot;Rabbit;Flower;Easter;Festival;Food;Dessert;Sweet;Decoration
+Christmas_cake;11;image/Christmas_cake.jpg
+Christmas;Cake;Ginger bread;Cookie;Cherry;Book;Glass;Rose marry;Food;Dessert;Sweet;Decoration
+boat_and_building;9;image/boat_and_building.jpg
+Boat;Building;People;Water;Bridge;Stairs;Electric pole;Greyscle;Sign board
+People_riding_bicycles;10;image/People_riding_bicycles.jpg
+People;Cycling;Bicycle;Tree;Building;Car;Crosswalk;Traffic light;Sky;Road;Restaurant
+Yellow_bus;8;image/Yellow_bus.jpg
+Yellow;Bus;People;Electric pole;Footpath;Tree;Sky;Cloud
+Yellow_concrete_building;9;image/Yellow_concrete_building
+Yellow;Building;Street;People;Bicycle;Van;Grass;Traffic lights;Sky
+blueberry_muffin/7/image/blueberry_muffin.jpg
+;7;image/Many_birds.jpg
+Food;Dessert;Knife;Blueberry;Muffin;Baking;Sweet
+Many_birds;7;image/Many_birds.jpg
+Bird;Animal;Snow;Tree;Branch;Blurred background;Flying
+Giraffe_drinking_water;7;Giraffe_drinking_water.jpg
+Giraffe;Animal;Tree;Water;Drinking;Field;Water hole
+Ice_cream_in_the_Desert;7;Ice_cream_in_the_Desert.jpg
+People;Military;World War 1;Ice cream;Greyscale;Egypt;Desert
+Howard_Street1937;8;image/Howard_Street1937.jpg
+People;Walking;Greyscale;US;San Francisco;California;Vintage;Street
+Concert_festival;7;Concert_festival.jpg
+Concert;Colorful;People;Sihouette;Light;Stage;Festival
+People_on_concert;6;People_on_concert.jpg
+People;Concert;Silhouette;Black;Light;Riding on the neck
+Person_walking_on_street;7;image/Person_walking_on_street.jpg
+Person;Bokeh;Street;Umbrella;Car;Walking;Raining
+Surfing;7;image/Surfing.jpg
+Man;Surfing;Grayscle;Mountain;Sea wave;Water;Sport
+football_drill;8;image/football_drill.jpg
+People;Sport;Football;Jump;Exercise;Ball;Goalkeeper;Football player
+Hong_Kong;7;image/Hong_Kong.jpg
+Car;Road;Place;Hong Kong;People;Building;Sign
+surfboard;8;image/surfboard.jpg
+People;Sailing;Surfboard;Extreme sport;Sport;Water;Tree;Sky
+marathon;7;image/marathon
+Tree;Marathon;Road;Exercise;People;Car;Building
+Man_standing_on_snow;7;image/Man_standing_on_snow.jpg
+Man;Snow;Ski;Standing;Sky;Sunlight;Tree;Shadow
+bicycle_forest;7;image/bicycle_forest.jpg
+Bicycle;Forest;Cycling;Person;Sport;Exercise;Bokeh
+Riding_bicycle_sunset;7;image/Riding_bicycle_sunset.jpg
+People;Cycling;Bicycle;Sky;Silhouette;Sunset;Exercise
+BMX;8;image/BMX.jpg
+People;Bicycle;Cycling;Bicycle;Extreme sport;Sport;BMX;Free Style;Jump
+uxstore;9;image/uxstore.jpg
+Computer;Laptop;Keyboard;Book;Coffee;Pen;Desk;White;Gadgets
+minimal;7;minimal.jpg
+Laptop;Tree;Book;Phone;Watch;White;Gadgets
+working;9;image/working.jpg
+Man;Computer;Phone;Keyboard;Mouse;Chair;Desk;Headset;Gadgets
+Durdle_Door;8;image/Durdle_Door.jpg
+Place;Sky;Mountain;People;Water;Sand;UK;Nature
+Mondello;8;image/Mondello.jpg
+Place;Building;Sky;Cloud;Water;Tree;Mountain;Italy;Nature
+New_York_City;8;image/New_York_City.jpg
+Place;Building;Bus;Car;Tree;New York;US;Traffic lights
+Greenland;7;image/Greenland.jpg
+Place;Building;Sky;Ship;Snow;Man;Mountain
+Ponte_Vecchio;8;image/Ponte_Vecchio.jpg
+Place;Building;Sky;Cloud;Water;Green;Chair;Italy
+Tower_Bridge;7;image/Tower_Bridge.jpg
+Place;Building;Sky;Water;Ship;Cloud;Tower Bridge
+Hotel;8;image/hotel.jpg
+Hotel;Woman;Water;Building;Tree;Sky;Cube;Place
+Tower_Bridge_Night;7;image/Tower_Bridge_Night.jpg
+Place;Building;Sky;People;UK;London;Tower Bridge
+Bigben;11;Bigben.jpg
+Place;Building;Sky;Bus;Car;People;Motorcycle;Cloud;London;UK;Traffic lights
+Cube_building;7;image/Cube_building.jpg
+Place;Building;Sky;Tree;Cube;Blue;Circle

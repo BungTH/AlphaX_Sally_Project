@@ -132,12 +132,11 @@ void handlefindSimilar(HASHITEM_T* hashphoto[],HASHITEM_T* hashtag[])
 	
     printf("\n------------------------------------------------\n");
 	printf("Photo %s Information\n",namephoto);
-	printf("------------------------------------------------\n");
 	displayphoto(findPhoto(namephoto,hashphoto));
 	printf("\nTop 3 similiar photo\n");
 	for(i = numresult-1;i != numresult-4;i--)
 		{
-		printf("\n%d.This photo has %d similiar tag",index,result[i]->count);
+		printf("\n%d.This photo has %d similiar tag(s)",index,result[i]->count);
 		displayphoto(result[i]);
 		index++;
 		}
@@ -151,6 +150,7 @@ void handlefindSimilar(HASHITEM_T* hashphoto[],HASHITEM_T* hashtag[])
  *   Then display photo in browser
  *	 
  *   Argument:  HASHITEM_T* hashphoto[] => hash table of photo.
+ *                                         Pass argument to other functions to find photo.
  * 
  * 	 return:    Non
  * 

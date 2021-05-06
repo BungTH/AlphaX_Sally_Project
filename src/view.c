@@ -51,7 +51,7 @@ void displayphoto(PHOTO_T* photo)
 	{
 	LIST_TAG_T* alltag = photo->alltag; /*get all tag of the photo(as a head of linklist)*/
 	LIST_TAG_T* tmp = NULL;
-
+	int count = 0;
 	printf("\n------------------------------------------------\n");
 	printf("Name : %s\n",photo->namephoto);
 	printf("Path : %s\n",photo->path);
@@ -60,6 +60,12 @@ void displayphoto(PHOTO_T* photo)
 	tmp = alltag;
 	while(tmp != NULL)
 		{
+		count++;
+		if(count == 5)
+			{
+			printf("\n");
+			count = 0;
+			}
 		printf("%s,",tmp->nametag);
 		tmp = tmp->next;	
 		}
@@ -132,6 +138,7 @@ void subMenuUI(char * choice)
  */
 void addNewPhotoUI(HASHITEM_T* hashphoto[],char* namephoto, int * sizetag
 					,char* path,char* tag[])
+
 	{
 	int i =0; 
 	char confirm = 'Y';
