@@ -68,7 +68,7 @@ unsigned long hashfunction(char* key)
  *
  *  Arugement : char* key (name key)
  *	     : PHOTO_T* item (information of the photo)
- *	     : HASHITEM_T* hash[] (hash table)
+ *	     : HASHITEM_T* hash[] (hash table that going insert)
  *
  *  Return    : (int) success for 1 and 0 for fail
  */

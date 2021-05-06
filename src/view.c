@@ -52,7 +52,7 @@ void displayphoto(PHOTO_T* photo)
 	LIST_TAG_T* alltag = photo->alltag; /*get all tag of the photo(as a head of linklist)*/
 	LIST_TAG_T* tmp = NULL;
 
-	printf("\n------------------------------------------------\n\n");
+	printf("\n------------------------------------------------\n");
 	printf("Name : %s\n",photo->namephoto);
 	printf("Path : %s\n",photo->path);
 	printf("Number of tag : %d\n",photo->numtag);

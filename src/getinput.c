@@ -13,6 +13,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <ctype.h>
 #include <string.h>
 #include "datastruct.h"
@@ -246,7 +247,7 @@ void getPath(char* path)
 	while(flag == FALSE)
 		{
 		getString("Enter path :",path);
-		flag = checkPathAndNamePhoto(path);
+		flag = checkPathAndNamePhoto(path) && (access(path, F_OK) == 0);
 		if(flag == TRUE)
 			break;
 		else

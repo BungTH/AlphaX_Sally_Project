@@ -130,14 +130,14 @@ void handlefindSimilar(HASHITEM_T* hashphoto[],HASHITEM_T* hashtag[])
 
 	PHOTO_T** result = findSimilar(namephoto,&numresult,hashtag,hashphoto);
 	
-    printf("------------------------------------------------\n");
-	printf("\nPhoto %s Information\n",namephoto);
+    printf("\n------------------------------------------------\n");
+	printf("Photo %s Information\n",namephoto);
 	printf("------------------------------------------------\n");
 	displayphoto(findPhoto(namephoto,hashphoto));
-	printf("\nTop 3 similiar photo");
+	printf("\nTop 3 similiar photo\n");
 	for(i = numresult-1;i != numresult-4;i--)
 		{
-		printf("\n%d. have %d same tag",index,result[i]->count);
+		printf("\n%d.This photo has %d similiar tag",index,result[i]->count);
 		displayphoto(result[i]);
 		index++;
 		}
