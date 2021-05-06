@@ -265,11 +265,9 @@ void displayInBrowserUI(char namephoto[],char* option)
 	printf("\t||DISPLAY ON BROWSER||\n");
 	printf("------------------------------------------------\n");
 	printf("||Please select your browser||\n");
-	printf("1 - Google Chrome\n");
-	printf("2 - Microsoft Edge\n");
-	printf("3 - Safari\n");
-	printf("4 - Firefox\n");
-	printf("5 - eog\n");
+	printf("1 - Google chrome\n");
+	printf("2 - Firefox\n");
+	printf("3 - eog\n");
 	printf("------------------------------------------------\n");
 	getOption(option);
 	getNamePhoto(namephoto);

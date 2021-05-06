@@ -125,15 +125,7 @@ void handlefindSimilar(HASHITEM_T* hashphoto[],HASHITEM_T* hashtag[])
 	similarUI(namephoto);
 
 	PHOTO_T** result = findSimilar(namephoto,&numresult,hashtag,hashphoto);
-	/*
-	for(i = 0;i<numresult;i++)
-		{
-		printf("\n %d %s %d",i,result[i]->namephoto,result[i]->count);
-		//reset the count and state for next use
-		result[i]->count = 0;
-		result[i]->state = 0;
-		}
-	*/
+	
     printf("------------------------------------------------\n");
 	printf("\nPhoto %s Information\n",namephoto);
 	printf("------------------------------------------------\n");
@@ -167,12 +159,11 @@ void handleDisplayInBrowser(HASHITEM_T* hashphoto[])
 	char command[PHOTOSIZE +5] = "";
 	displayInBrowserUI(namephoto,&option);
 	strcpy(path,findPhoto(namephoto,hashphoto)->path);
-	printf("1 - Google Chrome\n");
-	printf("2 - Microsoft Edge\n");
-	printf("3 - Safari\n");
-	if(option == '4')
+	if(option == '1')
+		strcat(command,"google-chrome");
+	if(option == '2')
 		strcat(command,"firefox");
-	if(option == '5')
+	if(option == '3')
 		strcat(command,"eog");
 	strcat(command," ");
 	if(access(path, F_OK) == 0)
@@ -182,7 +173,7 @@ void handleDisplayInBrowser(HASHITEM_T* hashphoto[])
 		}
 	else 
 		{
-		printf("\n%s is not exist\n",path);
+		printf("\n%s is not exist\n",namephoto);
 		}
 	}
 

@@ -113,12 +113,12 @@ void calculateSimiliar(LIST_TAG_T* alltag,PHOTO_T* photo);
 /*
  *  This function find the similar photo 
  *  with the given namephoto and return 
- *  the linklist of the top 3 similar
+ *  Array of the sorted photo
  *
- *	Arugement : char* namephoto (name of the photo)
+ *	Arugement : char* namephoto (name of the photo that user want to find similar)
  *				int*  numresult (output argument of the number of result)
  *			    HASHITEM_T* hashtag[] (hash table of tag[])
- *				use for get linklist of photo that have that 
+ *				=>use for get linklist of photo that have that 
  *				tag
  *				HASHITEM_T* hashphoto[](hash photo)
  *				use for find all tag of the photo

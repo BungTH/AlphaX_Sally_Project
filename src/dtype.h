@@ -71,7 +71,20 @@ void freeHash(HASHITEM_T* hash[]);
 
 /*****************sort algorithm*********************/
 
-
+/*
+ *  This Function insert the photo to the array and
+ *  resize when the array is going to fully
+ *
+ * 
+ *  Arugement : PHOTO_T* data       => data going to add to photo
+ * 				PHOTO_T* photoarray => array of the photo we 
+ * 										want to insert
+ * 				int arrsize         => size of the array right now 
+ *				int currentCount    => the current number of the 
+ *									   item that going to have in array
+ *
+ *  Return    : NO
+ */
 int insertArray(PHOTO_T* data,PHOTO_T* photoarray[],int arrsize,int currentCount);
 
 
