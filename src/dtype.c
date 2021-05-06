@@ -108,31 +108,7 @@ HASHITEM_T* getlist(char* key,HASHITEM_T* hash[])
 	return hash[hashfunction(key)];
 	}
 
-/*
- *  This Function free all the data in the hash
- *
- *  Arugement : HASHITEM_T* hash[] (hashtable)
- *
- *  Return    : NO
- */
-void freeHash(HASHITEM_T* hash[])
-	{
-	int i = 0;/*use for looping*/
-	HASHITEM_T* pHead = NULL;/*head of the linklist*/
-	HASHITEM_T* tmp = NULL;
-	HASHITEM_T* removeitem = NULL;/*the item going to remove*/
-	for(i = 0;i<BUCKET_COUNT;i++)
-		{
-		tmp = hash[i];
-		while(tmp != NULL)
-			{
-			removeitem = tmp;
-			free(removeitem);
-			tmp = tmp->next;
-			}
-		}
-	free(hash);
-	}
+
 
 
 /*****************sort algorithm*********************/

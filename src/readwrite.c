@@ -404,6 +404,8 @@ void freeAll(PHOTO_T * pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[])
     {
     LIST_TAG_T * pTmp = NULL;               //variable to hold pointer to temporary linkedlist
     
+    free(hashphoto);
+    free(hashtag);
     while(pHead != NULL)
         {
         pTmp = pHead->alltag;

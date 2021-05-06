@@ -57,18 +57,6 @@ int insertitem(char* key,PHOTO_T* item,HASHITEM_T* hash[]);
  ******************************************************/
 HASHITEM_T* getlist(char* key,HASHITEM_T* hash[]);
 
-/******************************************************
- *This Function free all the data in the hash
- *
- * Arugement : HASHITEM_T* hash[] (hashtable)
- *
- * Return    : NO
- *****************************************************/
-void freeHash(HASHITEM_T* hash[]);
-
- 
-
-
 /*****************sort algorithm*********************/
 
 /*
