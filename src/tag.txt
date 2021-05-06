@@ -32,7 +32,7 @@ bicycle_forest;7;image/bicycle_forest.jpg
 Bicycle;Forest;Cycling;Person;Sport;Exercise;Bokeh
 Man_standing_on_snow;7;image/Man_standing_on_snow.jpg
 Man;Snow;Ski;Standing;Sky;Sunlight;Tree;Shadow
-marathon;7;image/marathon
+marathon;7;image/marathon.jpg
 Tree;Marathon;Road;Exercise;People;Car;Building
 surfboard;8;image/surfboard.jpg
 People;Sailing;Surfboard;Extreme sport;Sport;Water;Tree;Sky
@@ -82,7 +82,7 @@ Gizeh;7;image/Gizeh.jpg
 Gizeh;Pyramid;Eqypt;People;History;Antiques;Camel
 Fast_food;7;image/Fast_food.jpg
 Hamburger;Nugget;Potato;French fries;Food;Fast food;Sauce
-Man_and_dog;9;image/Man_and_Dog
+Man_and_dog;9;image/Man_and_Dog.jpg
 Dog;Animal;Man;Mountain;Sky;Cloud;Tree;Camping;Bag
 Riding_horse_with_dog;8;image/Riding_horse_with_dog.jpg
 Field;Dog;Horse;Animal;Sky;Man;Cloud;Riding
@@ -90,13 +90,13 @@ work_at_cafe;10;image/work_at_cafe.jpg
 Cafe;Coffee;Strawberry;Cheesecake;Water;Food;Dessert;Laptop;Spoon;Glasses;Sweet
 City_road;9;image/City_road.jpg
 Taxi;Traffic lights;Building;Car;People;London;UK;Phone booth;Road
-London_Eye;8;image/London_Eye
+London_Eye;8;image/London_Eye.jpg
 Sky;Ship;Water;Cloud;Light;London_Eye_London;London;UK
 BusandBigben;8;image/BusandBigben.jpg
 Bus;Bigben;London;UK;Road;People;Car;Sky
 boltinUS;7;image/boltinUS.jpg
 Building;Sky;Bolt;New York;Light;US;Night
-Bridge;8;image/Bridge
+Bridge;8;image/Bridge.jpg
 Bridge;Car;Building;Night;Street;Light;New York;US;Sky
 Christmas_warm;9;mage/Christmas_warm.jpg
 Christmas;Christmas tree;Present;Festival;Family;Child;Mother;Dog;Animal;Decoration
@@ -108,9 +108,9 @@ vacation;7;image/vacation.jpg
 People;Picnic;Tree;Building;Sky;Vacation;Field
 simple;7;image/simple.jpg
 People;Building;Sky;Cloud;Car;Tree;Walk
-Children_Easter;8;image/Children_Easter
+Children_Easter;8;image/Children_Easter.jpg
 Easter;Egg;Festival;Children;Food;Colour;Decoration;Art
-painting_of_bunny;7;image/painting_of_bunny
+painting_of_bunny;7;image/painting_of_bunny.jpg
 Art;Painting;Colour;Water colour;Bunny;Flower;Paint brush
 baking_cake;9;image/baking_cake.jpg
 Cake;Food;Dessert;Baking;Child;Sweet;Decoration;Mother;Family
