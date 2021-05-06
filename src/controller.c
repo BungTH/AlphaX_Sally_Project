@@ -75,13 +75,17 @@ void handleSearchOption(HASHITEM_T* hashtag[],HASHITEM_T* hashphoto[],int option
 	
 	if (option == 1)
 		{
-		searchByTagUI(tag,&sizetag); /*get all the data and display UI*/
-		result = searchByTag(tag,sizetag,hashtag);/*get the result*/
+		/*get all the data and display UI*/
+		searchByTagUI(tag,&sizetag); 
+		/*get the result*/
+		result = searchByTag(tag,sizetag,hashtag);
 		}
 	else if (option == 2)
 		{
-		searchConUI(tag,&sizetag,except,&sizeexcept);/*get all the data that user input and display UI*/
-		result = searchCondition(tag,sizetag,except,sizeexcept,hashtag);/*get the result of search with conditsion*/	
+		/*get all the data that user input and display UI*/
+		searchConUI(tag,&sizetag,except,&sizeexcept);
+		/*get the result of search with conditsion*/
+		result = searchCondition(tag,sizetag,except,sizeexcept,hashtag);	
 		}
 		
 	if(result == NULL)
