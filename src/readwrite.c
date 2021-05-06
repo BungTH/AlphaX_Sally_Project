@@ -412,7 +412,4 @@ void freeAll(PHOTO_T * pHead, HASHITEM_T * hashphoto[], HASHITEM_T * hashtag[])
         pHead = pHead->next;
         free(pTmp);
         }
-    //freeHash bug : double free error
-    /*freeHash(hashphoto);
-    freeHash(hashtag);*/
     }
