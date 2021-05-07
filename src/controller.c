@@ -140,6 +140,12 @@ void handlefindSimilar(HASHITEM_T* hashphoto[],HASHITEM_T* hashtag[])
 		displayphoto(result[i]);
 		index++;
 		}
+	/*clear state and result for next use*/
+	for(i = 0;i<numresult;i++)
+		{
+		result[i]->count = 0;
+		result[i]->state = 0;
+		}
 	free(result);
 	
 	} 
